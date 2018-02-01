@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\AbstractCodeActivity.cs" />
     <Compile Include="Aftale\Create_in_of.cs" />
     <Compile Include="Aftale\Create_in_crm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,5 +62,6 @@
   <ItemGroup>
     <None Include="kkh.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

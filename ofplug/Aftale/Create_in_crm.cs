@@ -6,26 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ofplug.Abstract;
 
 namespace ofplug.Aftale
 {
-	public class Create_in_crm : CodeActivity
+	public class Create_in_crm : AbstractCodeActivity
 	{
 		protected override void Execute(CodeActivityContext codeActivityContext)
 		{
-			//Create the tracing service
-			ITracingService tracingService = codeActivityContext.GetExtension<ITracingService>();
+			Initialize(codeActivityContext);
 
-			//Create the context
-			IWorkflowContext workflowContext = codeActivityContext.GetExtension<IWorkflowContext>();
-			IOrganizationServiceFactory serviceFactory = codeActivityContext.GetExtension<IOrganizationServiceFactory>();
-			IOrganizationService service = serviceFactory.CreateOrganizationService(workflowContext.UserId);
-
-			tracingService.Trace("ofplug_aftale_create: creating aftale");
+			_tracingService.Trace("ofplug_aftale_create: creating aftale");
 
 			Entity entity = new Entity("nrq_bidragsaftale");
-			entity["nrq_type"] = "hello world";
-			service.Create(entity);
+			entity["nrq_type"] = "hello world 2";
+			_service.Create(entity);
 		}
 	}
 }
