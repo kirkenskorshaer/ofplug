@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -57,6 +58,17 @@
     <Compile Include="Abstract\AbstractCodeActivity.cs" />
     <Compile Include="Aftale\Create_in_of.cs" />
     <Compile Include="Aftale\Create_in_crm.cs" />
+    <Compile Include="of\data\Agreement.cs" />
+    <Compile Include="of\data\Contact.cs" />
+    <Compile Include="of\data\IdResponse.cs" />
+    <Compile Include="of\data\InitiateAgreement.cs" />
+    <Compile Include="of\data\Payment.cs" />
+    <Compile Include="of\data\Subscription.cs" />
+    <Compile Include="of\data\Agreement_post_response.cs" />
+    <Compile Include="of\data\parameters.cs" />
+    <Compile Include="of\data\Subscriptions_offset_get_response.cs" />
+    <Compile Include="of\data\Subscription_id_delete_response.cs" />
+    <Compile Include="of\data\Subscription_post_response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
