@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="crm\Indbetaling.cs" />
+    <Compile Include="Logic\Indbetaling\Create_or_update_all_in_crm.cs" />
+    <Compile Include="Logic\Indbetaling\Create_or_update_one_in_crm.cs" />
     <Compile Include="of\data\Agreement.cs" />
     <Compile Include="of\data\Contact.cs" />
     <Compile Include="of\data\IdResponse.cs" />
@@ -63,12 +65,17 @@
     <Compile Include="of\data\Payment.cs" />
     <Compile Include="of\data\Subscription.cs" />
     <Compile Include="Logic\Abstract\AbstractCodeActivity.cs" />
+    <Compile Include="Logic\Aftale\Create_or_update_one_in_crm.cs" />
+    <Compile Include="Logic\Aftale\Create_or_update_one_in_of.cs" />
     <Compile Include="Logic\Aftale\Create_in_of.cs" />
     <Compile Include="Logic\Aftale\Create_or_update_all_in_crm.cs" />
     <Compile Include="crm\Config.cs" />
     <Compile Include="crm\AbstractCrm.cs" />
     <Compile Include="crm\Aftale.cs" />
     <Compile Include="crm\Contact.cs" />
+    <Compile Include="Logic\Contact\Create_or_update_one_in_crm.cs" />
+    <Compile Include="Logic\Contact\Create_or_update_one_in_of.cs" />
+    <Compile Include="Logic\Contact\Update_all_medlemsnr_in_of.cs" />
     <Compile Include="of\Connection.cs" />
     <Compile Include="of\connector\Abstract_data_exchange.cs" />
     <Compile Include="of\connector\Agreement.cs" />
