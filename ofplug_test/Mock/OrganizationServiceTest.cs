@@ -8,6 +8,7 @@ namespace ofplug_test.Mock
 	public class OrganizationServiceTest : IOrganizationService
 	{
 		public List<KeyValuePair<string, object>> Log = new List<KeyValuePair<string, object>>();
+		public Queue<List<Entity>> entitiesToReturn = new Queue<List<Entity>>();
 
 		public void Associate(string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities)
 		{
@@ -43,7 +44,8 @@ namespace ofplug_test.Mock
 
 		public EntityCollection RetrieveMultiple(QueryBase query)
 		{
-			throw new NotImplementedException();
+			List<Entity> entities = entitiesToReturn.Dequeue();
+			return new EntityCollection(entities);
 		}
 
 		public void Update(Entity entity)
