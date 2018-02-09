@@ -2,7 +2,7 @@
 using System;
 using System.ServiceModel;
 
-namespace ofplug.Aftale
+namespace ofplug.Logic.Aftale
 {
 	public class Create_in_of : IPlugin
 	{
