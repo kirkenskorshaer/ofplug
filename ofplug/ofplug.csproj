@@ -64,6 +64,15 @@
     <Compile Include="of\data\InitiateAgreement.cs" />
     <Compile Include="of\data\Payment.cs" />
     <Compile Include="of\data\Subscription.cs" />
+    <Compile Include="of\Connection.cs" />
+    <Compile Include="of\connector\Abstract_data_exchange.cs" />
+    <Compile Include="of\connector\Agreement.cs" />
+    <Compile Include="of\connector\Agreements.cs" />
+    <Compile Include="of\connector\Contact.cs" />
+    <Compile Include="of\connector\Contacts.cs" />
+    <Compile Include="of\connector\Abstract_id_collection.cs" />
+    <Compile Include="of\connector\Payment.cs" />
+    <Compile Include="of\connector\Payments.cs" />
     <Compile Include="of\data\Agreement_post_response.cs" />
     <Compile Include="of\data\parameters.cs" />
     <Compile Include="of\data\Subscriptions_offset_get_response.cs" />
