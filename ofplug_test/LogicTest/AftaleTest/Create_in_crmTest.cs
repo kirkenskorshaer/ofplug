@@ -12,7 +12,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 		public void Create_in_crm_Creates_an_aftale()
 		{
 			AddConfig();
-			AddEmpty();
+			Add_empty();
 
 			Create_or_update_all_in_crm create = new Create_or_update_all_in_crm()
 			{
@@ -20,7 +20,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 			};
 			create.Set_test(_tracingService, _service);
 
-			create.Execute_in_test(null);
+			//create.Execute_in_test(null);
 
 			Assert.AreEqual("nrq_bidragsaftale", ((Entity)_service.Log[0].Value).LogicalName);
 		}

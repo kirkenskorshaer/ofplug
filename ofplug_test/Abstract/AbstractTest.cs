@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using ofplug_test.Mock;
-using System;
+using System.Activities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ofplug_test.Abstract
 {
@@ -12,6 +9,7 @@ namespace ofplug_test.Abstract
 	{
 		protected TracingServiceTest _tracingService;
 		protected OrganizationServiceTest _service;
+		protected CodeActivityContext _codeActivityContext;
 
 		public AbstractTest()
 		{
@@ -27,15 +25,24 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { configEntity });
 		}
 
-		protected void AddAftale()
+		protected void Add_aftale()
 		{
 			Entity entity = new Entity("nrq_bidragsaftale");
 			_service.entitiesToReturn.Enqueue(new List<Entity> { entity });
 		}
 
-		protected void AddEmpty()
+		protected void Add_empty()
 		{
 			_service.entitiesToReturn.Enqueue(new List<Entity>());
+		}
+
+		protected void Add_contact(ofplug.crm.Contact contact)
+		{
+			contact.CrmEntity = new Entity("contact");
+
+			contact.Fill_fields();
+
+			_service.entitiesToReturn.Enqueue(new List<Entity> { contact.CrmEntity });
 		}
 	}
 }

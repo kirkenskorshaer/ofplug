@@ -50,7 +50,7 @@ namespace ofplug_test.Mock
 
 		public void Update(Entity entity)
 		{
-			throw new NotImplementedException();
+			Log.Add(new KeyValuePair<string, object>("Update", entity));
 		}
 	}
 }

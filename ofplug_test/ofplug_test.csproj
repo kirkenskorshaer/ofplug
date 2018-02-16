@@ -56,10 +56,12 @@
   <ItemGroup>
     <Compile Include="Abstract\AbstractTest.cs" />
     <Compile Include="LogicTest\AftaleTest\Create_in_crmTest.cs" />
+    <Compile Include="LogicTest\ContactTest\Create_or_update_one_in_crmTest.cs" />
     <Compile Include="ofTest\connectorTest\AgreementsTest.cs" />
     <Compile Include="Mock\OrganizationServiceTest.cs" />
     <Compile Include="Mock\TracingServiceTest.cs" />
     <Compile Include="ofTest\connectorTest\AgreementTest.cs" />
+    <Compile Include="ofTest\connectorTest\ContactTest.cs" />
     <Compile Include="ofTest\dataTest\Hello_world.cs" />
     <Compile Include="ofTest\dataTest\Simple_data.cs" />
     <Compile Include="ofTest\SenderTest.cs" />
