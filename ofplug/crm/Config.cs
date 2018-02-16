@@ -12,9 +12,9 @@ namespace ofplug.crm
 
 		public Config(IOrganizationService service) : base(service, "nrq_settings")
 		{
-			QueryExpression queryExpression = Create_query_expression("nrq_project", "ofplug", new ColumnSet("nrq_url", "nrq_url"));
+			//QueryExpression queryExpression = Create_query_expression("nrq_project", "ofplug", new ColumnSet("nrq_url", "nrq_url"));
 
-			EntityCollection entities = _service.RetrieveMultiple(queryExpression);
+			//EntityCollection entities = _service.RetrieveMultiple(queryExpression);
 
 
 			//todo opret korrekt entitet
@@ -22,6 +22,8 @@ namespace ofplug.crm
 			CrmEntity = new Entity();
 			CrmEntity["nrq_url"] = "http://of.devflowtwo.com/kirkenskorshaer/api/v2/";
 			CrmEntity["nrq_aggrement_step"] = 50;
+			CrmEntity["nrq_payment_step"] = 50;
+			CrmEntity["nrq_contact_step"] = 50;
 
 
 
@@ -34,6 +36,16 @@ namespace ofplug.crm
 			Aggrement_step = int.Parse(CrmEntity["nrq_aggrement_step"].ToString());
 			Payment_step = int.Parse(CrmEntity["nrq_payment_step"].ToString());
 			Contact_step = int.Parse(CrmEntity["nrq_contact_step"].ToString());
+		}
+
+		public override void Fill_fields()
+		{
+			//todo maybe implement
+		}
+
+		public override void Read_fields()
+		{
+			//todo maybe implement
 		}
 	}
 }
