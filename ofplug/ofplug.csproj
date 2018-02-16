@@ -57,8 +57,12 @@
   <ItemGroup>
     <Compile Include="crm\Indbetaling.cs" />
     <Compile Include="Logic\Abstract\AbstractPlugin.cs" />
+    <Compile Include="Logic\Abstract\Abstract_maintain.cs" />
+    <Compile Include="Logic\Aftale\Maintain.cs" />
+    <Compile Include="Logic\Contact\Maintain.cs" />
     <Compile Include="Logic\Indbetaling\Create_or_update_all_in_crm.cs" />
     <Compile Include="Logic\Indbetaling\Create_or_update_one_in_crm.cs" />
+    <Compile Include="Logic\Indbetaling\Maintain.cs" />
     <Compile Include="Mapping\Aftale.cs" />
     <Compile Include="Mapping\Contact.cs" />
     <Compile Include="Mapping\Indbetaling.cs" />
