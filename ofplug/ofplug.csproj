@@ -58,6 +58,10 @@
     <Compile Include="crm\Indbetaling.cs" />
     <Compile Include="Logic\Indbetaling\Create_or_update_all_in_crm.cs" />
     <Compile Include="Logic\Indbetaling\Create_or_update_one_in_crm.cs" />
+    <Compile Include="Mapping\Aftale.cs" />
+    <Compile Include="Mapping\Contact.cs" />
+    <Compile Include="Mapping\Indbetaling.cs" />
+    <Compile Include="Mapping\Subscription.cs" />
     <Compile Include="of\connector\Subscription.cs" />
     <Compile Include="of\connector\Subscriptions.cs" />
     <Compile Include="of\data\AbstractData.cs" />
