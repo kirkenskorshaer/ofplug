@@ -15,6 +15,7 @@ namespace ofplug.crm
 		public string address1_postalcode;
 		public string address1_city;
 		public string address1_country;
+		public string new_kkadminmedlemsnr;
 
 		private OptionSetValue gendercode;
 		public GendercodeEnum? Gendercode_value { get { return Gendercode_optionSet_to_enum(gendercode); } set { gendercode = Gendercode_enum_to_optionSet(value); } }
@@ -32,7 +33,7 @@ namespace ofplug.crm
 
 		public void Get_contact_from_medlemsnr(IOrganizationService service, string medlemsnr)
 		{
-			QueryExpression queryExpression = Create_query_expression("new_KKAdminMedlemsNr", medlemsnr, new ColumnSet("contactid"));
+			QueryExpression queryExpression = Create_query_expression("new_kkadminmedlemsnr", medlemsnr, new ColumnSet("contactid"));
 
 			EntityCollection entities = service.RetrieveMultiple(queryExpression);
 
@@ -149,6 +150,7 @@ namespace ofplug.crm
 			address1_latitude = Read_if_not_empty<double?>("address1_latitude");
 			address1_longitude = Read_if_not_empty<double?>("address1_longitude");
 			lastname = Read_if_not_empty<string>("lastname");
+			new_kkadminmedlemsnr = Read_if_not_empty<string>("new_kkadminmedlemsnr");
 		}
 	}
 }
