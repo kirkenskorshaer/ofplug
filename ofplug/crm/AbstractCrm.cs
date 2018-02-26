@@ -157,7 +157,7 @@ namespace ofplug.crm
 		{
 			if (CrmEntity.Contains(name))
 			{
-				return (output)CrmEntity["name"];
+				return (output)CrmEntity[name];
 			}
 
 			return default(output);
