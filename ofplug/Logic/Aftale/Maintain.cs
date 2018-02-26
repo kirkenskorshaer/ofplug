@@ -13,18 +13,10 @@ namespace ofplug.Logic.Aftale
 			of.connector.Agreements agreements = new of.connector.Agreements(_config.Url, _config.Aggrement_step);
 			foreach (int id in agreements)
 			{
-				crm.Aftale crm_aftale = new crm.Aftale(_service);
-				crm_aftale.Get_entity_by_of_id(_service, id);
-				of.data.Agreement of_agreement = _of_connection.Agreement.Get(id);
+				of.data.Agreement of_aftale = _of_connection.Agreement.Get(id);
 
-				if (crm_aftale.CrmEntity == null)
-				{
-					Create_crm_aftale(of_agreement);
-				}
-				else if (Mapping.Aftale.Needs_update_in_crm(crm_aftale, of_agreement))
-				{
-					crm_aftale.Update();
-				}
+				Create_or_update_one_aftale_in_crm(of_aftale);
+
 				//todo remove
 				break;
 			}
