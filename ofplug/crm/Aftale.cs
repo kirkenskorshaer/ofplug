@@ -22,17 +22,6 @@ namespace ofplug.crm
 		{
 		}
 
-		public void Get_entity_by_of_id(IOrganizationService service, int id)
-		{
-			QueryExpression queryExpression = Create_query_expression("nrq_betalingsform", id.ToString(), new ColumnSet("nrq_bidragsaftaleid", "nrq_type"));
-
-			EntityCollection entities = service.RetrieveMultiple(queryExpression);
-
-			CrmEntity = entities.Entities.FirstOrDefault();
-
-			Read_from_entity();
-		}
-
 		public void Get_by_of_id(int id)
 		{//todo felter
 			QueryExpression queryExpression = Create_query_expression("nrq_betalingsform", id.ToString(), new ColumnSet("nrq_bidragsaftaleid", "nrq_type"));

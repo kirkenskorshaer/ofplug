@@ -33,7 +33,7 @@ namespace ofplug.Logic.Aftale
 		public void Create_or_update_one_aftale_in_crm(of.data.Agreement of_aftale)
 		{
 			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
-			crm_aftale.Get_entity_by_of_id(_service, of_aftale.Id.Value);
+			crm_aftale.Get_by_of_id(of_aftale.Id.Value);
 
 			if (crm_aftale.CrmEntity == null)
 			{
