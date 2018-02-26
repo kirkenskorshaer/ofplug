@@ -109,6 +109,8 @@ namespace ofplug.crm
 
 			Fill_fields();
 
+			_tracingService.Trace("ofplug " + Logical_name + " Create");
+
 			Id = _service.Create(CrmEntity);
 		}
 
@@ -118,6 +120,8 @@ namespace ofplug.crm
 
 			Fill_fields();
 			CrmEntity.Id = Id;
+
+			_tracingService.Trace("ofplug " + Logical_name + " Update");
 
 			_service.Update(CrmEntity);
 		}
