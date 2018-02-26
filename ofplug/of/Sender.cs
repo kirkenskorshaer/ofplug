@@ -50,7 +50,19 @@ namespace ofplug.of
 
 			byte[] requestBytes = DataContractByteArray(request);
 
-			byte[] responseBytes = webClient.UploadData(url, method, requestBytes);
+			string preview = DataContractToString(request);
+			byte[] responseBytes = null;
+			try
+			{
+				responseBytes = webClient.UploadData(url, method, requestBytes);
+			}
+			catch (WebException web_exception)
+			{
+				string error = new StreamReader(web_exception.Response.GetResponseStream()).ReadToEnd();
+
+				throw new System.Exception(error);
+			}
+
 			string responseString = Encoding.UTF8.GetString(responseBytes);
 			Response response = StringToDataContract<Response>(responseString);
 			webClient.Dispose();
