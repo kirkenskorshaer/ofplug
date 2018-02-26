@@ -64,6 +64,6 @@ namespace ofplug.of.data
 		public string Last_name { get; set; } // "Laugesen",
 
 		[DataMember(Name = "msisdn")]
-		public int? Msisdn { get; set; } // "30951964"
+		public string Msisdn { get; set; } // "30951964"
 	}
 }
