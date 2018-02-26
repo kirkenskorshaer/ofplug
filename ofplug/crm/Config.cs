@@ -28,7 +28,7 @@ namespace ofplug.crm
 
 
 			Url = CrmEntity["nrq_url"].ToString();
-			if(Url.EndsWith("/") == false)
+			if (Url.EndsWith("/") == false)
 			{
 				Url = Url + "/";
 			}
