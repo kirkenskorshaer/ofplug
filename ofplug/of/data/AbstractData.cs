@@ -18,7 +18,12 @@ namespace ofplug.of.data
 
 		protected string SetDate(DateTime? value)
 		{
-			return value.GetValueOrDefault().ToString("yyyy-MM-dd");
+			if (value.HasValue == false)
+			{
+				return null;
+			}
+
+			return value.Value.ToString("yyyy-MM-dd");
 		}
 
 		protected DateTime? GetDateTime(string input)
@@ -32,6 +37,11 @@ namespace ofplug.of.data
 
 		protected string SetDateTime(DateTime? value)
 		{
+			if (value.HasValue == false)
+			{
+				return null;
+			}
+
 			return value.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm:ss");
 		}
 	}
