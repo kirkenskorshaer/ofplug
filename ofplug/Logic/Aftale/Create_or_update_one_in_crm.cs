@@ -6,7 +6,7 @@ namespace ofplug.Logic.Aftale
 {
 	public class Create_or_update_one_in_crm : AbstractCodeActivity
 	{
-		[ReferenceTarget("contact")]
+		[ReferenceTarget("nrq_bidragsaftale")]
 		[RequiredArgument]
 		[Input("Aftale")]
 		public InArgument<int> Of_aftale_id_InArgument { get; set; }

@@ -8,7 +8,7 @@ namespace ofplug.crm
 {
 	public class Aftale : AbstractCrm
 	{
-		public int? nrq_beloeb;
+		public Money nrq_beloeb;
 		public string nrq_betalingsform;
 		public EntityReference nrq_bidragyder;
 		public string nrq_frekvens;
@@ -16,7 +16,7 @@ namespace ofplug.crm
 		public DateTime? nrq_startdato;
 		public string nrq_type;
 		//todo felter
-		public int? of_id = 0;
+		//public int? of_id = 0;
 
 		public Aftale(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "nrq_bidragsaftale")
 		{
@@ -24,7 +24,7 @@ namespace ofplug.crm
 
 		public void Get_by_of_id(int id)
 		{//todo felter
-			QueryExpression queryExpression = Create_query_expression("nrq_betalingsform", id.ToString(), new ColumnSet("nrq_bidragsaftaleid", "nrq_type"));
+			QueryExpression queryExpression = Create_query_expression("nrq_type", id.ToString(), new ColumnSet("nrq_type"));
 
 			EntityCollection entities = _service.RetrieveMultiple(queryExpression);
 
@@ -69,20 +69,20 @@ namespace ofplug.crm
 			Fill_if_not_empty("nrq_slutdato", nrq_slutdato);
 			Fill_if_not_empty("nrq_startdato", nrq_startdato);
 			Fill_if_not_empty("nrq_type", nrq_type);
-			Fill_if_not_empty("of_id", of_id);
+			//Fill_if_not_empty("of_id", of_id);
 		}
 
 		public override void Read_fields()
 		{
 			//todo felter
-			nrq_beloeb = Read_if_not_empty<int?>("nrq_beloeb");
+			nrq_beloeb = Read_if_not_empty<Money>("nrq_beloeb");
 			nrq_betalingsform = Read_if_not_empty<string>("nrq_betalingsform");
-			nrq_bidragyder = Read_if_not_empty<Contact>("nrq_bidragyder");
+			nrq_bidragyder = Read_if_not_empty<EntityReference>("nrq_bidragyder");
 			nrq_frekvens = Read_if_not_empty<string>("nrq_frekvens");
 			nrq_slutdato = Read_if_not_empty<DateTime?>("nrq_slutdato");
 			nrq_startdato = Read_if_not_empty<DateTime?>("nrq_startdato");
 			nrq_type = Read_if_not_empty<string>("nrq_type");
-			of_id = Read_if_not_empty<int?>("of_id");
+			//of_id = Read_if_not_empty<int?>("of_id");
 		}
 	}
 }

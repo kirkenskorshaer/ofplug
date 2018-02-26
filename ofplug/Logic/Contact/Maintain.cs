@@ -98,7 +98,7 @@ namespace ofplug.Logic.Contact
 		{
 			Mapping.Contact.To_of(crm_contact, of_contact);
 
-			_of_connection.Contact.Patch(of_contact.Id.Value, of_contact);
+			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
 		}
 
 		private void Create_of_contact(crm.Contact crm_contact)
