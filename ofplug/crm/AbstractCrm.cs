@@ -125,6 +125,11 @@ namespace ofplug.crm
 		public abstract void Fill_fields();
 		public abstract void Read_fields();
 
+		public EntityReference Get_entity_reference()
+		{
+			return new EntityReference(Logical_name, Id);
+		}
+
 		protected void Read_from_entity()
 		{
 			if (CrmEntity == null)

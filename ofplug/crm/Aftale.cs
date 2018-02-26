@@ -10,7 +10,7 @@ namespace ofplug.crm
 	{
 		public int? nrq_beloeb;
 		public string nrq_betalingsform;
-		public Contact nrq_bidragyder;
+		public EntityReference nrq_bidragyder;
 		public string nrq_frekvens;
 		public DateTime? nrq_slutdato;
 		public DateTime? nrq_startdato;
