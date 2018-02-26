@@ -21,25 +21,25 @@ namespace ofplug.of
 		public Response Post<Request, Response>(string url, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "post");
+			return Send_and_expect_response<Request, Response>(url, request, "POST");
 		}
 
 		public Response Put<Request, Response>(string url, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "put");
+			return Send_and_expect_response<Request, Response>(url, request, "PUT");
 		}
 
 		public Response Patch<Request, Response>(string url, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "patch");
+			return Send_and_expect_response<Request, Response>(url, request, "PATCH");
 		}
 
 		public Response Delete<Request, Response>(string url, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "delete");
+			return Send_and_expect_response<Request, Response>(url, request, "DELETE");
 		}
 
 		private Response Send_and_expect_response<Request, Response>(string url, Request request, string method)
