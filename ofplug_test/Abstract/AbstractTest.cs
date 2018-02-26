@@ -31,9 +31,12 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { entity });
 		}
 
-		protected void Add_empty()
+		protected void Add_empty(int number_of_empty_entity_lists = 1)
 		{
-			_service.entitiesToReturn.Enqueue(new List<Entity>());
+			for (int index = 0; index < number_of_empty_entity_lists; index++)
+			{
+				_service.entitiesToReturn.Enqueue(new List<Entity>());
+			}
 		}
 
 		protected void Add_contact(ofplug.crm.Contact contact)

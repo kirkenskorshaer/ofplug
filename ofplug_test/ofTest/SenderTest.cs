@@ -8,7 +8,8 @@ namespace ofplug_test.ofTest
 	[TestClass]
 	public class SenderTest
 	{
-		private string url = "http://127.0.0.1:5000/echo";
+		//private string url = "http://127.0.0.1:5000/echo";
+		private string url = "http://192.168.1.7:5000/echo";
 
 		[TestMethod]
 		public void Get()
@@ -46,11 +47,11 @@ namespace ofplug_test.ofTest
 				case "post":
 					return sender.Post<Simple_data, Simple_data>;
 				case "put":
-					return sender.Post<Simple_data, Simple_data>;
+					return sender.Put<Simple_data, Simple_data>;
 				case "patch":
-					return sender.Post<Simple_data, Simple_data>;
+					return sender.Patch<Simple_data, Simple_data>;
 				case "delete":
-					return sender.Post<Simple_data, Simple_data>;
+					return sender.Delete<Simple_data, Simple_data>;
 				default:
 					break;
 			}
