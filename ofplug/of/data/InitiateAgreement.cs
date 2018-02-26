@@ -5,61 +5,61 @@ namespace ofplug.of.data.Abstract
 	[DataContract]
 	public class InitiateAgreement
 	{
-		[DataMember(Name = "name")]
+		[DataMember(Name = "name", EmitDefaultValue = false)]
 		public string Name { get; set; }
 
-		[DataMember(Name = "first_name")]
+		[DataMember(Name = "first_name", EmitDefaultValue = false)]
 		public string First_name { get; set; }
 
-		[DataMember(Name = "middle_name")]
+		[DataMember(Name = "middle_name", EmitDefaultValue = false)]
 		public string Middle_name { get; set; }
 
-		[DataMember(Name = "last_name")]
+		[DataMember(Name = "last_name", EmitDefaultValue = false)]
 		public string Last_name { get; set; }
 
-		[DataMember(Name = "address")]
+		[DataMember(Name = "address", EmitDefaultValue = false)]
 		public string Address { get; set; }
 
-		[DataMember(Name = "postcode")]
+		[DataMember(Name = "postcode", EmitDefaultValue = false)]
 		public string Postcode { get; set; }
 
-		[DataMember(Name = "city")]
+		[DataMember(Name = "city", EmitDefaultValue = false)]
 		public string City { get; set; }
 
-		[DataMember(Name = "country")]
+		[DataMember(Name = "country", EmitDefaultValue = false)]
 		public string Country { get; set; }
 
-		[DataMember(Name = "msisdn")]
+		[DataMember(Name = "msisdn", EmitDefaultValue = false)]
 		public string Msisdn { get; set; }
 
-		[DataMember(Name = "email")]
+		[DataMember(Name = "email", EmitDefaultValue = false)]
 		public string Email { get; set; }
 
-		[DataMember(Name = "cpr")]
+		[DataMember(Name = "cpr", EmitDefaultValue = false)]
 		public string Cpr { get; set; }
 
-		[DataMember(Name = "cvr")]
+		[DataMember(Name = "cvr", EmitDefaultValue = false)]
 		public string Cvr { get; set; }
 
-		[DataMember(Name = "bank_sort_code")]
+		[DataMember(Name = "bank_sort_code", EmitDefaultValue = false)]
 		public int Bank_sort_code { get; set; }
 
-		[DataMember(Name = "bank_account_no")]
+		[DataMember(Name = "bank_account_no", EmitDefaultValue = false)]
 		public int Bank_account_no { get; set; }
 
-		[DataMember(Name = "external_id")]
+		[DataMember(Name = "external_id", EmitDefaultValue = false)]
 		public string External_id { get; set; }
 
-		[DataMember(Name = "payment_media")]
+		[DataMember(Name = "payment_media", EmitDefaultValue = false)]
 		public string Payment_media { get; set; }
 
-		[DataMember(Name = "amount")]
+		[DataMember(Name = "amount", EmitDefaultValue = false)]
 		public int Amount { get; set; }
 
-		[DataMember(Name = "frequency")]
+		[DataMember(Name = "frequency", EmitDefaultValue = false)]
 		public string Frequency { get; set; }
 
-		[DataMember(Name = "project_id")]
+		[DataMember(Name = "project_id", EmitDefaultValue = false)]
 		public string Project_id { get; set; }
 	}
 }

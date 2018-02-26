@@ -5,7 +5,7 @@ namespace ofplug.of.data
 	[DataContract]
 	public class IdResponse
 	{
-		[DataMember(Name = "ID")]
+		[DataMember(Name = "ID", EmitDefaultValue = false)]
 		public int Id { get; set; }
 	}
 }

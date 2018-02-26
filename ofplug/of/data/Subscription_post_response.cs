@@ -5,7 +5,7 @@ namespace ofplug.of.data
 	[DataContract]
 	public class Subscription_post_response
 	{
-		[DataMember(Name = "id")]
+		[DataMember(Name = "id", EmitDefaultValue = false)]
 		public int Id { get; set; }
 	}
 }
