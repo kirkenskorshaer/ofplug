@@ -7,6 +7,8 @@ namespace ofplug.of.data
 	[DataContract]
 	public abstract class AbstractData
 	{
+		public int? Of_id;
+
 		protected DateTime? GetDate(string input)
 		{
 			if (string.IsNullOrWhiteSpace(input))
