@@ -42,7 +42,7 @@ namespace ofplug.crm
 		public int? of_aftale_id;
 
 
-		public Indbetaling(IOrganizationService service) : base(service, "new_indbetaling")
+		public Indbetaling(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "new_indbetaling")
 		{
 		}
 

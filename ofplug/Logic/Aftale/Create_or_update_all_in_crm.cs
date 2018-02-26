@@ -9,7 +9,7 @@ namespace ofplug.Logic.Aftale
 		{
 			Initialize(codeActivityContext);
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Update_agreements_in_crm_from_of_data();
 		}
 	}

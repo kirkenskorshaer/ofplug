@@ -9,7 +9,7 @@ namespace ofplug.Logic.Contact
 		{
 			Initialize(codeActivityContext);
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Update_all_medlemsnr_in_of();
 		}
 	}

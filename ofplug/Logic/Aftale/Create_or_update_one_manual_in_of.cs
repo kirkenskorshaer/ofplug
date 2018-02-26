@@ -18,10 +18,10 @@ namespace ofplug.Logic.Aftale
 
 			EntityReference aftaleEntityReference = AftaleEntityReference.Get<EntityReference>(codeActivityContext);
 
-			crm.Aftale crm_aftale = new crm.Aftale(_service);
+			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 			crm_aftale.Get_by_reference(aftaleEntityReference);
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Create_or_update_one_in_of(crm_aftale);
 		}
 	}

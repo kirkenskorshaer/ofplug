@@ -37,7 +37,7 @@ namespace ofplug.Logic.Abstract
 				throw;
 			}
 
-			_config = new crm.Config(_service);
+			_config = new crm.Config(_service, _tracingService);
 			_of_connection = new of.Connection(_config.Url);
 		}
 	}

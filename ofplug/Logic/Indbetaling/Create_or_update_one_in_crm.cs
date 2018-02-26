@@ -18,7 +18,7 @@ namespace ofplug.Logic.Indbetaling
 			int of_indbetaling_id = Of_indbetaling_id_InArgument.Get<int>(codeActivityContext);
 			of.data.Payment of_indbetaling = _of_connection.Payment.Get(of_indbetaling_id);
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Create_or_update_one_indbetaling_in_crm(of_indbetaling_id, of_indbetaling);
 		}
 	}

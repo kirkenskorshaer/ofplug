@@ -14,7 +14,7 @@ namespace ofplug.Logic.Contact
 				return;
 			}
 
-			crm.Contact crm_contact = new crm.Contact(_service)
+			crm.Contact crm_contact = new crm.Contact(_service, _tracingService)
 			{
 				CrmEntity = _context_entity
 			};
@@ -26,7 +26,7 @@ namespace ofplug.Logic.Contact
 
 			crm_contact.Read_fields();
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Create_or_update_one_in_of(crm_contact);
 		}
 	}

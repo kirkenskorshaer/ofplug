@@ -14,7 +14,7 @@ namespace ofplug.Logic.Aftale
 				return;
 			}
 
-			crm.Aftale crm_aftale = new crm.Aftale(_service)
+			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService)
 			{
 				CrmEntity = _context_entity
 			};
@@ -26,7 +26,7 @@ namespace ofplug.Logic.Aftale
 
 			crm_aftale.Read_fields();
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Create_or_update_one_in_of(crm_aftale);
 		}
 	}

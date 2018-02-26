@@ -26,7 +26,7 @@ namespace ofplug.crm
 		public string lastname;
 		//msisdn
 
-		public Contact(IOrganizationService service) : base(service, "contact")
+		public Contact(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "contact")
 		{
 		}
 

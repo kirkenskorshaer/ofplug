@@ -23,7 +23,7 @@ namespace ofplug.Logic.Contact
 				return;
 			}
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Create_or_update_one_contact_in_crm(of_contact_id, of_contact);
 		}
 	}

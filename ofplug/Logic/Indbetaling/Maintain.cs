@@ -6,7 +6,7 @@ namespace ofplug.Logic.Indbetaling
 {
 	public class Maintain : Abstract.Abstract_maintain
 	{
-		public Maintain(IOrganizationService service, Config config, Connection of_connection) : base(service, config, of_connection)
+		public Maintain(IOrganizationService service, ITracingService tracingService, Config config, Connection of_connection) : base(service, tracingService, config, of_connection)
 		{
 		}
 
@@ -16,7 +16,7 @@ namespace ofplug.Logic.Indbetaling
 			{
 				of.data.Payment of_payment = _of_connection.Payment.Get(id);
 
-				crm.Aftale crm_aftale = new crm.Aftale(_service);
+				crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 				crm_aftale.Get_by_of_id(id);
 
 				if (crm_aftale.CrmEntity == null)
@@ -24,7 +24,7 @@ namespace ofplug.Logic.Indbetaling
 					continue;
 				}
 
-				crm.Indbetaling crm_indbetaling = new crm.Indbetaling(_service);
+				crm.Indbetaling crm_indbetaling = new crm.Indbetaling(_service, _tracingService);
 				crm_indbetaling.Get_by_of_id(id);
 
 				if (crm_indbetaling.CrmEntity == null)
@@ -43,7 +43,7 @@ namespace ofplug.Logic.Indbetaling
 
 		public void Create_or_update_one_indbetaling_in_crm(int of_indbetaling_id, of.data.Payment of_indbetaling)
 		{
-			crm.Indbetaling crm_indbetaling = new crm.Indbetaling(_service);
+			crm.Indbetaling crm_indbetaling = new crm.Indbetaling(_service, _tracingService);
 
 			crm_indbetaling.Get_by_of_id(of_indbetaling_id);
 

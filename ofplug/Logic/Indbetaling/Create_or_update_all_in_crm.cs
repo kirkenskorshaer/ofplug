@@ -9,7 +9,7 @@ namespace ofplug.Logic.Indbetaling
 		{
 			Initialize(codeActivityContext);
 
-			Maintain maintain = new Maintain(_service, _config, _of_connection);
+			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
 			maintain.Create_or_update_all_indbetaling_in_crm();
 		}
 	}

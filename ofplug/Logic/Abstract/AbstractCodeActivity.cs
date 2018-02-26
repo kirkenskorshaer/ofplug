@@ -24,7 +24,7 @@ namespace ofplug.Logic.Abstract
 				_service = serviceFactory.CreateOrganizationService(workflowContext.UserId);
 			}
 
-			_config = new crm.Config(_service);
+			_config = new crm.Config(_service, _tracingService);
 			_of_connection = new of.Connection(_config.Url);
 		}
 

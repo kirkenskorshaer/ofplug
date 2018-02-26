@@ -4,7 +4,7 @@ namespace ofplug.Logic.Aftale
 {
 	public class Maintain : Abstract.Abstract_maintain
 	{
-		public Maintain(IOrganizationService service, crm.Config config, of.Connection of_connection) : base(service, config, of_connection)
+		public Maintain(IOrganizationService service, ITracingService tracingService, crm.Config config, of.Connection of_connection) : base(service, tracingService, config, of_connection)
 		{
 		}
 
@@ -32,7 +32,7 @@ namespace ofplug.Logic.Aftale
 
 		public void Create_or_update_one_aftale_in_crm(of.data.Agreement of_aftale)
 		{
-			crm.Aftale crm_aftale = new crm.Aftale(_service);
+			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 			crm_aftale.Get_entity_by_of_id(_service, of_aftale.Id.Value);
 
 			if (crm_aftale.CrmEntity == null)
@@ -47,7 +47,7 @@ namespace ofplug.Logic.Aftale
 
 		private void Create_crm_aftale(of.data.Agreement of_agreement)
 		{
-			crm.Aftale aftale = new crm.Aftale(_service);
+			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 
 			crm.Contact contact = Get_or_create_contact(of_agreement.Contact_id.Value);
 			aftale.nrq_bidragyder = contact;

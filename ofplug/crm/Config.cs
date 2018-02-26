@@ -10,7 +10,7 @@ namespace ofplug.crm
 		public int Payment_step { get; private set; }
 		public int Contact_step { get; private set; }
 
-		public Config(IOrganizationService service) : base(service, "nrq_settings")
+		public Config(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "nrq_settings")
 		{
 			//QueryExpression queryExpression = Create_query_expression("nrq_project", "ofplug", new ColumnSet("nrq_url", "nrq_url"));
 

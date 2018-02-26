@@ -18,7 +18,7 @@ namespace ofplug.crm
 		//todo felter
 		public int? of_id = 0;
 
-		public Aftale(IOrganizationService service) : base(service, "nrq_bidragsaftale")
+		public Aftale(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "nrq_bidragsaftale")
 		{
 		}
 
@@ -44,7 +44,7 @@ namespace ofplug.crm
 			Read_fields();
 		}
 
-		public static List<Aftale> Get_all(IOrganizationService service)
+		public static List<Aftale> Get_all(IOrganizationService service, ITracingService tracingService)
 		{
 			QueryExpression queryExpression = new QueryExpression("nrq_bidragsaftale")
 			{//todo felter
@@ -54,7 +54,7 @@ namespace ofplug.crm
 			EntityCollection entities = service.RetrieveMultiple(queryExpression);
 
 			List<Aftale> aftaler = new List<Aftale>();
-			entities.Entities.ToList().ForEach(entity => aftaler.Add(new Aftale(service)
+			entities.Entities.ToList().ForEach(entity => aftaler.Add(new Aftale(service, tracingService)
 			{
 				CrmEntity = entity,
 			}));

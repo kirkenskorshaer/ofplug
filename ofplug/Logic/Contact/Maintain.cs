@@ -6,13 +6,13 @@ namespace ofplug.Logic.Contact
 {
 	public class Maintain : Abstract.Abstract_maintain
 	{
-		public Maintain(IOrganizationService service, Config config, Connection of_connection) : base(service, config, of_connection)
+		public Maintain(IOrganizationService service, ITracingService tracingService, Config config, Connection of_connection) : base(service, tracingService, config, of_connection)
 		{
 		}
 
 		public void Create_or_update_one_contact_in_crm(int? of_contact_id, of.data.Contact of_contact)
 		{
-			crm.Contact crm_contact = new crm.Contact(_service);
+			crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
 			crm_contact.Get_contact_from_of_contact_id(_service, of_contact_id.Value);
 
 			if (crm_contact.CrmEntity == null)
@@ -63,7 +63,7 @@ namespace ofplug.Logic.Contact
 			of.connector.Contacts contacts = new of.connector.Contacts(_config.Url, _config.Aggrement_step);
 			foreach (int id in contacts)
 			{
-				crm.Contact crm_contact = new crm.Contact(_service);
+				crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
 
 				of.data.Contact of_contact = _of_connection.Contact.Get(id);
 				crm_contact.Get_contact_from_basis_information(_service, of_contact.Id.ToString());//todo felter

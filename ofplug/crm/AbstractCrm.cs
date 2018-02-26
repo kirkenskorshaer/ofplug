@@ -9,11 +9,15 @@ namespace ofplug.crm
 		public Guid Id;
 		public Entity CrmEntity;
 		protected IOrganizationService _service;
+		protected ITracingService _tracingService;
+
 		public string Logical_name { get; private set; }
 
-		public AbstractCrm(IOrganizationService service, string logical_name)
+		public AbstractCrm(IOrganizationService service, ITracingService tracingService, string logical_name)
 		{
 			_service = service;
+			_tracingService = tracingService;
+
 			Logical_name = logical_name;
 		}
 
