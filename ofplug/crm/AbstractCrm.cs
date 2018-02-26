@@ -125,6 +125,18 @@ namespace ofplug.crm
 		public abstract void Fill_fields();
 		public abstract void Read_fields();
 
+		protected void Read_from_entity()
+		{
+			if (CrmEntity == null)
+			{
+				return;
+			}
+
+			Id = CrmEntity.Id;
+
+			Read_fields();
+		}
+
 		protected void Fill_if_not_empty(string name, object value)
 		{
 			if (value == null)

@@ -38,7 +38,7 @@ namespace ofplug.crm
 
 			CrmEntity = entities.Entities.FirstOrDefault();
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public void Get_contact_from_of_contact_id(IOrganizationService service, int of_contact_id)
@@ -49,21 +49,21 @@ namespace ofplug.crm
 
 			CrmEntity = entities.Entities.FirstOrDefault();
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public void Get_by_reference(EntityReference entityReference)
 		{
 			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, new ColumnSet("nrq_of_id"));
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public void Get_contact_from_id(IOrganizationService service, Guid id)
 		{
 			CrmEntity = service.Retrieve("contact", id, new ColumnSet("contactid"));
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public void Get_contact(IOrganizationService service, int? medlemsnr, int of_contact_id, string email)
@@ -111,7 +111,7 @@ namespace ofplug.crm
 
 			CrmEntity = entityCollection.Entities.FirstOrDefault();
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public override void Fill_fields()
@@ -136,9 +136,6 @@ namespace ofplug.crm
 		public override void Read_fields()
 		{
 			//todo felter
-
-			Id = CrmEntity.Id;
-
 			firstname = Read_if_not_empty<string>("firstname");
 			new_ofcontactid = Read_if_not_empty<int?>("new_ofcontactid");
 			emailaddress1 = Read_if_not_empty<string>("emailaddress1");

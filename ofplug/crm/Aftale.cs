@@ -30,7 +30,7 @@ namespace ofplug.crm
 
 			CrmEntity = entities.Entities.FirstOrDefault();
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public void Get_by_of_id(int id)
@@ -41,7 +41,7 @@ namespace ofplug.crm
 
 			CrmEntity = entities.Entities.FirstOrDefault();
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public static List<Aftale> Get_all(IOrganizationService service, ITracingService tracingService)
@@ -66,7 +66,7 @@ namespace ofplug.crm
 		{
 			CrmEntity = _service.Retrieve(aftale_reference.LogicalName, aftale_reference.Id, new ColumnSet("nrq_of_id"));
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public override void Fill_fields()
@@ -86,9 +86,6 @@ namespace ofplug.crm
 		public override void Read_fields()
 		{
 			//todo felter
-
-			Id = CrmEntity.Id;
-
 			nrq_beloeb = Read_if_not_empty<int?>("nrq_beloeb");
 			nrq_betalingsform = Read_if_not_empty<string>("nrq_betalingsform");
 			nrq_bidragyder = Read_if_not_empty<Contact>("nrq_bidragyder");

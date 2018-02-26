@@ -54,7 +54,7 @@ namespace ofplug.crm
 
 			CrmEntity = entities.Entities.FirstOrDefault();
 
-			Read_fields();
+			Read_from_entity();
 		}
 
 		public override void Fill_fields()
