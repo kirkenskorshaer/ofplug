@@ -14,7 +14,7 @@ namespace ofplug_test.ofTest.connectorTest
 		public void Agreements_can_get_data()
 		{
 			SenderMock sender = Arrange_sender();
-			Agreements agreements = new Agreements("http://of.devflowtwo.com/kirkenskorshaer/api/v2/", 50, sender);
+			Agreements agreements = new Agreements("", sender);
 
 			Assert.IsTrue(agreements.Any());
 		}

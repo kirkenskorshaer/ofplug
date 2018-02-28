@@ -12,7 +12,7 @@ namespace ofplug.Logic.Indbetaling
 
 		public void Create_or_update_all_indbetaling_in_crm()
 		{
-			foreach (int id in _of_connection.Get_payments(_config.Payment_step))
+			foreach (int id in _of_connection.Get_payments())
 			{
 				of.data.Payment of_payment = _of_connection.Payment.Get(id);
 

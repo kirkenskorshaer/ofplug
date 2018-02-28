@@ -7,16 +7,14 @@ namespace ofplug.of.connector
 	public abstract class Abstract_id_collection : IEnumerable<int>
 	{
 		private Queue<int> _id_cache = new Queue<int>();
-		private int _current_offset = 0;
-		private int _of_step;
+		private int _current_id = -1;
 		private string _url;
 		private string _collection_name;
 		private ISender _sender;
 
-		public Abstract_id_collection(string url, string collection_name, int step, ISender sender)
+		public Abstract_id_collection(string url, string collection_name, ISender sender)
 		{
 			_url = url;
-			_of_step = step;
 			_collection_name = collection_name;
 			_sender = sender;
 		}
@@ -35,19 +33,19 @@ namespace ofplug.of.connector
 
 				while (_id_cache.Any())
 				{
-					yield return _id_cache.Dequeue();
+					_current_id = _id_cache.Dequeue();
+					yield return _current_id;
 				}
 			}
 		}
 
 		private bool Fill_cache()
 		{
-			List<int> response = _sender.Get<List<int>>(_url + _collection_name + "/" + _current_offset + "/");
-			_current_offset += _of_step;
+			List<int> response = _sender.Get<List<int>>(_url + _collection_name + "/" + (_current_id + 1) + "/");
 
 			response.ForEach(id => _id_cache.Enqueue(id));
 
-			return (response.Count == _of_step);
+			return (response.Count > 0);
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()

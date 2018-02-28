@@ -60,19 +60,19 @@ namespace ofplug.of
 			_sender = sender;
 		}
 
-		public Agreements Get_agreements(int step)
+		public Agreements Get_agreements()
 		{
-			return new Agreements(_url, step, _sender);
+			return new Agreements(_url, _sender);
 		}
 
-		public Contacts Get_contacts(int step)
+		public Contacts Get_contacts()
 		{
-			return new Contacts(_url, step, _sender);
+			return new Contacts(_url, _sender);
 		}
 
-		public Payments Get_payments(int step)
+		public Payments Get_payments()
 		{
-			return new Payments(_url, step, _sender);
+			return new Payments(_url, _sender);
 		}
 	}
 }
