@@ -15,6 +15,9 @@ namespace ofplug.of
 			string data = webClient.DownloadString(url);
 			Response response = StringToDataContract<Response>(data);
 			webClient.Dispose();
+
+			Move_id(response);
+
 			return response;
 		}
 
@@ -67,6 +70,8 @@ namespace ofplug.of
 			Response response = StringToDataContract<Response>(responseString);
 			webClient.Dispose();
 
+			Move_id(response);
+
 			return response;
 		}
 
@@ -107,6 +112,16 @@ namespace ofplug.of
 			writer.Flush();
 			stream.Position = 0;
 			return stream;
+		}
+
+		private void Move_id(object response)
+		{
+			data.AbstractData response_object = response as data.AbstractData;
+			if (response_object != null)
+			{
+				response_object.Of_id = response_object.Id;
+				response_object.Id = null;
+			}
 		}
 	}
 }
