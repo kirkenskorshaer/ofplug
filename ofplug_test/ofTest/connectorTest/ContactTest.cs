@@ -7,6 +7,7 @@ namespace ofplug_test.ofTest.connectorTest
 	public class ContactTest : Abstract.AbstractTest
 	{
 		[TestMethod]
+		[Ignore]
 		public void Contact_can_change_name()
 		{
 			ofplug.of.Connection connection = new ofplug.of.Connection("http://of.devflowtwo.com/kirkenskorshaer/api/v2/");

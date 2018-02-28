@@ -7,6 +7,7 @@ namespace ofplug_test.ofTest.connectorTest
 	public class AgreementTest
 	{
 		[TestMethod]
+		[Ignore]
 		public void GetTest()
 		{
 			ofplug.of.Connection connection = new ofplug.of.Connection("http://of.devflowtwo.com/kirkenskorshaer/api/v2/");

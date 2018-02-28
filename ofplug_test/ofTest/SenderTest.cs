@@ -12,6 +12,7 @@ namespace ofplug_test.ofTest
 		private string url = "http://192.168.1.7:5000/echo";
 
 		[TestMethod]
+		[Ignore]
 		public void Get()
 		{
 			Sender sender = new Sender();
@@ -26,6 +27,7 @@ namespace ofplug_test.ofTest
 		[DataRow("put")]
 		[DataRow("patch")]
 		[DataRow("delete")]
+		[Ignore]
 		public void Call_with_data_returned(string methodName)
 		{
 			Sender sender = new Sender();
