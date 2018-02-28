@@ -11,12 +11,14 @@ namespace ofplug.of.connector
 		private int _of_step;
 		private string _url;
 		private string _collection_name;
+		private ISender _sender;
 
-		public Abstract_id_collection(string url, string collection_name, int step)
+		public Abstract_id_collection(string url, string collection_name, int step, ISender sender)
 		{
 			_url = url;
 			_of_step = step;
 			_collection_name = collection_name;
+			_sender = sender;
 		}
 
 		public IEnumerator<int> GetEnumerator()
@@ -35,8 +37,7 @@ namespace ofplug.of.connector
 
 		private bool Fill_cache()
 		{
-			Sender sender = new Sender();
-			List<int> response = sender.Get<List<int>>(_url + _collection_name + "/" + _current_offset + "/");
+			List<int> response = _sender.Get<List<int>>(_url + _collection_name + "/" + _current_offset + "/");
 			_current_offset += _of_step;
 
 			response.ForEach(id => _id_cache.Enqueue(id));

@@ -60,7 +60,7 @@ namespace ofplug.Logic.Contact
 
 		public void Update_all_medlemsnr_in_of()
 		{
-			of.connector.Contacts contacts = new of.connector.Contacts(_config.Url, _config.Aggrement_step);
+			of.connector.Contacts contacts = _of_connection.Get_contacts(_config.Contact_step);
 			foreach (int id in contacts)
 			{
 				crm.Contact crm_contact = new crm.Contact(_service, _tracingService);

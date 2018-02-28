@@ -2,7 +2,7 @@
 {
 	public class Agreement : Abstract_data_exchange
 	{
-		public Agreement(Sender sender, string url, string path) : base(sender, url, path)
+		public Agreement(ISender sender, string url, string path) : base(sender, url, path)
 		{
 		}
 

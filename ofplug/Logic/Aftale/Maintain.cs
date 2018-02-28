@@ -10,7 +10,7 @@ namespace ofplug.Logic.Aftale
 
 		public void Update_agreements_in_crm_from_of_data()
 		{
-			of.connector.Agreements agreements = new of.connector.Agreements(_config.Url, _config.Aggrement_step);
+			of.connector.Agreements agreements = _of_connection.Get_agreements(_config.Aggrement_step);
 			foreach (int id in agreements)
 			{
 				of.data.Agreement of_aftale = _of_connection.Agreement.Get(id);

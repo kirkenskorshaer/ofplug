@@ -2,7 +2,7 @@
 {
 	public class Payment : Abstract_data_exchange
 	{
-		public Payment(Sender sender, string url, string path) : base(sender, url, path)
+		public Payment(ISender sender, string url, string path) : base(sender, url, path)
 		{
 		}
 

@@ -23,17 +23,17 @@ namespace ofplug.of
 
 		public Agreements Get_agreements(int step)
 		{
-			return new Agreements(_url, step);
+			return new Agreements(_url, step, _sender);
 		}
 
 		public Contacts Get_contacts(int step)
 		{
-			return new Contacts(_url, step);
+			return new Contacts(_url, step, _sender);
 		}
 
 		public Payments Get_payments(int step)
 		{
-			return new Payments(_url, step);
+			return new Payments(_url, step, _sender);
 		}
 	}
 }

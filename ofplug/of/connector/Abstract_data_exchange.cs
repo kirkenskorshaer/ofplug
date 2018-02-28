@@ -4,9 +4,9 @@
 	{
 		protected string _path { get; private set; }
 		protected string _url { get; private set; }
-		protected Sender _sender { get; private set; }
+		protected ISender _sender { get; private set; }
 
-		public Abstract_data_exchange(Sender sender, string url, string path)
+		public Abstract_data_exchange(ISender sender, string url, string path)
 		{
 			_url = url;
 			_sender = sender;

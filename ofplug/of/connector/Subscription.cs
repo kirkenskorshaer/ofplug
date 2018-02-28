@@ -2,7 +2,7 @@
 {
 	public class Subscription : Abstract_data_exchange
 	{
-		public Subscription(Sender sender, string url, string path) : base(sender, url, path)
+		public Subscription(ISender sender, string url, string path) : base(sender, url, path)
 		{
 		}
 

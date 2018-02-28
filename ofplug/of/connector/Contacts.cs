@@ -2,7 +2,7 @@
 {
 	public class Contacts : Abstract_id_collection
 	{
-		public Contacts(string url, int step) : base(url, "contacts", step)
+		public Contacts(string url, int step, ISender sender) : base(url, "contacts", step, sender)
 		{
 		}
 	}
