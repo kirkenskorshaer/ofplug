@@ -6,9 +6,6 @@ namespace ofplug.of.data
 	[DataContract]
 	public class Payment : AbstractData
 	{
-		[DataMember(Name = "id", EmitDefaultValue = false)]
-		public int Id { get; set; }
-
 		[DataMember(Name = "amount", EmitDefaultValue = false)]
 		public int? Amount { get; set; } //: "200",
 

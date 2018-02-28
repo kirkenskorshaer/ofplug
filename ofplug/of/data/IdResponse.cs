@@ -3,9 +3,7 @@
 namespace ofplug.of.data
 {
 	[DataContract]
-	public class IdResponse
+	public class IdResponse : AbstractData
 	{
-		[DataMember(Name = "ID", EmitDefaultValue = false)]
-		public int Id { get; set; }
 	}
 }

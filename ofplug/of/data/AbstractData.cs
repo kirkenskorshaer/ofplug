@@ -9,6 +9,9 @@ namespace ofplug.of.data
 	{
 		public int? Of_id;
 
+		[DataMember(Name = "ID", EmitDefaultValue = false)]
+		public int? Id { get; set; }
+
 		protected DateTime? GetDate(string input)
 		{
 			if (string.IsNullOrWhiteSpace(input))

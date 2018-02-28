@@ -6,9 +6,6 @@ namespace ofplug.of.data
 	[DataContract]
 	public class Subscription : AbstractData
 	{
-		[DataMember(Name = "ID", EmitDefaultValue = false)]
-		public int? Id; // "1704"
-
 		[DataMember(Name = "status", EmitDefaultValue = false)]
 		public string Status; // "complete"
 

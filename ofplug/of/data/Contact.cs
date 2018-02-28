@@ -7,9 +7,6 @@ namespace ofplug.of.data
 	[DataContract]
 	public class Contact : AbstractData
 	{
-		[DataMember(Name = "ID", EmitDefaultValue = false)]
-		public int? Id { get; set; }
-
 		[DataMember(Name = "name", EmitDefaultValue = false)]
 		public string Name { get; set; } // "Christian Laugesen",
 
