@@ -16,6 +16,8 @@ namespace ofplug_test.LogicTest.AftaleTest
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
 			Add_empty(4);
+			Add_of_aftale();
+			Add_of_contact();
 
 			WorkflowInvoker.Invoke(creator, input);
 
@@ -30,11 +32,13 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Dictionary<string, object> input = Arrange_input();
 			Add_aftale();
 			Add_contact();
+			Add_of_aftale();
+			Add_of_contact();
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			KeyValuePair<string, object> result = _service.Log[1];
-			Assert.AreEqual("associate", result.Key);
+			KeyValuePair<string, object> result = _service.Log[0];
+			Assert.AreEqual("contact", ((EntityReference)((Entity)result.Value)["nrq_bidragyder"]).LogicalName);
 		}
 
 		private void Add_contact()

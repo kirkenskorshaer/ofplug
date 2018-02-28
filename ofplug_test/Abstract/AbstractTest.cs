@@ -59,5 +59,17 @@ namespace ofplug_test.Abstract
 
 			_sender.data_to_return.Enqueue(of_contact);
 		}
+
+		protected void Add_of_aftale()
+		{
+			ofplug.of.data.Agreement of_aftale = new ofplug.of.data.Agreement()
+			{
+				Of_id = int.MaxValue,
+				Contact_id = int.MaxValue,
+				Amount = 100
+			};
+
+			_sender.data_to_return.Enqueue(of_aftale);
+		}
 	}
 }
