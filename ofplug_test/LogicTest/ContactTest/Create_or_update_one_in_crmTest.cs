@@ -3,6 +3,7 @@ using Microsoft.Xrm.Sdk;
 using ofplug_test.Abstract;
 using System.Activities;
 using System.Collections.Generic;
+using System;
 
 namespace ofplug_test.LogicTest.ContactTest
 {
@@ -14,6 +15,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_of_contact();
 			Add_empty();
 
 			WorkflowInvoker.Invoke(creator, input);
@@ -26,6 +28,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_of_contact();
 			Add_contact(new ofplug.crm.Contact(_service, _tracingService) { firstname = "tsts_frst_nm" });
 
 			WorkflowInvoker.Invoke(creator, input);
@@ -50,7 +53,7 @@ namespace ofplug_test.LogicTest.ContactTest
 				IsTest = true
 			};
 
-			creator.Set_test(_tracingService, _service);
+			creator.Set_test(_tracingService, _service, _sender);
 
 			return creator;
 		}

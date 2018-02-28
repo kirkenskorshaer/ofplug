@@ -14,6 +14,8 @@ namespace ofplug.Logic.Abstract
 
 		protected Entity _context_entity = null;
 
+		private of.ISender _sender_test = null;
+
 		public abstract void Execute(IServiceProvider serviceProvider);
 
 		protected void Initialize(IServiceProvider serviceProvider)
@@ -39,6 +41,18 @@ namespace ofplug.Logic.Abstract
 
 			_config = new crm.Config(_service, _tracingService);
 			_of_connection = new of.Connection(_config.Url);
+
+			if (_sender_test != null)
+			{
+				_of_connection.Replace_sender(_sender_test);
+			}
+		}
+
+		public void Set_test(ITracingService tracingService, IOrganizationService service, of.ISender sender)
+		{
+			_tracingService = tracingService;
+			_service = service;
+			_sender_test = sender;
 		}
 	}
 }

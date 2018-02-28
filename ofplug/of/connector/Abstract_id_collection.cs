@@ -21,6 +21,11 @@ namespace ofplug.of.connector
 			_sender = sender;
 		}
 
+		public void Replace_sender(ISender sender)
+		{
+			_sender = sender;
+		}
+
 		public IEnumerator<int> GetEnumerator()
 		{
 			bool is_more_in_of = true;

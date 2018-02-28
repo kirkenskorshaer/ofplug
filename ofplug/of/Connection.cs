@@ -5,20 +5,59 @@ namespace ofplug.of
 	public class Connection
 	{
 		private string _url;
-		private Sender _sender;
+		private ISender _sender;
 
-		public Contact Contact;
-		public Agreement Agreement;
-		public Payment Payment;
+		private Contact _contact;
+		public Contact Contact
+		{
+			get
+			{
+				if(_contact == null)
+				{
+					_contact = new Contact(_sender, _url, "contact");
+				}
+
+				return _contact;
+			}
+		}
+
+		private Agreement _agreement = null;
+		public Agreement Agreement
+		{
+			get
+			{
+				if (_agreement == null)
+				{
+					_agreement = new Agreement(_sender, _url, "agreement");
+				}
+
+				return _agreement;
+			}
+		}
+
+		private Payment _payment = null;
+		public Payment Payment
+		{
+			get
+			{
+				if (_payment == null)
+				{
+					_payment = new Payment(_sender, _url, "agreement");
+				}
+
+				return _payment;
+			}
+		}
 
 		public Connection(string url)
 		{
 			_sender = new Sender();
 			_url = url;
+		}
 
-			Contact = new Contact(_sender, _url, "contact");
-			Agreement = new Agreement(_sender, _url, "agreement");
-			Payment = new Payment(_sender, _url, "payment");
+		public void Replace_sender(ISender sender)
+		{
+			_sender = sender;
 		}
 
 		public Agreements Get_agreements(int step)

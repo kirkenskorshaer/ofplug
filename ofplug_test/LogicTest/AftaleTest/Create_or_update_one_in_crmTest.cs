@@ -60,7 +60,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 				IsTest = true
 			};
 
-			creator.Set_test(_tracingService, _service);
+			creator.Set_test(_tracingService, _service, _sender);
 
 			return creator;
 		}

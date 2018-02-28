@@ -13,6 +13,8 @@ namespace ofplug.Logic.Abstract
 		protected crm.Config _config;
 		protected of.Connection _of_connection;
 
+		private of.ISender _sender_test;
+
 		protected void Initialize(CodeActivityContext codeActivityContext)
 		{
 			if (IsTest == false)
@@ -26,12 +28,18 @@ namespace ofplug.Logic.Abstract
 
 			_config = new crm.Config(_service, _tracingService);
 			_of_connection = new of.Connection(_config.Url);
+
+			if (IsTest)
+			{
+				_of_connection.Replace_sender(_sender_test);
+			}
 		}
 
-		public void Set_test(ITracingService tracingService, IOrganizationService service)
+		public void Set_test(ITracingService tracingService, IOrganizationService service, of.ISender sender)
 		{
 			_tracingService = tracingService;
 			_service = service;
+			_sender_test = sender;
 		}
 	}
 }
