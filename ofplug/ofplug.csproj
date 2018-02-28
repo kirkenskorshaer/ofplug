@@ -99,11 +99,6 @@
     <Compile Include="of\connector\Abstract_id_collection.cs" />
     <Compile Include="of\connector\Payment.cs" />
     <Compile Include="of\connector\Payments.cs" />
-    <Compile Include="of\data\Agreement_post_response.cs" />
-    <Compile Include="of\data\parameters.cs" />
-    <Compile Include="of\data\Subscriptions_offset_get_response.cs" />
-    <Compile Include="of\data\Subscription_id_delete_response.cs" />
-    <Compile Include="of\data\Subscription_post_response.cs" />
     <Compile Include="of\ISender.cs" />
     <Compile Include="of\Sender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
