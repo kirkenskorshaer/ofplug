@@ -66,7 +66,7 @@ namespace ofplug.Logic.Contact
 				crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
 
 				of.data.Contact of_contact = _of_connection.Contact.Get(id);
-				crm_contact.Get_contact_from_basis_information(_service, of_contact.Id.ToString());//todo felter
+				crm_contact.Get_contact_from_basis_information(_service, of_contact.Of_id.ToString());//todo felter
 
 				if (crm_contact.CrmEntity == null)
 				{
@@ -76,7 +76,7 @@ namespace ofplug.Logic.Contact
 				if (Needs_medlemsnr_update_in_of(crm_contact, of_contact))
 				{
 					//todo sæt medlemsnr
-					of_contact.Id = int.Parse(crm_contact.firstname);
+					of_contact.Of_id = int.Parse(crm_contact.firstname);
 				}
 				//todo remove
 				break;
@@ -86,7 +86,7 @@ namespace ofplug.Logic.Contact
 		private bool Needs_medlemsnr_update_in_of(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
 			//todo skal se om medlemsnr er udfyldt
-			if (crm_contact.firstname != of_contact.Id.ToString())
+			if (crm_contact.firstname != of_contact.Of_id.ToString())
 			{
 				return true;
 			}

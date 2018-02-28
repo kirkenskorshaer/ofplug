@@ -22,7 +22,7 @@ namespace ofplug.Logic.Abstract
 			of.data.Contact of_contact = _of_connection.Contact.Get(of_contact_id);
 
 			crm.Contact contact = new crm.Contact(_service, _tracingService);
-			contact.Get_contact(_service, of_contact.Id, of_contact.Id.Value, of_contact.Email);
+			contact.Get_contact(_service, of_contact.Of_id, of_contact.Of_id.Value, of_contact.Email);
 
 			if (contact.CrmEntity == null)
 			{

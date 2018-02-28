@@ -25,7 +25,7 @@ namespace ofplug.Logic.Aftale
 		public void Create_or_update_one_aftale_in_crm(of.data.Agreement of_aftale)
 		{
 			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
-			crm_aftale.Get_by_of_id(of_aftale.Id.Value);
+			crm_aftale.Get_by_of_id(of_aftale.Of_id.Value);
 
 			if (crm_aftale.CrmEntity == null)
 			{
@@ -87,7 +87,7 @@ namespace ofplug.Logic.Aftale
 		{
 			Mapping.Aftale.To_of(crm_aftale, of_aftale);
 
-			_of_connection.Agreement.Patch(of_aftale.Id.Value, of_aftale);
+			_of_connection.Agreement.Patch(of_aftale.Of_id.Value, of_aftale);
 		}
 
 		private void Create_of_aftale(crm.Aftale crm_aftale)

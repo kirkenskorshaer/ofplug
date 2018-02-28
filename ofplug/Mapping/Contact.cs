@@ -45,7 +45,7 @@
 			crm_contact.firstname = of_contact.First_name;
 			crm_contact.lastname = of_contact.Last_name;
 			//crm_contact.new_cprnr
-			crm_contact.new_ofcontactid = of_contact.Id;
+			crm_contact.new_ofcontactid = of_contact.Of_id;
 			crm_contact.new_kkadminmedlemsnr = of_contact.External_id;
 		}
 
@@ -65,7 +65,7 @@
 				crm_contact.lastname != of_contact.Last_name ||
 				crm_contact.new_kkadminmedlemsnr != of_contact.External_id ||
 				//crm_contact.new_cprnr
-				crm_contact.new_ofcontactid != of_contact.Id;
+				crm_contact.new_ofcontactid != of_contact.Of_id;
 		}
 
 		public static bool Needs_update_in_of(crm.Contact crm_contact, of.data.Contact of_contact)
@@ -84,7 +84,7 @@
 				of_contact.Last_name != crm_contact.lastname ||
 				of_contact.External_id != crm_contact.new_kkadminmedlemsnr ||
 				//crm_contact.new_cprnr
-				of_contact.Id != crm_contact.new_ofcontactid;
+				of_contact.Of_id != crm_contact.new_ofcontactid;
 		}
 	}
 }
