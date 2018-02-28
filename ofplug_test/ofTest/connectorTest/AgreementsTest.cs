@@ -19,6 +19,21 @@ namespace ofplug_test.ofTest.connectorTest
 			Assert.IsTrue(agreements.Any());
 		}
 
+		[TestMethod]
+		[Ignore]
+		public void Agreements_can_get_data_from_of()
+		{
+			ofplug.of.Sender sender = new ofplug.of.Sender();
+			Agreements agreements = new Agreements("http://of.devflowtwo.com/kirkenskorshaer/api/v2/", sender);
+
+			int id_index = 0;
+			foreach (int id in agreements)
+			{
+				id_index++;
+				Console.Out.WriteLine(id_index + ": " + id.ToString());
+			}
+		}
+
 		private SenderMock Arrange_sender()
 		{
 			SenderMock sender = new SenderMock();
