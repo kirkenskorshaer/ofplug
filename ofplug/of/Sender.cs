@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ofplug.of
 {
-	public class Sender
+	public class Sender : ISender
 	{
 		public Response Get<Response>(string url)
 			where Response : class
