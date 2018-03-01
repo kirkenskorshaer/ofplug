@@ -16,7 +16,7 @@ namespace ofplug_test.LogicTest.ContactTest
 			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
 			Add_of_contact();
-			Add_empty();
+			Add_crm_empty();
 
 			WorkflowInvoker.Invoke(creator, input);
 

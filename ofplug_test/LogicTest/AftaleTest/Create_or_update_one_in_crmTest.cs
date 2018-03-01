@@ -15,7 +15,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
-			Add_empty(4);
+			Add_crm_empty(4);
 			Add_of_aftale();
 			Add_of_contact();
 
@@ -30,8 +30,8 @@ namespace ofplug_test.LogicTest.AftaleTest
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
-			Add_aftale();
-			Add_contact();
+			Add_crm_aftale();
+			Add_crm_contact();
 			Add_of_aftale();
 			Add_of_contact();
 
@@ -41,7 +41,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Assert.AreEqual("contact", ((EntityReference)((Entity)result.Value)["nrq_bidragyder"]).LogicalName);
 		}
 
-		private void Add_contact()
+		private void Add_crm_contact()
 		{
 			Entity entity = new Entity("contact");
 			_service.entitiesToReturn.Enqueue(new List<Entity> { entity });

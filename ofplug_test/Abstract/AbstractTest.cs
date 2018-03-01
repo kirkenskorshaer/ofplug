@@ -26,13 +26,13 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { configEntity });
 		}
 
-		protected void Add_aftale()
+		protected void Add_crm_aftale()
 		{
 			Entity entity = new Entity("nrq_bidragsaftale");
 			_service.entitiesToReturn.Enqueue(new List<Entity> { entity });
 		}
 
-		protected void Add_empty(int number_of_empty_entity_lists = 1)
+		protected void Add_crm_empty(int number_of_empty_entity_lists = 1)
 		{
 			for (int index = 0; index < number_of_empty_entity_lists; index++)
 			{
