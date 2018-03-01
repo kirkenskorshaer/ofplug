@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Xrm.Sdk;
 using ofplug_test.Abstract;
 using System.Activities;
 using System.Collections.Generic;
-using System;
 
 namespace ofplug_test.LogicTest.ContactTest
 {
@@ -20,7 +18,8 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert.AreEqual("contact", ((Entity)_service.Log[0].Value).LogicalName);
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Create, "contact");
 		}
 
 		[TestMethod]
@@ -33,7 +32,8 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert.AreEqual("contact", ((Entity)_service.Log[0].Value).LogicalName);
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Update, "contact");
 		}
 
 		private Dictionary<string, object> Arrange_input()

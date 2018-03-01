@@ -3,7 +3,6 @@ using ofplug_test.Abstract;
 using Microsoft.Xrm.Sdk;
 using System.Collections.Generic;
 using System.Activities;
-using System;
 
 namespace ofplug_test.LogicTest.AftaleTest
 {
@@ -21,8 +20,12 @@ namespace ofplug_test.LogicTest.AftaleTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert.AreEqual("contact", ((Entity)_service.Log[0].Value).LogicalName);
-			Assert.AreEqual("nrq_bidragsaftale", ((Entity)_service.Log[1].Value).LogicalName);
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Create, "contact");
+			Assert_crm_operation(5, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
 		}
 
 		[TestMethod]
@@ -37,7 +40,9 @@ namespace ofplug_test.LogicTest.AftaleTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			KeyValuePair<string, object> result = _service.Log[0];
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			KeyValuePair<Mock.OrganizationServiceMock.Operation, object> result = _service.Log[2];
 			Assert.AreEqual("contact", ((EntityReference)((Entity)result.Value)["nrq_bidragyder"]).LogicalName);
 		}
 

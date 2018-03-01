@@ -1,4 +1,6 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 using ofplug_test.Mock;
 using System.Activities;
 using System.Collections.Generic;
@@ -70,6 +72,22 @@ namespace ofplug_test.Abstract
 			};
 
 			_sender.data_to_return.Enqueue(of_aftale);
+		}
+
+		protected void Assert_crm_operation(int log_index, OrganizationServiceMock.Operation operation, string entity_name)
+		{
+			KeyValuePair<OrganizationServiceMock.Operation, object> log = _service.Log[log_index];
+
+			Assert.AreEqual(operation, log.Key);
+
+			if (operation == OrganizationServiceMock.Operation.RetrieveMultiple)
+			{
+				Assert.AreEqual(entity_name, ((QueryExpression)log.Value).EntityName);
+
+				return;
+			}
+
+			Assert.AreEqual(entity_name, ((Entity)log.Value).LogicalName);
 		}
 	}
 }
