@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ofplug_test.Mock
 {
-	public class OrganizationServiceTest : IOrganizationService
+	public class OrganizationServiceMock : IOrganizationService
 	{
 		public List<KeyValuePair<string, object>> Log = new List<KeyValuePair<string, object>>();
 		public Queue<List<Entity>> entitiesToReturn = new Queue<List<Entity>>();

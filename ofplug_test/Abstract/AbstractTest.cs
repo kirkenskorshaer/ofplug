@@ -8,14 +8,14 @@ namespace ofplug_test.Abstract
 	public class AbstractTest
 	{
 		protected TracingServiceTest _tracingService;
-		protected OrganizationServiceTest _service;
+		protected OrganizationServiceMock _service;
 		protected CodeActivityContext _codeActivityContext;
 		protected SenderMock _sender = new SenderMock();
 
 		public AbstractTest()
 		{
 			_tracingService = new TracingServiceTest();
-			_service = new OrganizationServiceTest();
+			_service = new OrganizationServiceMock();
 		}
 
 		protected void AddConfig()
