@@ -81,7 +81,6 @@
     <Compile Include="Logic\Abstract\AbstractCodeActivity.cs" />
     <Compile Include="Logic\Aftale\Create_or_update_one_in_crm.cs" />
     <Compile Include="Logic\Aftale\Create_or_update_one_manual_in_of.cs" />
-    <Compile Include="Logic\Aftale\Create_in_of.cs" />
     <Compile Include="Logic\Aftale\Create_or_update_all_in_crm.cs" />
     <Compile Include="crm\Config.cs" />
     <Compile Include="crm\AbstractCrm.cs" />
