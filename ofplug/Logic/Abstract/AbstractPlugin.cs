@@ -20,23 +20,26 @@ namespace ofplug.Logic.Abstract
 
 		protected void Initialize(IServiceProvider serviceProvider)
 		{
-			_tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
-			_context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
+			if (_sender_test == null)
+			{
+				_tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
+				_context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
+
+				try
+				{
+					IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+					_service = serviceFactory.CreateOrganizationService(_context.UserId);
+				}
+				catch (Exception exception)
+				{
+					_tracingService.Trace("ofplug: {0}", exception.ToString());
+					throw;
+				}
+			}
 
 			if (_context.InputParameters.Contains("Target") && _context.InputParameters["Target"] is Entity)
 			{
-				Entity entity = (Entity)_context.InputParameters["Target"];
-			}
-
-			try
-			{
-				IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
-				_service = serviceFactory.CreateOrganizationService(_context.UserId);
-			}
-			catch (Exception exception)
-			{
-				_tracingService.Trace("ofplug: {0}", exception.ToString());
-				throw;
+				_context_entity = (Entity)_context.InputParameters["Target"];
 			}
 
 			_config = new crm.Config(_service, _tracingService);
@@ -48,11 +51,12 @@ namespace ofplug.Logic.Abstract
 			}
 		}
 
-		public void Set_test(ITracingService tracingService, IOrganizationService service, of.ISender sender)
+		public void Set_test(ITracingService tracingService, IOrganizationService service, of.ISender sender, IPluginExecutionContext context)
 		{
 			_tracingService = tracingService;
 			_service = service;
 			_sender_test = sender;
+			_context = context;
 		}
 	}
 }
