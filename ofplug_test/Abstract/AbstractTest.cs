@@ -100,6 +100,14 @@ namespace ofplug_test.Abstract
 			_sender.data_to_return.Enqueue(of_aftale);
 		}
 
+		protected void Add_of_empty(int number_of_empty_data = 1)
+		{
+			for (int index = 0; index < number_of_empty_data; index++)
+			{
+				_sender.data_to_return.Enqueue(null);
+			}
+		}
+
 		protected void Assert_crm_operation(int log_index, OrganizationServiceMock.Operation operation, string entity_name)
 		{
 			KeyValuePair<OrganizationServiceMock.Operation, object> log = _service.Log[log_index];
