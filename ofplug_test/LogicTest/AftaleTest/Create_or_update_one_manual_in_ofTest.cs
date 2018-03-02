@@ -29,6 +29,38 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Assert_number_of_operations(2, 3);
 		}
 
+		[TestMethod]
+		public void Does_not_create_a_contact_if_no_contact_is_attached_to_aftale()
+		{
+			ofplug.Logic.Aftale.Create_or_update_one_manual_in_of creator = Arrange_creator();
+			Dictionary<string, object> input = Arrange_input();
+			Add_crm_aftale();
+			Add_of_empty(1);
+
+			WorkflowInvoker.Invoke(creator, input);
+
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.Retrieve, "nrq_bidragsaftale");
+			Assert_of_operation(0, Mock.SenderMock.Operation.Post, typeof(ofplug.of.data.Agreement));
+			Assert_number_of_operations(1, 1);
+		}
+
+		[TestMethod]
+		public void Updates_aftale_in_of_if_it_already_exists()
+		{
+			ofplug.Logic.Aftale.Create_or_update_one_manual_in_of creator = Arrange_creator();
+			Dictionary<string, object> input = Arrange_input();
+			Add_of_aftale();
+			Add_crm_aftale(aftale => aftale.nrq_type = _id.Get_id("of_contact_id").ToString());
+			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("of_contact_id") });
+
+			WorkflowInvoker.Invoke(creator, input);
+
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.Retrieve, "nrq_bidragsaftale");
+			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
+			Assert_of_operation(1, Mock.SenderMock.Operation.Patch, typeof(ofplug.of.data.Agreement));
+			Assert_number_of_operations(2, 1);
+		}
+
 		private Dictionary<string, object> Arrange_input()
 		{
 			Dictionary<string, object> input = new Dictionary<string, object>
