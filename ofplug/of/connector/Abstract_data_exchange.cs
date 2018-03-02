@@ -39,7 +39,7 @@
 
 		public data.IdResponse Post<Input>(Input input)
 		{
-			data.IdResponse response = _sender.Put<Input, data.IdResponse>(_url + _path, input);
+			data.IdResponse response = _sender.Post<Input, data.IdResponse>(_url + _path, input);
 			return response;
 		}
 	}
