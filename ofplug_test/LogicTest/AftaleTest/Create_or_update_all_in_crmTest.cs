@@ -12,7 +12,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 		{
 			ofplug.Logic.Aftale.Create_or_update_all_in_crm creator = Arrange_creator();
 			Add_crm_empty(4);
-			_sender.data_to_return.Enqueue(new List<int> { int.MaxValue });
+			_sender.data_to_return.Enqueue(new List<int> { _id.Get_id("agreement_id") });
 			Add_of_aftale();
 			Add_of_contact();
 

@@ -16,7 +16,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Dictionary<string, object> input = Arrange_input();
 			Add_crm_aftale(aftale => aftale.nrq_bidragyder = new EntityReference("contact", Guid.Empty));
 			Add_crm_contact();
-			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = int.MaxValue });
+			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("contact id") });
 			Add_of_empty(2);
 
 			WorkflowInvoker.Invoke(creator, input);

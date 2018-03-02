@@ -14,6 +14,7 @@ namespace ofplug_test.Abstract
 		protected OrganizationServiceMock _service;
 		protected CodeActivityContext _codeActivityContext;
 		protected SenderMock _sender = new SenderMock();
+		protected IdMock _id = new IdMock();
 
 		public AbstractTest()
 		{
@@ -81,7 +82,7 @@ namespace ofplug_test.Abstract
 		{
 			ofplug.of.data.Contact of_contact = new ofplug.of.data.Contact()
 			{
-				Of_id = int.MaxValue,
+				Of_id = _id.Get_id("of_contact_id"),
 				First_name = "unittest"
 			};
 
@@ -92,8 +93,8 @@ namespace ofplug_test.Abstract
 		{
 			ofplug.of.data.Agreement of_aftale = new ofplug.of.data.Agreement()
 			{
-				Of_id = int.MaxValue,
-				Contact_id = int.MaxValue,
+				Of_id = _id.Get_id("of_aftale_id"),
+				Contact_id = _id.Get_id("of_contact_id"),
 				Amount = 100
 			};
 
