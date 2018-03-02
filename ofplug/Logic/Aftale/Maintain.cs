@@ -96,6 +96,12 @@ namespace ofplug.Logic.Aftale
 
 			Mapping.Aftale.To_of(crm_aftale, of_aftale);
 
+			crm.Contact crm_contact = Get_crm_contact_from_crm_aftale(crm_aftale);
+			if (crm_contact != null)
+			{
+				Get_or_create_of_contact(crm_contact);
+			}
+
 			_of_connection.Agreement.Post(of_aftale);
 		}
 	}

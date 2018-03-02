@@ -33,5 +33,47 @@ namespace ofplug.Logic.Abstract
 
 			return contact;
 		}
+
+		protected crm.Contact Get_crm_contact_from_crm_aftale(crm.Aftale crm_aftale)
+		{
+			if (crm_aftale.nrq_bidragyder != null)
+			{
+				crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
+				crm_contact.Get_by_reference(crm_aftale.nrq_bidragyder);
+
+				if (crm_contact.CrmEntity != null)
+				{
+					return crm_contact;
+				}
+			}
+
+			return null;
+		}
+
+		protected of.data.Contact Get_or_create_of_contact(crm.Contact crm_contact)
+		{
+			of.data.Contact of_contact = null;
+
+			if (crm_contact.new_ofcontactid.HasValue)
+			{
+				of_contact = _of_connection.Contact.Get(crm_contact.new_ofcontactid.Value);
+			}
+			else
+			{
+				of_contact = new of.data.Contact();
+				Mapping.Contact.To_of(crm_contact, of_contact);
+
+				of.data.IdResponse response = _of_connection.Contact.Post(of_contact);
+
+				crm.Contact update_crm_contact = new crm.Contact(_service, _tracingService)
+				{
+					new_ofcontactid = response.Id,
+					Id = crm_contact.Id
+				};
+				update_crm_contact.Update();
+			}
+
+			return of_contact;
+		}
 	}
 }
