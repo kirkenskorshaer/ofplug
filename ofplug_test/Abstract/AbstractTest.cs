@@ -130,7 +130,7 @@ namespace ofplug_test.Abstract
 			SenderLog log = _sender.Log[log_index];
 
 			Assert.AreEqual(operation, log.Operation);
-			Assert.AreEqual(type, log.Request.GetType());
+			Assert.AreEqual(type, log.Request?.GetType());
 		}
 
 		protected void Assert_number_of_operations(int of_operations, int crm_operations)
