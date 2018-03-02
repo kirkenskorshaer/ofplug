@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using ofplug_test.Mock;
+using System;
 using System.Activities;
 using System.Collections.Generic;
 
@@ -30,8 +31,28 @@ namespace ofplug_test.Abstract
 
 		protected void Add_crm_aftale()
 		{
-			Entity entity = new Entity("nrq_bidragsaftale");
-			_service.entitiesToReturn.Enqueue(new List<Entity> { entity });
+			Add_crm_aftale(crm_aftale => { });
+		}
+
+		protected void Add_crm_aftale(Action<ofplug.crm.Aftale> adjust_aftale)
+		{
+			ofplug.crm.Aftale crm_aftale = new ofplug.crm.Aftale(_service, _tracingService)
+			{
+				nrq_beloeb = new Money(100)
+			};
+
+			adjust_aftale(crm_aftale);
+
+			Add_crm_aftale(crm_aftale);
+		}
+
+		protected void Add_crm_aftale(ofplug.crm.Aftale crm_aftale)
+		{
+			crm_aftale.CrmEntity = new Entity("nrq_bidragsaftale");
+
+			crm_aftale.Fill_fields();
+
+			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_aftale.CrmEntity });
 		}
 
 		protected void Add_crm_empty(int number_of_empty_entity_lists = 1)
