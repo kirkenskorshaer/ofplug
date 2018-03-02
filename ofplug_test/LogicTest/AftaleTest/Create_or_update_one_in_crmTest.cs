@@ -29,6 +29,19 @@ namespace ofplug_test.LogicTest.AftaleTest
 		}
 
 		[TestMethod]
+		public void Nothing_happens_when_no_aftale_could_be_found()
+		{
+			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
+			Dictionary<string, object> input = Arrange_input();
+			Add_of_empty();
+
+			WorkflowInvoker.Invoke(creator, input);
+
+			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
+			Assert_number_of_operations(1, 0);
+		}
+
+		[TestMethod]
 		public void Associates_a_Contact()
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
