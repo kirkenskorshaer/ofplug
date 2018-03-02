@@ -59,7 +59,7 @@ namespace ofplug.Logic.Aftale
 
 		private void Add_contact(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
 		{
-			crm.Contact crm_contact = Get_or_create_contact(of_aftale.Contact_id.Value);
+			crm.Contact crm_contact = Get_or_create_crm_contact(of_aftale.Contact_id.Value);
 
 			crm_aftale.nrq_bidragyder = crm_contact.Get_entity_reference();
 		}

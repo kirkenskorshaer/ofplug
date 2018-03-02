@@ -17,7 +17,7 @@ namespace ofplug.Logic.Abstract
 			_tracingService = tracingService;
 		}
 
-		protected crm.Contact Get_or_create_contact(int of_contact_id)
+		protected crm.Contact Get_or_create_crm_contact(int of_contact_id)
 		{
 			of.data.Contact of_contact = _of_connection.Contact.Get(of_contact_id);
 
