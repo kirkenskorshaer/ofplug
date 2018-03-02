@@ -60,8 +60,10 @@
     <Compile Include="LogicTest\AftaleTest\Create_or_update_one_manual_in_ofTest.cs" />
     <Compile Include="LogicTest\ContactTest\Create_or_update_one_in_crmTest.cs" />
     <Compile Include="Mock\IdMock.cs" />
+    <Compile Include="Mock\PluginExecutionContextMock.cs" />
     <Compile Include="Mock\SenderLog.cs" />
     <Compile Include="Mock\SenderMock.cs" />
+    <Compile Include="Mock\ServiceProviderMock.cs" />
     <Compile Include="ofTest\connectorTest\AgreementsTest.cs" />
     <Compile Include="Mock\OrganizationServiceMock.cs" />
     <Compile Include="Mock\TracingServiceTest.cs" />
