@@ -46,12 +46,6 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Assert.AreEqual("contact", ((EntityReference)((Entity)result.Value)["nrq_bidragyder"]).LogicalName);
 		}
 
-		private void Add_crm_contact()
-		{
-			Entity entity = new Entity("contact");
-			_service.entitiesToReturn.Enqueue(new List<Entity> { entity });
-		}
-
 		private Dictionary<string, object> Arrange_input()
 		{
 			Dictionary<string, object> input = new Dictionary<string, object>

@@ -42,6 +42,11 @@ namespace ofplug_test.Abstract
 			}
 		}
 
+		protected void Add_crm_contact()
+		{
+			Add_crm_contact(new ofplug.crm.Contact(_service, _tracingService) { });
+		}
+
 		protected void Add_crm_contact(ofplug.crm.Contact contact)
 		{
 			contact.CrmEntity = new Entity("contact");
