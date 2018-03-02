@@ -42,7 +42,7 @@ namespace ofplug_test.Abstract
 			}
 		}
 
-		protected void Add_contact(ofplug.crm.Contact contact)
+		protected void Add_crm_contact(ofplug.crm.Contact contact)
 		{
 			contact.CrmEntity = new Entity("contact");
 
