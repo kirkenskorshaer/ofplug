@@ -13,6 +13,8 @@ namespace ofplug_test.Abstract
 		protected TracingServiceTest _tracingService;
 		protected OrganizationServiceMock _service;
 		protected CodeActivityContext _codeActivityContext;
+		protected ServiceProviderMock _serviceProvider;
+		protected PluginExecutionContextMock _pluginExecutionContext;
 		protected SenderMock _sender = new SenderMock();
 		protected IdMock _id = new IdMock();
 
@@ -20,6 +22,11 @@ namespace ofplug_test.Abstract
 		{
 			_tracingService = new TracingServiceTest();
 			_service = new OrganizationServiceMock();
+			_serviceProvider = new ServiceProviderMock()
+			{
+				Service = _service
+			};
+			_pluginExecutionContext = new PluginExecutionContextMock();
 		}
 
 		protected void AddConfig()
@@ -28,6 +35,17 @@ namespace ofplug_test.Abstract
 			configEntity["nrq_url"] = "http://of.devflowtwo.com/kirkenskorshaer/api/v2/";
 			configEntity["nrq_aggrement_step"] = 50;
 			_service.entitiesToReturn.Enqueue(new List<Entity> { configEntity });
+		}
+
+		protected void Arrange_input_parameter(ofplug.crm.Aftale crm_aftale)
+		{
+			crm_aftale.CrmEntity = new Entity(crm_aftale.Logical_name);
+			crm_aftale.Fill_fields();
+
+			_pluginExecutionContext.InputParameters = new ParameterCollection
+			{
+				{ "Target", crm_aftale.CrmEntity }
+			};
 		}
 
 		protected void Add_crm_aftale()
