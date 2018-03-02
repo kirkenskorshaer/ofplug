@@ -123,5 +123,19 @@ namespace ofplug_test.Abstract
 
 			Assert.AreEqual(entity_name, ((Entity)log.Value).LogicalName);
 		}
+
+		protected void Assert_of_operation(int log_index, SenderMock.Operation operation, Type type)
+		{
+			SenderLog log = _sender.Log[log_index];
+
+			Assert.AreEqual(operation, log.Operation);
+			Assert.AreEqual(type, log.Request.GetType());
+		}
+
+		protected void Assert_number_of_operations(int of_operations, int crm_operations)
+		{
+			Assert.AreEqual(of_operations, _sender.Log.Count);
+			Assert.AreEqual(crm_operations, _service.Log.Count);
+		}
 	}
 }
