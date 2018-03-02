@@ -68,7 +68,7 @@ namespace ofplug.Logic.Aftale
 		{
 			of.data.Agreement of_aftale = null;
 
-			if (string.IsNullOrWhiteSpace(crm_aftale.nrq_type) && int.TryParse(crm_aftale.nrq_type, out int of_id))
+			if (string.IsNullOrWhiteSpace(crm_aftale.nrq_type) == false && int.TryParse(crm_aftale.nrq_type, out int of_id))
 			{
 				of_aftale = _of_connection.Agreement.Get(of_id);
 			}
