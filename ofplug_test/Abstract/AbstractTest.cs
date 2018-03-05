@@ -95,7 +95,16 @@ namespace ofplug_test.Abstract
 
 		protected void Add_crm_contact()
 		{
-			Add_crm_contact(new ofplug.crm.Contact(_service, _tracingService) { });
+			Add_crm_contact(contact => { });
+		}
+
+		protected void Add_crm_contact(Action<ofplug.crm.Contact> adjust_contact)
+		{
+			ofplug.crm.Contact crm_contact = new ofplug.crm.Contact(_service, _tracingService);
+
+			adjust_contact(crm_contact);
+
+			Add_crm_contact(crm_contact);
 		}
 
 		protected void Add_crm_contact(ofplug.crm.Contact contact)
