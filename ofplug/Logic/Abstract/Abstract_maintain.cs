@@ -50,6 +50,77 @@ namespace ofplug.Logic.Abstract
 			return null;
 		}
 
+		public void Create_or_update_one_aftale_in_crm(of.data.Agreement of_aftale)
+		{
+			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
+			crm_aftale.Get_by_of_id(of_aftale.Of_id.Value);
+
+			if (crm_aftale.CrmEntity == null)
+			{
+				Create_crm_aftale(of_aftale);
+			}
+			else if (Mapping.Aftale.Needs_update_in_crm(crm_aftale, of_aftale))
+			{
+				Update_aftale_in_crm(crm_aftale, of_aftale);
+			}
+		}
+
+		private void Create_crm_aftale(of.data.Agreement of_agreement)
+		{
+			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
+
+			Mapping.Aftale.To_crm(crm_aftale, of_agreement);
+
+			Add_contact_to_aftale(crm_aftale, of_agreement);
+
+			crm_aftale.Create();
+		}
+
+		private void Update_aftale_in_crm(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
+		{
+			Mapping.Aftale.To_crm(crm_aftale, of_aftale);
+
+			Add_contact_to_aftale(crm_aftale, of_aftale);
+
+			crm_aftale.Update();
+		}
+
+		private void Add_contact_to_aftale(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
+		{
+			crm.Contact crm_contact = Get_or_create_crm_contact(of_aftale.Contact_id.Value);
+
+			crm_aftale.nrq_bidragyder = crm_contact.Get_entity_reference();
+		}
+
+		public void Create_or_update_one_contact_in_crm(int? of_contact_id, of.data.Contact of_contact)
+		{
+			crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
+			crm_contact.Get_contact_from_of_contact_id(_service, of_contact_id.Value);
+
+			if (crm_contact.CrmEntity == null)
+			{
+				Create_contact_in_crm(crm_contact, of_contact);
+			}
+			else if (Mapping.Contact.Needs_update_in_crm(crm_contact, of_contact))
+			{
+				Update_contact_in_crm(crm_contact, of_contact);
+			}
+		}
+
+		private void Update_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
+		{
+			Mapping.Contact.To_crm(crm_contact, of_contact);
+
+			crm_contact.Update();
+		}
+
+		private void Create_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
+		{
+			Mapping.Contact.To_crm(crm_contact, of_contact);
+
+			crm_contact.Create();
+		}
+
 		protected of.data.Contact Get_or_create_of_contact(crm.Contact crm_contact)
 		{
 			of.data.Contact of_contact = null;

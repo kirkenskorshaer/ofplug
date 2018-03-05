@@ -10,34 +10,9 @@ namespace ofplug.Logic.Contact
 		{
 		}
 
-		public void Create_or_update_one_contact_in_crm(int? of_contact_id, of.data.Contact of_contact)
-		{
-			crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
-			crm_contact.Get_contact_from_of_contact_id(_service, of_contact_id.Value);
 
-			if (crm_contact.CrmEntity == null)
-			{
-				Create_contact_in_crm(crm_contact, of_contact);
-			}
-			else if (Mapping.Contact.Needs_update_in_crm(crm_contact, of_contact))
-			{
-				Update_contact_in_crm(crm_contact, of_contact);
-			}
-		}
 
-		private void Update_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
-		{
-			Mapping.Contact.To_crm(crm_contact, of_contact);
 
-			crm_contact.Update();
-		}
-
-		private void Create_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
-		{
-			Mapping.Contact.To_crm(crm_contact, of_contact);
-
-			crm_contact.Create();
-		}
 
 		public void Create_or_update_one_in_of(crm.Contact crm_contact)
 		{
