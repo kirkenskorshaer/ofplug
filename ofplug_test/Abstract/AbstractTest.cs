@@ -48,6 +48,17 @@ namespace ofplug_test.Abstract
 			};
 		}
 
+		protected void Arrange_input_parameter(ofplug.crm.Contact crm_contact)
+		{
+			crm_contact.CrmEntity = new Entity(crm_contact.Logical_name);
+			crm_contact.Fill_fields();
+
+			_pluginExecutionContext.InputParameters = new ParameterCollection
+			{
+				{ "Target", crm_contact.CrmEntity }
+			};
+		}
+
 		protected void Add_crm_aftale()
 		{
 			Add_crm_aftale(crm_aftale => { });

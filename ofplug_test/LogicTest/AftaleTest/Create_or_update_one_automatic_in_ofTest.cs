@@ -25,6 +25,27 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Assert_number_of_operations(2, 2);
 		}
 
+		[TestMethod]
+		public void Nothing_happens_if_there_are_no_context_entity()
+		{
+			ofplug.Logic.Aftale.Create_or_update_one_automatic_in_of creator = Arrange_creator();
+
+			creator.Execute(_serviceProvider);
+
+			Assert_number_of_operations(0, 0);
+		}
+
+		[TestMethod]
+		public void Nothing_happens_if_context_entity_is_the_wrong_type()
+		{
+			ofplug.Logic.Aftale.Create_or_update_one_automatic_in_of creator = Arrange_creator();
+			Arrange_input_parameter(new ofplug.crm.Contact(_service, _tracingService) { });
+
+			creator.Execute(_serviceProvider);
+
+			Assert_number_of_operations(0, 0);
+		}
+
 		private ofplug.Logic.Aftale.Create_or_update_one_automatic_in_of Arrange_creator()
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_automatic_in_of creator = new ofplug.Logic.Aftale.Create_or_update_one_automatic_in_of()
