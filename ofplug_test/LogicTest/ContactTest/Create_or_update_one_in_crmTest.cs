@@ -40,6 +40,19 @@ namespace ofplug_test.LogicTest.ContactTest
 			Assert_number_of_operations(1, 2);
 		}
 
+		[TestMethod]
+		public void Nothing_happens_if_no_of_contact_can_be_found()
+		{
+			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
+			Dictionary<string, object> input = Arrange_input();
+			Add_of_empty();
+
+			WorkflowInvoker.Invoke(creator, input);
+
+			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
+			Assert_number_of_operations(1, 0);
+		}
+
 		private Dictionary<string, object> Arrange_input()
 		{
 			Dictionary<string, object> input = new Dictionary<string, object>
