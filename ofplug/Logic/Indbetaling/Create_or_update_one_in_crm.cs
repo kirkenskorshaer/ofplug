@@ -6,7 +6,7 @@ namespace ofplug.Logic.Indbetaling
 {
 	public class Create_or_update_one_in_crm : AbstractCodeActivity
 	{
-		[ReferenceTarget("contact")]
+		[ReferenceTarget("new_indbetaling")]
 		[RequiredArgument]
 		[Input("Indbetaling")]
 		public InArgument<int> Of_indbetaling_id_InArgument { get; set; }
