@@ -64,9 +64,23 @@ namespace ofplug.Logic.Indbetaling
 			crm_indbetaling.Update();
 		}
 
-		private void Create_in_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_payment)
+		private void Create_in_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_indbetaling)
 		{
-			Mapping.Indbetaling.To_crm(crm_indbetaling, of_payment);
+			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling);
+
+			if (of_indbetaling.Agreement_id.HasValue)
+			{
+				of.data.Agreement of_aftale = _of_connection.Agreement.Get(of_indbetaling.Agreement_id.Value);
+
+				Create_or_update_one_aftale_in_crm(of_aftale);
+			}
+
+			if (of_indbetaling.Contact_id.HasValue)
+			{
+				of.data.Contact of_contact = _of_connection.Contact.Get(of_indbetaling.Contact_id.Value);
+
+				Create_or_update_one_contact_in_crm(of_indbetaling.Contact_id, of_contact);
+			}
 
 			crm_indbetaling.Create();
 		}
