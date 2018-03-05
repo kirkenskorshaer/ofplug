@@ -37,7 +37,7 @@ namespace ofplug.Logic.Abstract
 				}
 			}
 
-			if (_context.InputParameters.Contains("Target") && _context.InputParameters["Target"] is Entity)
+			if (_context != null && _context.InputParameters != null && _context.InputParameters.Contains("Target") && _context.InputParameters["Target"] is Entity)
 			{
 				_context_entity = (Entity)_context.InputParameters["Target"];
 			}
