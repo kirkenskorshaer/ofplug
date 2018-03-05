@@ -118,11 +118,18 @@ namespace ofplug_test.Abstract
 
 		protected void Add_of_contact()
 		{
+			Add_of_contact(of_contact => { });
+		}
+
+		protected void Add_of_contact(Action<ofplug.of.data.Contact> adjust_contact)
+		{
 			ofplug.of.data.Contact of_contact = new ofplug.of.data.Contact()
 			{
 				Of_id = _id.Get_id("of_contact_id"),
 				First_name = "unittest"
 			};
+
+			adjust_contact(of_contact);
 
 			_sender.data_to_return.Enqueue(of_contact);
 		}
