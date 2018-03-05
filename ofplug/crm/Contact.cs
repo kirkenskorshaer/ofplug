@@ -132,6 +132,7 @@ namespace ofplug.crm
 			Fill_if_not_empty("address1_latitude", address1_latitude);
 			Fill_if_not_empty("address1_longitude", address1_longitude);
 			Fill_if_not_empty("lastname", lastname);
+			Fill_if_not_empty("new_kkadminmedlemsnr", new_kkadminmedlemsnr);
 		}
 
 		public override void Read_fields()
