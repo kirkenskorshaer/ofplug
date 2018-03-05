@@ -20,6 +20,8 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Create, "contact");
+			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
+			Assert_number_of_operations(1, 2);
 		}
 
 		[TestMethod]
@@ -34,6 +36,8 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Update, "contact");
+			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
+			Assert_number_of_operations(1, 2);
 		}
 
 		private Dictionary<string, object> Arrange_input()
