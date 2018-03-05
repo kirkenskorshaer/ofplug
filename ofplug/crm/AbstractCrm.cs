@@ -49,12 +49,14 @@ namespace ofplug.crm
 
 		public string Gendercode_enum_to_string(GendercodeEnum? value)
 		{
-			switch (value.Value)
+			switch (value)
 			{
 				case GendercodeEnum.Male:
 					return "male";
 				case GendercodeEnum.Female:
 					return "female";
+				case null:
+					return null;
 				default:
 					throw new Exception("unknown enum " + value);
 			}
