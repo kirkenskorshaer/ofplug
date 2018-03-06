@@ -14,27 +14,9 @@ namespace ofplug.Logic.Indbetaling
 		{
 			foreach (int id in _of_connection.Get_payments())
 			{
-				of.data.Payment of_payment = _of_connection.Payment.Get(id);
+				of.data.Payment of_indbetaling = _of_connection.Payment.Get(id);
 
-				crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
-				crm_aftale.Get_by_of_id(id);
-
-				if (crm_aftale.CrmEntity == null)
-				{
-					continue;
-				}
-
-				crm.Indbetaling crm_indbetaling = new crm.Indbetaling(_service, _tracingService);
-				crm_indbetaling.Get_by_of_id(id);
-
-				if (crm_indbetaling.CrmEntity == null)
-				{
-					Create_in_crm(crm_indbetaling, of_payment);
-				}
-				else if (Mapping.Indbetaling.Needs_update_in_crm(crm_indbetaling, of_payment))
-				{
-					Update_in_crm(crm_indbetaling, of_payment);
-				}
+				Create_or_update_one_indbetaling_in_crm(of_indbetaling.Of_id.Value, of_indbetaling);
 
 				//todo remove
 				break;
