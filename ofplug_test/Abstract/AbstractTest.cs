@@ -85,6 +85,31 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_aftale.CrmEntity });
 		}
 
+		protected void Add_crm_indbetaling()
+		{
+			Add_crm_indbetaling(crm_indbetaling => { });
+		}
+
+		protected void Add_crm_indbetaling(Action<ofplug.crm.Indbetaling> adjust_indbetaling)
+		{
+			ofplug.crm.Indbetaling crm_indbetaling = new ofplug.crm.Indbetaling(_service, _tracingService)
+			{
+			};
+
+			adjust_indbetaling(crm_indbetaling);
+
+			Add_crm_indbetaling(crm_indbetaling);
+		}
+
+		protected void Add_crm_indbetaling(ofplug.crm.Indbetaling crm_indbetaling)
+		{
+			crm_indbetaling.CrmEntity = new Entity("new_indbetaling");
+
+			crm_indbetaling.Fill_fields();
+
+			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_indbetaling.CrmEntity });
+		}
+
 		protected void Add_crm_empty(int number_of_empty_entity_lists = 1)
 		{
 			for (int index = 0; index < number_of_empty_entity_lists; index++)
@@ -132,6 +157,23 @@ namespace ofplug_test.Abstract
 			adjust_contact(of_contact);
 
 			_sender.data_to_return.Enqueue(of_contact);
+		}
+
+		protected void Add_of_indbetaling()
+		{
+			Add_of_indbetaling(of_indbetaling => { });
+		}
+
+		protected void Add_of_indbetaling(Action<ofplug.of.data.Payment> adjust_indbetaling)
+		{
+			ofplug.of.data.Payment of_indbetaling = new ofplug.of.data.Payment()
+			{
+				Of_id = _id.Get_id("of_contact_id")
+			};
+
+			adjust_indbetaling(of_indbetaling);
+
+			_sender.data_to_return.Enqueue(of_indbetaling);
 		}
 
 		protected void Add_of_aftale()
