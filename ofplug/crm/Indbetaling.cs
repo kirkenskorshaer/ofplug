@@ -40,6 +40,7 @@ namespace ofplug.crm
 		//public Status statecode;
 
 		public int? of_aftale_id;
+		public int? of_indbetaling_id;
 
 
 		public Indbetaling(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "new_indbetaling")
@@ -67,6 +68,7 @@ namespace ofplug.crm
 			Fill_if_not_empty("nrq_bilagsnr", nrq_bilagsnr);
 			Fill_if_not_empty("nrq_linktilindbetaling", nrq_linktilindbetaling);
 			Fill_if_not_empty("nrq_tekst", nrq_tekst);
+			Fill_if_not_empty("of_indbetaling_id", of_indbetaling_id);
 		}
 
 		public override void Read_fields()
@@ -79,6 +81,7 @@ namespace ofplug.crm
 			nrq_bilagsnr = Read_if_not_empty<string>("nrq_bilagsnr");
 			nrq_linktilindbetaling = Read_if_not_empty<string>("nrq_linktilindbetaling");
 			nrq_tekst = Read_if_not_empty<string>("nrq_tekst");
+			of_indbetaling_id = Read_if_not_empty<int?>("of_indbetaling_id");
 		}
 	}
 }
