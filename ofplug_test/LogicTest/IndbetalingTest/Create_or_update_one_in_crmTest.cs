@@ -25,6 +25,22 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 		}
 
 		[TestMethod]
+		public void Update_an_indbetaling()
+		{
+			ofplug.Logic.Indbetaling.Create_or_update_one_in_crm creator = Arrange_creator();
+			Dictionary<string, object> input = Arrange_input();
+			Add_of_indbetaling(of_indbetaling => of_indbetaling.Amount = 100);
+			Add_crm_indbetaling();
+
+			WorkflowInvoker.Invoke(creator, input);
+
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Update, "new_indbetaling");
+			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
+			Assert_number_of_operations(1, 2);
+		}
+
+		[TestMethod]
 		public void If_a_contact_is_associated_the_contact_will_be_created()
 		{
 			ofplug.Logic.Indbetaling.Create_or_update_one_in_crm creator = Arrange_creator();
