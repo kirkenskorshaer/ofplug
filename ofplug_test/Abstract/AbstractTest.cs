@@ -37,6 +37,17 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { configEntity });
 		}
 
+		protected void Arrange_input_parameter(ofplug.crm.Indbetaling crm_indbetaling)
+		{
+			crm_indbetaling.CrmEntity = new Entity(crm_indbetaling.Logical_name);
+			crm_indbetaling.Fill_fields();
+
+			_pluginExecutionContext.InputParameters = new ParameterCollection
+			{
+				{ "Target", crm_indbetaling.CrmEntity }
+			};
+		}
+
 		protected void Arrange_input_parameter(ofplug.crm.Aftale crm_aftale)
 		{
 			crm_aftale.CrmEntity = new Entity(crm_aftale.Logical_name);
