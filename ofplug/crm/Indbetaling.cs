@@ -58,6 +58,13 @@ namespace ofplug.crm
 			Read_from_entity();
 		}
 
+		public void Get_by_reference(EntityReference entityReference)
+		{
+			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, new ColumnSet("new_amount"));
+
+			Read_from_entity();
+		}
+
 		public override void Fill_fields()
 		{
 			//todo felter
