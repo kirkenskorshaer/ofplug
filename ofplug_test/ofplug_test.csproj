@@ -64,6 +64,7 @@
     <Compile Include="LogicTest\ContactTest\Create_or_update_one_manual_in_ofTest.cs" />
     <Compile Include="LogicTest\ContactTest\Update_all_medlemsnr_in_ofTest.cs" />
     <Compile Include="LogicTest\IndbetalingTest\Create_or_update_all_in_crmTest.cs" />
+    <Compile Include="LogicTest\IndbetalingTest\Update_status_manual_in_ofTest.cs" />
     <Compile Include="LogicTest\IndbetalingTest\Update_status_automatic_in_ofTest.cs" />
     <Compile Include="LogicTest\IndbetalingTest\Create_or_update_one_in_crmTest.cs" />
     <Compile Include="Mock\IdMock.cs" />
