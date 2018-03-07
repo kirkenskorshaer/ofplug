@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using System;
+using Microsoft.Xrm.Sdk;
 using ofplug.crm;
 using ofplug.of;
 
@@ -21,6 +22,33 @@ namespace ofplug.Logic.Indbetaling
 				//todo remove
 				break;
 			}
+		}
+
+		public void Update_status_in_of(crm.Indbetaling crm_indbetaling)
+		{
+			//todo byt ud med of_indbetaling_id
+			int? of_indbetaling_id = crm_indbetaling.of_indbetaling_id;
+
+			if (of_indbetaling_id.HasValue == false)
+			{
+				return;
+			}
+
+			of.data.Payment of_indbetaling = _of_connection.Payment.Get(of_indbetaling_id.Value);
+
+			//todo sæt status
+			string crm_status = crm_indbetaling.nrq_tekst;
+			if (crm_status == of_indbetaling.State)
+			{
+				return;
+			}
+
+			of.data.Payment of_indbetaling_patch = new of.data.Payment()
+			{
+				Of_id = of_indbetaling_id,
+				State = crm_status,
+			};
+			_of_connection.Payment.Patch(of_indbetaling_id.Value, of_indbetaling);
 		}
 
 		public void Create_or_update_one_indbetaling_in_crm(int of_indbetaling_id, of.data.Payment of_indbetaling)
