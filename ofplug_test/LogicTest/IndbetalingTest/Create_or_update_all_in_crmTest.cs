@@ -13,15 +13,17 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 			ofplug.Logic.Indbetaling.Create_or_update_all_in_crm creator = Arrange_creator();
 			_sender.data_to_return.Enqueue(new List<int> { _id.Get_id("indbetaling_id") });
 			Add_of_indbetaling();
+			Add_crm_config();
 			Add_crm_empty();
 
 			WorkflowInvoker.Invoke(creator);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(1, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(2, 2);
+			Assert_number_of_operations(2, 3);
 		}
 
 		private ofplug.Logic.Indbetaling.Create_or_update_all_in_crm Arrange_creator()

@@ -17,7 +17,7 @@ namespace ofplug_test.ofTest
 		{
 			Sender sender = new Sender();
 
-			Hello_world hello_world = sender.Get<Hello_world>(url);
+			Hello_world hello_world = sender.Get<Hello_world>(url, "");
 
 			Assert.AreEqual(1, hello_world.Response);
 		}
@@ -36,13 +36,13 @@ namespace ofplug_test.ofTest
 				StringField = "qwerty"
 			};
 
-			Func<string, Simple_data, Simple_data> method = getWebMethod(methodName, sender);
-			Simple_data data_received = method(url, data_to_send);
+			Func<string, string, Simple_data, Simple_data> method = getWebMethod(methodName, sender);
+			Simple_data data_received = method(url, "", data_to_send);
 
 			Assert.AreEqual(data_to_send.ToString(), data_received.ToString());
 		}
 
-		private Func<string, Simple_data, Simple_data> getWebMethod(string name, Sender sender)
+		private Func<string, string, Simple_data, Simple_data> getWebMethod(string name, Sender sender)
 		{
 			switch (name)
 			{

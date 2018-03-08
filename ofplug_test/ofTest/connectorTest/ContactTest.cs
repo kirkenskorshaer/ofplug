@@ -10,7 +10,7 @@ namespace ofplug_test.ofTest.connectorTest
 		[Ignore]
 		public void Contact_can_change_name()
 		{
-			ofplug.of.Connection connection = new ofplug.of.Connection("http://of.devflowtwo.com/kirkenskorshaer/api/v2/");
+			ofplug.of.Connection connection = new ofplug.of.Connection("http://of.devflowtwo.com/kirkenskorshaer/api/v2/", "");
 			ofplug.of.data.Contact of_contact = connection.Contact.Get(1703);
 
 			string first_name_before = of_contact.First_name;

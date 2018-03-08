@@ -29,14 +29,6 @@ namespace ofplug_test.Abstract
 			_pluginExecutionContext = new PluginExecutionContextMock();
 		}
 
-		protected void AddConfig()
-		{
-			Entity configEntity = new Entity("nrq_settings");
-			configEntity["nrq_url"] = "http://of.devflowtwo.com/kirkenskorshaer/api/v2/";
-			configEntity["nrq_aggrement_step"] = 50;
-			_service.entitiesToReturn.Enqueue(new List<Entity> { configEntity });
-		}
-
 		protected void Arrange_input_parameter(ofplug.crm.Indbetaling crm_indbetaling)
 		{
 			crm_indbetaling.CrmEntity = new Entity(crm_indbetaling.Logical_name);
@@ -68,6 +60,20 @@ namespace ofplug_test.Abstract
 			{
 				{ "Target", crm_contact.CrmEntity }
 			};
+		}
+
+		protected void Add_crm_config()
+		{
+			ofplug.crm.Config config = new ofplug.crm.Config(_service, _tracingService, false)
+			{
+				CrmEntity = new Entity("nrq_configuration"),
+				Nrq_of_token = "",
+				Nrq_of_url = "",
+			};
+
+			config.Fill_fields();
+
+			_service.entitiesToReturn.Enqueue(new List<Entity> { config.CrmEntity });
 		}
 
 		protected void Add_crm_aftale()

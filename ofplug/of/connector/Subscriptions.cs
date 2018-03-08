@@ -2,7 +2,7 @@
 {
 	public class Subscriptions : Abstract_id_collection
 	{
-		public Subscriptions(string url, ISender sender) : base(url, "subscriptions", sender)
+		public Subscriptions(string url, string token, ISender sender) : base(url, token, "subscriptions", sender)
 		{
 		}
 	}

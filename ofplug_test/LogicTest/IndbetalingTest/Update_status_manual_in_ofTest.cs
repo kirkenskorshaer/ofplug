@@ -13,6 +13,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		public void Updates_status()
 		{
 			ofplug.Logic.Indbetaling.Update_status_manual_in_of creator = Arrange_creator();
+			Add_crm_config();
 			Add_crm_indbetaling(crm_indbetaling => crm_indbetaling.of_indbetaling_id = _id.Get_id("indbetaling id"));
 			Dictionary<string, object> input = Arrange_input();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.State = "not updated");
@@ -20,10 +21,11 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.Retrieve, "new_indbetaling");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Retrieve, "new_indbetaling");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(1, Mock.SenderMock.Operation.Patch, typeof(ofplug.of.data.Payment));
-			Assert_number_of_operations(2, 1);
+			Assert_number_of_operations(2, 2);
 		}
 
 		private ofplug.Logic.Indbetaling.Update_status_manual_in_of Arrange_creator()

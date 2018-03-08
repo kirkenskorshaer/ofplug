@@ -11,6 +11,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 		public void Creates_an_aftale()
 		{
 			ofplug.Logic.Aftale.Create_or_update_all_in_crm creator = Arrange_creator();
+			Add_crm_config();
 			Add_crm_empty(4);
 			_sender.data_to_return.Enqueue(new List<int> { _id.Get_id("agreement_id") });
 			Add_of_aftale();
@@ -18,12 +19,13 @@ namespace ofplug_test.LogicTest.AftaleTest
 
 			WorkflowInvoker.Invoke(creator);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
 			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Create, "contact");
-			Assert_crm_operation(5, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
+			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(5, Mock.OrganizationServiceMock.Operation.Create, "contact");
+			Assert_crm_operation(6, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
 		}
 
 		private ofplug.Logic.Aftale.Create_or_update_all_in_crm Arrange_creator()

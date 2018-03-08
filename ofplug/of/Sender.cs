@@ -7,11 +7,11 @@ namespace ofplug.of
 {
 	public class Sender : ISender
 	{
-		public Response Get<Response>(string url)
+		public Response Get<Response>(string url, string token)
 			where Response : class
 		{
 			WebClient webClient = new WebClient();
-			Set_headers(webClient);
+			Set_headers(webClient, token);
 			string data = webClient.DownloadString(url);
 			Response response = StringToDataContract<Response>(data);
 			webClient.Dispose();
@@ -21,35 +21,35 @@ namespace ofplug.of
 			return response;
 		}
 
-		public Response Post<Request, Response>(string url, Request request)
+		public Response Post<Request, Response>(string url, string token, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "POST");
+			return Send_and_expect_response<Request, Response>(url, token, request, "POST");
 		}
 
-		public Response Put<Request, Response>(string url, Request request)
+		public Response Put<Request, Response>(string url, string token, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "PUT");
+			return Send_and_expect_response<Request, Response>(url, token, request, "PUT");
 		}
 
-		public Response Patch<Request, Response>(string url, Request request)
+		public Response Patch<Request, Response>(string url, string token, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "PATCH");
+			return Send_and_expect_response<Request, Response>(url, token, request, "PATCH");
 		}
 
-		public Response Delete<Request, Response>(string url, Request request)
+		public Response Delete<Request, Response>(string url, string token, Request request)
 			where Response : class
 		{
-			return Send_and_expect_response<Request, Response>(url, request, "DELETE");
+			return Send_and_expect_response<Request, Response>(url, token, request, "DELETE");
 		}
 
-		private Response Send_and_expect_response<Request, Response>(string url, Request request, string method)
+		private Response Send_and_expect_response<Request, Response>(string url, string token, Request request, string method)
 			where Response : class
 		{
 			WebClient webClient = new WebClient();
-			Set_headers(webClient);
+			Set_headers(webClient, token);
 
 			byte[] requestBytes = DataContractByteArray(request);
 
@@ -75,9 +75,9 @@ namespace ofplug.of
 			return response;
 		}
 
-		private void Set_headers(WebClient webClient)
+		private void Set_headers(WebClient webClient, string token)
 		{
-			webClient.Headers["Authorization"] = "Bearer yz9dsGlEWsRNfQYW81Jk";
+			webClient.Headers["Authorization"] = "Bearer " + token;
 			webClient.Headers["content-type"] = "application/json; charset=utf-8";
 		}
 

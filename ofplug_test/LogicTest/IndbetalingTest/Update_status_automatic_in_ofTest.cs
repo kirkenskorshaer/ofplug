@@ -12,24 +12,28 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
 			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { of_indbetaling_id = _id.Get_id("indbetaling id") });
+			Add_crm_config();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.State = "not updated");
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("indbetaling id") });
 
 			creator.Execute(_serviceProvider);
 
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(1, Mock.SenderMock.Operation.Patch, typeof(ofplug.of.data.Payment));
-			Assert_number_of_operations(2, 0);
+			Assert_number_of_operations(2, 1);
 		}
 
 		[TestMethod]
 		public void Nothing_happens_if_there_are_no_context_entity()
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
+			Add_crm_config();
 
 			creator.Execute(_serviceProvider);
 
-			Assert_number_of_operations(0, 0);
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_number_of_operations(0, 1);
 		}
 
 		[TestMethod]
@@ -37,10 +41,12 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
 			Arrange_input_parameter(new ofplug.crm.Aftale(_service, _tracingService) { nrq_beloeb = new Money(100), nrq_bidragyder = new EntityReference("contact", Guid.Empty) });
+			Add_crm_config();
 
 			creator.Execute(_serviceProvider);
 
-			Assert_number_of_operations(0, 0);
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_number_of_operations(0, 1);
 		}
 
 		[TestMethod]
@@ -48,10 +54,12 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
 			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { of_indbetaling_id = null });
+			Add_crm_config();
 
 			creator.Execute(_serviceProvider);
 
-			Assert_number_of_operations(0, 0);
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_number_of_operations(0, 1);
 		}
 
 		[TestMethod]
@@ -59,12 +67,14 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
 			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { of_indbetaling_id = _id.Get_id("indbetaling id"), nrq_tekst = "updated" });//todo forkert felt
+			Add_crm_config();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.State = "updated");
 
 			creator.Execute(_serviceProvider);
 
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 0);
+			Assert_number_of_operations(1, 1);
 		}
 
 		private ofplug.Logic.Indbetaling.Update_status_automatic_in_of Arrange_creator()

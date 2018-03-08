@@ -13,15 +13,17 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_of_contact();
 			Add_crm_empty();
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Create, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Create, "contact");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 2);
+			Assert_number_of_operations(1, 3);
 		}
 
 		[TestMethod]
@@ -29,15 +31,17 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_of_contact();
 			Add_crm_contact(new ofplug.crm.Contact(_service, _tracingService) { firstname = "tsts_frst_nm" });
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Update, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Update, "contact");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 2);
+			Assert_number_of_operations(1, 3);
 		}
 
 		[TestMethod]
@@ -45,12 +49,14 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_of_empty();
 
 			WorkflowInvoker.Invoke(creator, input);
 
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 0);
+			Assert_number_of_operations(1, 1);
 		}
 
 		private Dictionary<string, object> Arrange_input()

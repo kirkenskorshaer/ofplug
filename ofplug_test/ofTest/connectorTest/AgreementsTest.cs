@@ -14,7 +14,7 @@ namespace ofplug_test.ofTest.connectorTest
 		public void Agreements_can_get_data()
 		{
 			SenderMock sender = Arrange_sender();
-			Agreements agreements = new Agreements("", sender);
+			Agreements agreements = new Agreements("", "", sender);
 
 			Assert.IsTrue(agreements.Any());
 		}
@@ -24,7 +24,7 @@ namespace ofplug_test.ofTest.connectorTest
 		public void Agreements_can_get_data_from_of()
 		{
 			ofplug.of.Sender sender = new ofplug.of.Sender();
-			Agreements agreements = new Agreements("http://of.devflowtwo.com/kirkenskorshaer/api/v2/", sender);
+			Agreements agreements = new Agreements("http://of.devflowtwo.com/kirkenskorshaer/api/v2/", "", sender);
 
 			int id_index = 0;
 			foreach (int id in agreements)

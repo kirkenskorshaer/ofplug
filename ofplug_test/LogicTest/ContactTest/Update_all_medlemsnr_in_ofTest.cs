@@ -12,6 +12,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Update_all_medlemsnr_in_of creator = Arrange_creator();
 			_sender.data_to_return.Enqueue(new List<int>() { _id.Get_id("contact_id_1") });
+			Add_crm_config();
 			Add_of_contact();
 			Add_of_empty();
 			Add_crm_contact(contact =>
@@ -22,11 +23,12 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			WorkflowInvoker.Invoke(creator);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(1, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(2, Mock.SenderMock.Operation.Patch, typeof(ofplug.of.data.Contact));
-			Assert_number_of_operations(3, 1);
+			Assert_number_of_operations(3, 2);
 		}
 
 		[TestMethod]
@@ -34,6 +36,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Update_all_medlemsnr_in_of creator = Arrange_creator();
 			_sender.data_to_return.Enqueue(new List<int>() { _id.Get_id("contact_id_1") });
+			Add_crm_config();
 			Add_of_contact(of_contact => of_contact.External_id = _id.Get_id("medlemsnr").ToString());
 			Add_of_empty();
 			Add_crm_contact(contact =>
@@ -44,10 +47,11 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			WorkflowInvoker.Invoke(creator);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(2, 1);
+			Assert_number_of_operations(2, 2);
 		}
 
 		[TestMethod]
@@ -55,17 +59,19 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Contact.Update_all_medlemsnr_in_of creator = Arrange_creator();
 			_sender.data_to_return.Enqueue(new List<int>() { _id.Get_id("contact_id_1") });
+			Add_crm_config();
 			Add_of_contact();
 			_sender.data_to_return.Enqueue(new List<int>() { });
 			Add_crm_empty();
 
 			WorkflowInvoker.Invoke(creator);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(3, 1);
+			Assert_number_of_operations(3, 2);
 		}
 
 		private ofplug.Logic.Contact.Update_all_medlemsnr_in_of Arrange_creator()

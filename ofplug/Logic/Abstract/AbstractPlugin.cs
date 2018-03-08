@@ -43,7 +43,7 @@ namespace ofplug.Logic.Abstract
 			}
 
 			_config = new crm.Config(_service, _tracingService);
-			_of_connection = new of.Connection(_config.Url);
+			_of_connection = new of.Connection(_config.Nrq_of_url, _config.Nrq_of_token);
 
 			if (_sender_test != null)
 			{

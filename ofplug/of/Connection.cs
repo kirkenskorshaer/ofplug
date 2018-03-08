@@ -5,6 +5,7 @@ namespace ofplug.of
 	public class Connection
 	{
 		private string _url;
+		private string _token;
 		private ISender _sender;
 
 		private Contact _contact;
@@ -12,9 +13,9 @@ namespace ofplug.of
 		{
 			get
 			{
-				if(_contact == null)
+				if (_contact == null)
 				{
-					_contact = new Contact(_sender, _url, "contact");
+					_contact = new Contact(_sender, _url, _token, "contact");
 				}
 
 				return _contact;
@@ -28,7 +29,7 @@ namespace ofplug.of
 			{
 				if (_agreement == null)
 				{
-					_agreement = new Agreement(_sender, _url, "agreement");
+					_agreement = new Agreement(_sender, _url, _token, "agreement");
 				}
 
 				return _agreement;
@@ -42,17 +43,18 @@ namespace ofplug.of
 			{
 				if (_payment == null)
 				{
-					_payment = new Payment(_sender, _url, "agreement");
+					_payment = new Payment(_sender, _url, _token, "agreement");
 				}
 
 				return _payment;
 			}
 		}
 
-		public Connection(string url)
+		public Connection(string url, string token)
 		{
 			_sender = new Sender();
 			_url = url;
+			_token = token;
 		}
 
 		public void Replace_sender(ISender sender)
@@ -62,17 +64,17 @@ namespace ofplug.of
 
 		public Agreements Get_agreements()
 		{
-			return new Agreements(_url, _sender);
+			return new Agreements(_url, _token, _sender);
 		}
 
 		public Contacts Get_contacts()
 		{
-			return new Contacts(_url, _sender);
+			return new Contacts(_url, _token, _sender);
 		}
 
 		public Payments Get_payments()
 		{
-			return new Payments(_url, _sender);
+			return new Payments(_url, _token, _sender);
 		}
 	}
 }

@@ -9,12 +9,14 @@ namespace ofplug.of.connector
 		private Queue<int> _id_cache = new Queue<int>();
 		private int _current_id = -1;
 		private string _url;
+		private string _token;
 		private string _collection_name;
 		private ISender _sender;
 
-		public Abstract_id_collection(string url, string collection_name, ISender sender)
+		public Abstract_id_collection(string url, string token, string collection_name, ISender sender)
 		{
 			_url = url;
+			_token = token;
 			_collection_name = collection_name;
 			_sender = sender;
 		}
@@ -41,7 +43,7 @@ namespace ofplug.of.connector
 
 		private bool Fill_cache()
 		{
-			List<int> response = _sender.Get<List<int>>(_url + _collection_name + "/" + (_current_id + 1) + "/");
+			List<int> response = _sender.Get<List<int>>(_url + _collection_name + "/" + (_current_id + 1) + "/", _token);
 
 			response.ForEach(id => _id_cache.Enqueue(id));
 

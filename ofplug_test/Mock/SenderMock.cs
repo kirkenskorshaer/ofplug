@@ -17,31 +17,31 @@ namespace ofplug_test.Mock
 			Put = 5,
 		}
 
-		public Response Delete<Request, Response>(string url, Request request) where Response : class
+		public Response Delete<Request, Response>(string url, string token, Request request) where Response : class
 		{
 			Log.Add(new SenderLog(Operation.Delete, url, request));
 			return data_to_return.Dequeue() as Response;
 		}
 
-		public Response Get<Response>(string url) where Response : class
+		public Response Get<Response>(string url, string token) where Response : class
 		{
 			Log.Add(new SenderLog(Operation.Get, url, null));
 			return data_to_return.Dequeue() as Response;
 		}
 
-		public Response Patch<Request, Response>(string url, Request request) where Response : class
+		public Response Patch<Request, Response>(string url, string token, Request request) where Response : class
 		{
 			Log.Add(new SenderLog(Operation.Patch, url, request));
 			return data_to_return.Dequeue() as Response;
 		}
 
-		public Response Post<Request, Response>(string url, Request request) where Response : class
+		public Response Post<Request, Response>(string url, string token, Request request) where Response : class
 		{
 			Log.Add(new SenderLog(Operation.Post, url, request));
 			return data_to_return.Dequeue() as Response;
 		}
 
-		public Response Put<Request, Response>(string url, Request request) where Response : class
+		public Response Put<Request, Response>(string url, string token, Request request) where Response : class
 		{
 			Log.Add(new SenderLog(Operation.Put, url, request));
 			return data_to_return.Dequeue() as Response;

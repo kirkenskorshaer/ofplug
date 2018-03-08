@@ -13,15 +13,17 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 		{
 			ofplug.Logic.Indbetaling.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_of_indbetaling();
 			Add_crm_empty();
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 2);
+			Assert_number_of_operations(1, 3);
 		}
 
 		[TestMethod]
@@ -30,14 +32,16 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 			ofplug.Logic.Indbetaling.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.Amount = 100);
+			Add_crm_config();
 			Add_crm_indbetaling();
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Update, "new_indbetaling");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Update, "new_indbetaling");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 2);
+			Assert_number_of_operations(1, 3);
 		}
 
 		[TestMethod]
@@ -46,18 +50,20 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 			ofplug.Logic.Indbetaling.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
 			Add_of_indbetaling(indbetaling => indbetaling.Contact_id = _id.Get_id("of_contact_id"));
+			Add_crm_config();
 			Add_crm_empty(2);
 			Add_of_contact();
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Create, "contact");
-			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.Create, "contact");
+			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(1, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(2, 4);
+			Assert_number_of_operations(2, 5);
 		}
 
 		[TestMethod]
@@ -66,6 +72,7 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 			ofplug.Logic.Indbetaling.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
 			Add_of_indbetaling(indbetaling => indbetaling.Agreement_id = _id.Get_id("of_aftale_id"));
+			Add_crm_config();
 			Add_crm_empty(2);
 			Add_crm_contact();
 			Add_of_aftale();
@@ -73,15 +80,16 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
-			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
-			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "new_indbetaling");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
+			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
+			Assert_crm_operation(5, Mock.OrganizationServiceMock.Operation.Create, "new_indbetaling");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(1, Mock.SenderMock.Operation.Get, null);
 			Assert_of_operation(2, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(3, 5);
+			Assert_number_of_operations(3, 6);
 		}
 
 		private Dictionary<string, object> Arrange_input()

@@ -14,18 +14,20 @@ namespace ofplug_test.LogicTest.AftaleTest
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_crm_empty(4);
 			Add_of_aftale();
 			Add_of_contact();
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
 			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
 			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Create, "contact");
-			Assert_crm_operation(5, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
+			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			Assert_crm_operation(5, Mock.OrganizationServiceMock.Operation.Create, "contact");
+			Assert_crm_operation(6, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");
 		}
 
 		[TestMethod]
@@ -33,12 +35,14 @@ namespace ofplug_test.LogicTest.AftaleTest
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_of_empty();
 
 			WorkflowInvoker.Invoke(creator, input);
 
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Get, null);
-			Assert_number_of_operations(1, 0);
+			Assert_number_of_operations(1, 1);
 		}
 
 		[TestMethod]
@@ -46,6 +50,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 		{
 			ofplug.Logic.Aftale.Create_or_update_one_in_crm creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
+			Add_crm_config();
 			Add_crm_aftale();
 			Add_crm_contact();
 			Add_of_aftale();
@@ -53,9 +58,10 @@ namespace ofplug_test.LogicTest.AftaleTest
 
 			WorkflowInvoker.Invoke(creator, input);
 
-			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			KeyValuePair<Mock.OrganizationServiceMock.Operation, object> result = _service.Log[2];
+			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_bidragsaftale");
+			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
+			KeyValuePair<Mock.OrganizationServiceMock.Operation, object> result = _service.Log[3];
 			Assert.AreEqual("contact", ((EntityReference)((Entity)result.Value)["nrq_bidragyder"]).LogicalName);
 		}
 

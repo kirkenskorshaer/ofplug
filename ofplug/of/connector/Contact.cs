@@ -2,7 +2,7 @@
 {
 	public class Contact : Abstract_data_exchange
 	{
-		public Contact(ISender sender, string url, string path) : base(sender, url, path)
+		public Contact(ISender sender, string url, string token, string path) : base(sender, url, token, path)
 		{
 		}
 
