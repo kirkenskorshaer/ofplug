@@ -232,12 +232,17 @@ namespace ofplug_test.Abstract
 			Assert.AreEqual(entity_name, ((Entity)log.Value).LogicalName);
 		}
 
-		protected void Assert_of_operation(int log_index, SenderMock.Operation operation, Type type)
+		protected void Assert_of_operation(int log_index, SenderMock.Operation operation, Type type, string url_part = null)
 		{
 			SenderLog log = _sender.Log[log_index];
 
 			Assert.AreEqual(operation, log.Operation);
 			Assert.AreEqual(type, log.Request?.GetType());
+
+			if (url_part != null)
+			{
+				Assert.IsTrue(log.Url.Contains(url_part));
+			}
 		}
 
 		protected void Assert_number_of_operations(int of_operations, int crm_operations)
