@@ -208,6 +208,17 @@ namespace ofplug_test.Abstract
 			_sender.data_to_return.Enqueue(of_aftale);
 		}
 
+		protected void Add_of_abonnement()
+		{
+			ofplug.of.data.Subscription of_abonnement = new ofplug.of.data.Subscription()
+			{
+				Of_id = _id.Get_id("of_abonnement_id"),
+				Contact_id = _id.Get_id("of_contact_id"),
+			};
+
+			_sender.data_to_return.Enqueue(of_abonnement);
+		}
+
 		protected void Add_of_empty(int number_of_empty_data = 1)
 		{
 			for (int index = 0; index < number_of_empty_data; index++)
