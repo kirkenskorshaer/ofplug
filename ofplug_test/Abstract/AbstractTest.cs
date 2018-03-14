@@ -102,6 +102,31 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_aftale.CrmEntity });
 		}
 
+		protected void Add_crm_abonnement()
+		{
+			Add_crm_abonnement(crm_abonnement => { });
+		}
+
+		protected void Add_crm_abonnement(Action<ofplug.crm.Abonnement> adjust_abonnement)
+		{
+			ofplug.crm.Abonnement crm_abonnement = new ofplug.crm.Abonnement(_service, _tracingService)
+			{
+			};
+
+			adjust_abonnement(crm_abonnement);
+
+			Add_crm_abonnement(crm_abonnement);
+		}
+
+		protected void Add_crm_abonnement(ofplug.crm.Abonnement crm_abonnement)
+		{
+			crm_abonnement.CrmEntity = new Entity("Abonnement");//todo norriq name
+
+			crm_abonnement.Fill_fields();
+
+			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_abonnement.CrmEntity });
+		}
+
 		protected void Add_crm_indbetaling()
 		{
 			Add_crm_indbetaling(crm_indbetaling => { });
