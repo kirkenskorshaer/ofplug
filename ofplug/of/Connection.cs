@@ -36,6 +36,20 @@ namespace ofplug.of
 			}
 		}
 
+		private Subscription _subscription = null;
+		public Subscription Subscription
+		{
+			get
+			{
+				if (_subscription == null)
+				{
+					_subscription = new Subscription(_sender, _url, _token, "subscription");
+				}
+
+				return _subscription;
+			}
+		}
+
 		private Payment _payment = null;
 		public Payment Payment
 		{
@@ -65,6 +79,11 @@ namespace ofplug.of
 		public Agreements Get_agreements()
 		{
 			return new Agreements(_url, _token, _sender);
+		}
+
+		public Subscriptions Get_subscriptions()
+		{
+			return new Subscriptions(_url, _token, _sender);
 		}
 
 		public Contacts Get_contacts()
