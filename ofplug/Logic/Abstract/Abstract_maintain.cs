@@ -17,6 +17,23 @@ namespace ofplug.Logic.Abstract
 			_tracingService = tracingService;
 		}
 
+		public void Create_or_update_one_contact_in_of(crm.Contact crm_contact)
+		{
+			of.data.Contact of_contact = Get_or_create_of_contact(crm_contact);
+
+			if (Mapping.Contact.Needs_update_in_of(crm_contact, of_contact))
+			{
+				Update_of_contact(crm_contact, of_contact);
+			}
+		}
+
+		private void Update_of_contact(crm.Contact crm_contact, of.data.Contact of_contact)
+		{
+			Mapping.Contact.To_of(crm_contact, of_contact);
+
+			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
+		}
+
 		protected crm.Contact Get_or_create_crm_contact(int of_contact_id)
 		{
 			of.data.Contact of_contact = _of_connection.Contact.Get(of_contact_id);

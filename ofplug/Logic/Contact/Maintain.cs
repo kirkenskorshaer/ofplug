@@ -10,20 +10,6 @@ namespace ofplug.Logic.Contact
 		{
 		}
 
-
-
-
-
-		public void Create_or_update_one_in_of(crm.Contact crm_contact)
-		{
-			of.data.Contact of_contact = Get_or_create_of_contact(crm_contact);
-
-			if (Mapping.Contact.Needs_update_in_of(crm_contact, of_contact))
-			{
-				Update_of_contact(crm_contact, of_contact);
-			}
-		}
-
 		public void Update_all_medlemsnr_in_of()
 		{
 			of.connector.Contacts contacts = _of_connection.Get_contacts();
@@ -59,13 +45,6 @@ namespace ofplug.Logic.Contact
 			}
 
 			return false;
-		}
-
-		private void Update_of_contact(crm.Contact crm_contact, of.data.Contact of_contact)
-		{
-			Mapping.Contact.To_of(crm_contact, of_contact);
-
-			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
 		}
 	}
 }

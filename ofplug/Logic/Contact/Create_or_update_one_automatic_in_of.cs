@@ -27,7 +27,7 @@ namespace ofplug.Logic.Contact
 			crm_contact.Read_fields();
 
 			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
-			maintain.Create_or_update_one_in_of(crm_contact);
+			maintain.Create_or_update_one_contact_in_of(crm_contact);
 		}
 	}
 }
