@@ -29,36 +29,14 @@ namespace ofplug_test.Abstract
 			_pluginExecutionContext = new PluginExecutionContextMock();
 		}
 
-		protected void Arrange_input_parameter(ofplug.crm.Indbetaling crm_indbetaling)
+		protected void Arrange_input_parameter(ofplug.crm.AbstractCrm crm_entity)
 		{
-			crm_indbetaling.CrmEntity = new Entity(crm_indbetaling.Logical_name);
-			crm_indbetaling.Fill_fields();
+			crm_entity.CrmEntity = new Entity(crm_entity.Logical_name);
+			crm_entity.Fill_fields();
 
 			_pluginExecutionContext.InputParameters = new ParameterCollection
 			{
-				{ "Target", crm_indbetaling.CrmEntity }
-			};
-		}
-
-		protected void Arrange_input_parameter(ofplug.crm.Aftale crm_aftale)
-		{
-			crm_aftale.CrmEntity = new Entity(crm_aftale.Logical_name);
-			crm_aftale.Fill_fields();
-
-			_pluginExecutionContext.InputParameters = new ParameterCollection
-			{
-				{ "Target", crm_aftale.CrmEntity }
-			};
-		}
-
-		protected void Arrange_input_parameter(ofplug.crm.Contact crm_contact)
-		{
-			crm_contact.CrmEntity = new Entity(crm_contact.Logical_name);
-			crm_contact.Fill_fields();
-
-			_pluginExecutionContext.InputParameters = new ParameterCollection
-			{
-				{ "Target", crm_contact.CrmEntity }
+				{ "Target", crm_entity.CrmEntity }
 			};
 		}
 
