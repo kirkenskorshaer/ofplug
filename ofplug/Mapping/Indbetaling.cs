@@ -7,6 +7,7 @@
 		{
 			of_payment.Agreement_id = crm_indbetaling.of_aftale_id;
 			of_payment.Amount = (int?)crm_indbetaling.new_amount;
+			of_payment.Crm_id = crm_indbetaling.Id.ToString().ToLower();
 		}
 
 		public static void To_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_payment)

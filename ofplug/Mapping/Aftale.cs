@@ -8,6 +8,7 @@
 			of_agreement.Amount = (int)crm_aftale.nrq_beloeb.Value;
 			of_agreement.Payment_method = crm_aftale.nrq_betalingsform;
 			of_agreement.Frequency = crm_aftale.nrq_frekvens;
+			of_agreement.Crm_id = crm_aftale.Id.ToString().ToLower();
 			//of_agreement.Payment_media = crm_aftale.nrq_type;
 			//of_agreement.Id = crm_aftale.of_id;
 		}

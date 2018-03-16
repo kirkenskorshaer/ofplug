@@ -18,6 +18,7 @@
 			of_subscription.State = crm_abonnement.Nrq_state;
 			of_subscription.Status = crm_abonnement.Nrq_status;
 			of_subscription.Subscription_customer_no = crm_abonnement.Nrq_Subscription_customer_no;
+			of_subscription.Crm_id = crm_abonnement.Id.ToString().ToLower();
 		}
 
 		public static void To_crm(crm.Abonnement crm_abonnement, of.data.Subscription of_subscription)

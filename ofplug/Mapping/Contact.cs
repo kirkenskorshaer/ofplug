@@ -26,6 +26,7 @@
 			of_contact.Of_id = crm_contact.new_ofcontactid;
 			of_contact.Valid_adr_ts_value = null;
 			of_contact.External_id = crm_contact.new_kkadminmedlemsnr;
+			of_contact.Crm_id = crm_contact.Id.ToString().ToLower();
 
 			//    "birthday": "11. nov. 2011",
 			//"birthday": "2011-11-13",
