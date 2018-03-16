@@ -113,22 +113,24 @@ namespace ofplug.Logic.Abstract
 			return null;
 		}
 
-		public void Create_or_update_one_aftale_in_crm(of.data.Agreement of_aftale)
+		public crm.Aftale Create_or_update_one_aftale_in_crm(of.data.Agreement of_aftale)
 		{
 			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 			crm_aftale.Get_by_of_id(of_aftale.Of_id.Value);
 
 			if (crm_aftale.CrmEntity == null)
 			{
-				Create_crm_aftale(of_aftale);
+				crm_aftale = Create_crm_aftale(of_aftale);
 			}
 			else if (Mapping.Aftale.Needs_update_in_crm(crm_aftale, of_aftale))
 			{
 				Update_aftale_in_crm(crm_aftale, of_aftale);
 			}
+
+			return crm_aftale;
 		}
 
-		private void Create_crm_aftale(of.data.Agreement of_agreement)
+		private crm.Aftale Create_crm_aftale(of.data.Agreement of_agreement)
 		{
 			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 
@@ -137,6 +139,8 @@ namespace ofplug.Logic.Abstract
 			Add_contact_to_aftale(crm_aftale, of_agreement);
 
 			crm_aftale.Create();
+
+			return crm_aftale;
 		}
 
 		private void Update_aftale_in_crm(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
@@ -155,7 +159,7 @@ namespace ofplug.Logic.Abstract
 			crm_aftale.nrq_bidragyder = crm_contact.Get_entity_reference();
 		}
 
-		public void Create_or_update_one_contact_in_crm(int? of_contact_id, of.data.Contact of_contact)
+		public crm.Contact Create_or_update_one_contact_in_crm(int? of_contact_id, of.data.Contact of_contact)
 		{
 			crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
 			crm_contact.Get_contact_from_of_contact_id(_service, of_contact_id.Value);
@@ -168,6 +172,8 @@ namespace ofplug.Logic.Abstract
 			{
 				Update_contact_in_crm(crm_contact, of_contact);
 			}
+
+			return crm_contact;
 		}
 
 		private void Update_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
