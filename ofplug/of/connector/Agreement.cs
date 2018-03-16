@@ -1,4 +1,6 @@
-﻿namespace ofplug.of.connector
+﻿using System;
+
+namespace ofplug.of.connector
 {
 	public class Agreement : Abstract_data_exchange
 	{
@@ -9,6 +11,11 @@
 		public data.Agreement Get(int id)
 		{
 			return Get<data.Agreement>(id);
+		}
+
+		public data.Agreement Get(Guid id)
+		{
+			return Get<data.Agreement>(1, id.ToString().ToLower());
 		}
 
 		public data.IdResponse Patch(int id, data.Agreement of_agreement)

@@ -1,4 +1,6 @@
-﻿namespace ofplug.of.connector
+﻿using System;
+
+namespace ofplug.of.connector
 {
 	public class Payment : Abstract_data_exchange
 	{
@@ -9,6 +11,11 @@
 		public data.Payment Get(int id)
 		{
 			return Get<data.Payment>(id);
+		}
+
+		public data.Payment Get(Guid id)
+		{
+			return Get<data.Payment>(1, id.ToString().ToLower());
 		}
 
 		public data.IdResponse Patch(int id, data.Payment of_payment)

@@ -1,4 +1,6 @@
-﻿namespace ofplug.of.connector
+﻿using System;
+
+namespace ofplug.of.connector
 {
 	public class Contact : Abstract_data_exchange
 	{
@@ -9,6 +11,11 @@
 		public data.Contact Get(int id)
 		{
 			return Get<data.Contact>(id);
+		}
+
+		public data.Contact Get(Guid id)
+		{
+			return Get<data.Contact>(1, id.ToString().ToLower());
 		}
 
 		public data.IdResponse Patch(int id, data.Contact of_contact)

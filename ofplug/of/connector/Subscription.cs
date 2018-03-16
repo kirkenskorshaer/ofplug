@@ -1,4 +1,6 @@
-﻿namespace ofplug.of.connector
+﻿using System;
+
+namespace ofplug.of.connector
 {
 	public class Subscription : Abstract_data_exchange
 	{
@@ -9,6 +11,11 @@
 		public data.Subscription Get(int id)
 		{
 			return Get<data.Subscription>(id);
+		}
+
+		public data.Subscription Get(Guid id)
+		{
+			return Get<data.Subscription>(1, id.ToString().ToLower());
 		}
 
 		public data.IdResponse Patch(int id, data.Subscription of_subscription)
