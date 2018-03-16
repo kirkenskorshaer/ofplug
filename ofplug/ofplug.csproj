@@ -77,6 +77,7 @@
     <Compile Include="Mapping\Contact.cs" />
     <Compile Include="Mapping\Indbetaling.cs" />
     <Compile Include="Mapping\Subscription.cs" />
+    <Compile Include="of\connector\InitiateAgreement.cs" />
     <Compile Include="of\connector\Subscription.cs" />
     <Compile Include="of\connector\Subscriptions.cs" />
     <Compile Include="of\data\AbstractData.cs" />

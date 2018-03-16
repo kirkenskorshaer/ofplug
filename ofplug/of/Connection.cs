@@ -64,6 +64,20 @@ namespace ofplug.of
 			}
 		}
 
+		private InitiateAgreement _initiate_agreement = null;
+		public InitiateAgreement Initiate_agreement
+		{
+			get
+			{
+				if (_initiate_agreement == null)
+				{
+					_initiate_agreement = new InitiateAgreement(_sender, _url, _token, "wizard/InitiateAgreement");
+				}
+
+				return _initiate_agreement;
+			}
+		}
+
 		public Connection(string url, string token)
 		{
 			_sender = new Sender();
