@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="crm\Indbetaling.cs" />
     <Compile Include="crm\Abonnement.cs" />
+    <Compile Include="crm\StartAftale.cs" />
     <Compile Include="Logic\Abonnement\Create_or_update_all_in_crm.cs" />
     <Compile Include="Logic\Abonnement\Create_or_update_one_automatic_in_of.cs" />
     <Compile Include="Logic\Abonnement\Create_or_update_one_in_crm.cs" />
