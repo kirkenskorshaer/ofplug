@@ -75,6 +75,7 @@
     <Compile Include="Logic\Indbetaling\Update_status_manual_in_of.cs" />
     <Compile Include="Logic\Indbetaling\Update_status_automatic_in_of.cs" />
     <Compile Include="Mapping\Aftale.cs" />
+    <Compile Include="Mapping\InitiateAgreement.cs" />
     <Compile Include="Mapping\Contact.cs" />
     <Compile Include="Mapping\Indbetaling.cs" />
     <Compile Include="Mapping\Subscription.cs" />
