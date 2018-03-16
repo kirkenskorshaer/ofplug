@@ -74,6 +74,9 @@
     <Compile Include="Logic\Indbetaling\Maintain.cs" />
     <Compile Include="Logic\Indbetaling\Update_status_manual_in_of.cs" />
     <Compile Include="Logic\Indbetaling\Update_status_automatic_in_of.cs" />
+    <Compile Include="Logic\InitiateAgreement\Process_InitiateAgreement_automatic.cs" />
+    <Compile Include="Logic\InitiateAgreement\Process_InitiateAgreement_manual.cs" />
+    <Compile Include="Logic\InitiateAgreement\Maintain.cs" />
     <Compile Include="Mapping\Aftale.cs" />
     <Compile Include="Mapping\InitiateAgreement.cs" />
     <Compile Include="Mapping\Contact.cs" />
