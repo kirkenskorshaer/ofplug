@@ -12,6 +12,15 @@ namespace ofplug.of.data
 		[DataMember(Name = "ID", EmitDefaultValue = false)]
 		public int? Id { get; set; }
 
+		[DataMember(Name = "custom_1", EmitDefaultValue = false)]
+		public string Crm_id { get; set; }
+
+		[DataMember(Name = "custom_2", EmitDefaultValue = false)]
+		public string Unused_custom_2 { get; set; }
+
+		[DataMember(Name = "custom_3", EmitDefaultValue = false)]
+		public string Unused_custom_3 { get; set; }
+
 		protected DateTime? GetDate(string input)
 		{
 			if (string.IsNullOrWhiteSpace(input))
