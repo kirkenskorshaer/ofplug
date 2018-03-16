@@ -22,48 +22,6 @@ namespace ofplug.Logic.Abonnement
 			}
 		}
 
-		public void Create_or_update_one_abonnement_in_crm(of.data.Subscription of_abonnement)
-		{
-			crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
-			crm_abonnement.Get_by_of_id(of_abonnement.Of_id.Value);
-
-			if (crm_abonnement.CrmEntity == null)
-			{
-				Create_abonnement_in_crm(of_abonnement);
-			}
-			else if (Mapping.Subscription.Needs_update_in_crm(crm_abonnement, of_abonnement))
-			{
-				Update_abonnement_in_crm(crm_abonnement, of_abonnement);
-			}
-		}
-
-		private void Update_abonnement_in_crm(crm.Abonnement crm_abonnement, of.data.Subscription of_abonnement)
-		{
-			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement);
-
-			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
-
-			crm_abonnement.Update();
-		}
-
-		private void Create_abonnement_in_crm(of.data.Subscription of_abonnement)
-		{
-			crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
-
-			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement);
-
-			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
-
-			crm_abonnement.Create();
-		}
-
-		private void Add_crm_contact_to_abonnement(crm.Abonnement crm_abonnement, of.data.Subscription of_abonnement)
-		{
-			crm.Contact crm_contact = Get_or_create_crm_contact(of_abonnement.Contact_id.Value);
-
-			crm_abonnement.Nrq_contact = crm_contact.Get_entity_reference();
-		}
-
 		public void Create_or_update_one_abonnement_in_of(crm.Abonnement crm_abonnement)
 		{
 			of.data.Subscription of_abonnement = null;

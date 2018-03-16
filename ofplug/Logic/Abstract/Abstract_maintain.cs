@@ -34,6 +34,52 @@ namespace ofplug.Logic.Abstract
 			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
 		}
 
+		public crm.Abonnement Create_or_update_one_abonnement_in_crm(of.data.Subscription of_abonnement)
+		{
+			crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
+			crm_abonnement.Get_by_of_id(of_abonnement.Of_id.Value);
+
+			if (crm_abonnement.CrmEntity == null)
+			{
+				crm_abonnement = Create_abonnement_in_crm(of_abonnement);
+			}
+			else if (Mapping.Subscription.Needs_update_in_crm(crm_abonnement, of_abonnement))
+			{
+				Update_abonnement_in_crm(crm_abonnement, of_abonnement);
+			}
+
+			return crm_abonnement;
+		}
+
+		private void Update_abonnement_in_crm(crm.Abonnement crm_abonnement, of.data.Subscription of_abonnement)
+		{
+			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement);
+
+			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
+
+			crm_abonnement.Update();
+		}
+
+		private crm.Abonnement Create_abonnement_in_crm(of.data.Subscription of_abonnement)
+		{
+			crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
+
+			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement);
+
+			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
+
+			crm_abonnement.Create();
+
+			return crm_abonnement;
+		}
+
+		private void Add_crm_contact_to_abonnement(crm.Abonnement crm_abonnement, of.data.Subscription of_abonnement)
+		{
+			crm.Contact crm_contact = Get_or_create_crm_contact(of_abonnement.Contact_id.Value);
+
+			crm_abonnement.Nrq_contact = crm_contact.Get_entity_reference();
+		}
+
 		protected crm.Contact Get_or_create_crm_contact(int of_contact_id)
 		{
 			of.data.Contact of_contact = _of_connection.Contact.Get(of_contact_id);
