@@ -18,13 +18,20 @@ namespace ofplug.crm
 		//todo felter
 		//public int? of_id = 0;
 
+		private static ColumnSet _columnSet = new ColumnSet
+		(//todo felter
+			"nrq_beloeb",
+			"nrq_bidragsaftaleid",
+			"nrq_type"
+		);
+
 		public Aftale(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "nrq_bidragsaftale")
 		{
 		}
 
 		public void Get_by_of_id(int id)
 		{//todo felter
-			QueryExpression queryExpression = Create_query_expression("nrq_type", id.ToString(), new ColumnSet("nrq_type"));
+			QueryExpression queryExpression = Create_query_expression("nrq_type", id.ToString(), _columnSet);
 
 			EntityCollection entities = _service.RetrieveMultiple(queryExpression);
 
@@ -36,8 +43,8 @@ namespace ofplug.crm
 		public static List<Aftale> Get_all(IOrganizationService service, ITracingService tracingService)
 		{
 			QueryExpression queryExpression = new QueryExpression("nrq_bidragsaftale")
-			{//todo felter
-				ColumnSet = new ColumnSet("nrq_bidragsaftaleid", "nrq_type")
+			{
+				ColumnSet = _columnSet
 			};
 
 			EntityCollection entities = service.RetrieveMultiple(queryExpression);
@@ -53,7 +60,7 @@ namespace ofplug.crm
 
 		public void Get_by_reference(EntityReference aftale_reference)
 		{
-			CrmEntity = _service.Retrieve(aftale_reference.LogicalName, aftale_reference.Id, new ColumnSet("nrq_of_id"));
+			CrmEntity = _service.Retrieve(aftale_reference.LogicalName, aftale_reference.Id, _columnSet);
 
 			Read_from_entity();
 		}

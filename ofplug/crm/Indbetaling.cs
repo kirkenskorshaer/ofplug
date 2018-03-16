@@ -42,6 +42,12 @@ namespace ofplug.crm
 		public int? of_aftale_id;
 		public int? of_indbetaling_id;
 
+		private static ColumnSet _columnSet = new ColumnSet
+		(//todo felter
+			"new_amount",
+			"new_bankid",
+			"new_valdt"
+		);
 
 		public Indbetaling(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "new_indbetaling")
 		{

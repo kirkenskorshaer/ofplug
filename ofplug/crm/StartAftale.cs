@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 
 namespace ofplug.crm
@@ -28,13 +27,19 @@ namespace ofplug.crm
 
 		public bool Nrq_import_status;
 
+		private static ColumnSet _columnSet = new ColumnSet
+		(//todo felter
+			"nrq_First_name",
+			"nrq_Middle_name"
+		);
+
 		public StartAftale(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "StartAftale")//todo norriq navn
 		{
 		}
 
 		public void Get_by_reference(EntityReference entityReference)
 		{
-			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, new ColumnSet("nrq_of_id"));
+			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, _columnSet);
 
 			Read_from_entity();
 		}

@@ -27,13 +27,20 @@ namespace ofplug.crm
 		public string lastname;
 		//msisdn
 
+		private static ColumnSet _columnSet = new ColumnSet
+		(//todo felter
+			"firstname",
+			"new_ofcontactid",
+			"emailaddress1"
+		);
+
 		public Contact(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "contact")
 		{
 		}
 
 		public void Get_contact_from_medlemsnr(IOrganizationService service, string medlemsnr)
 		{
-			QueryExpression queryExpression = Create_query_expression("new_kkadminmedlemsnr", medlemsnr, new ColumnSet("contactid"));
+			QueryExpression queryExpression = Create_query_expression("new_kkadminmedlemsnr", medlemsnr, _columnSet);
 
 			EntityCollection entities = service.RetrieveMultiple(queryExpression);
 
@@ -44,7 +51,7 @@ namespace ofplug.crm
 
 		public void Get_contact_from_of_contact_id(IOrganizationService service, int of_contact_id)
 		{
-			QueryExpression queryExpression = Create_query_expression("new_ofcontactid", of_contact_id.ToString(), new ColumnSet("contactid"));
+			QueryExpression queryExpression = Create_query_expression("new_ofcontactid", of_contact_id.ToString(), _columnSet);
 
 			EntityCollection entities = service.RetrieveMultiple(queryExpression);
 
@@ -55,14 +62,14 @@ namespace ofplug.crm
 
 		public void Get_by_reference(EntityReference entityReference)
 		{
-			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, new ColumnSet("nrq_of_id"));
+			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, _columnSet);
 
 			Read_from_entity();
 		}
 
 		public void Get_contact_from_id(IOrganizationService service, Guid id)
 		{
-			CrmEntity = service.Retrieve("contact", id, new ColumnSet("contactid"));
+			CrmEntity = service.Retrieve("contact", id, _columnSet);
 
 			Read_from_entity();
 		}
@@ -103,7 +110,7 @@ namespace ofplug.crm
 
 			QueryExpression queryExpression = new QueryExpression("contact")
 			{
-				ColumnSet = new ColumnSet("contactid")
+				ColumnSet = _columnSet
 			};
 
 			queryExpression.Criteria.AddFilter(filterExpression);

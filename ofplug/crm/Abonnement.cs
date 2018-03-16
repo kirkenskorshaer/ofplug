@@ -22,20 +22,25 @@ namespace ofplug.crm
 		public string Nrq_bank_sort_code;
 		public int? Nrq_of_subscription_id;
 
+		private static ColumnSet _columnSet = new ColumnSet
+		(//todo felter
+			"nrq_of_subscription_id"
+		);
+
 		public Abonnement(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "Abonnement")//todo nrq entity name
 		{
 		}
 
 		public void Get_by_reference(EntityReference entityReference)
 		{
-			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, new ColumnSet("nrq_of_subscription_id"));
+			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, _columnSet);
 
 			Read_from_entity();
 		}
 
 		public void Get_by_of_id(int id)
 		{//todo felter
-			QueryExpression queryExpression = Create_query_expression("Nrq_of_subscription_id", id.ToString(), new ColumnSet("nrq_of_subscription_id"));
+			QueryExpression queryExpression = Create_query_expression("Nrq_of_subscription_id", id.ToString(), _columnSet);
 
 			EntityCollection entities = _service.RetrieveMultiple(queryExpression);
 
