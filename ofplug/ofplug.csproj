@@ -84,6 +84,7 @@
     <Compile Include="of\data\Contact.cs" />
     <Compile Include="of\data\IdResponse.cs" />
     <Compile Include="of\data\InitiateAgreement.cs" />
+    <Compile Include="of\data\InitiateAgreementResponse.cs" />
     <Compile Include="of\data\Payment.cs" />
     <Compile Include="of\data\Subscription.cs" />
     <Compile Include="Logic\Abstract\AbstractCodeActivity.cs" />
