@@ -27,6 +27,13 @@
 			return response;
 		}
 
+		protected Output Get<Output>(int key, string value)
+			where Output : class
+		{
+			Output response = _sender.Get<Output>(_url + _path + "custom/" + key.ToString() + "/" + value + "/", _token);
+			return response;
+		}
+
 		public data.IdResponse Patch<Input>(int id, Input input)
 		{
 			data.IdResponse response = _sender.Patch<Input, data.IdResponse>(_url + _path + id.ToString() + "/", _token, input);
