@@ -80,6 +80,33 @@ namespace ofplug_test.Abstract
 			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_aftale.CrmEntity });
 		}
 
+		protected void Add_crm_start_aftale()
+		{
+			Add_crm_start_aftale(crm_start_aftale => { });
+		}
+
+		protected void Add_crm_start_aftale(Action<ofplug.crm.StartAftale> adjust_start_aftale)
+		{
+			ofplug.crm.StartAftale crm_start_aftale = new ofplug.crm.StartAftale(_service, _tracingService)
+			{
+				Nrq_Amount = new Money(100)
+			};
+
+			adjust_start_aftale(crm_start_aftale);
+
+			Add_crm_start_aftale(crm_start_aftale);
+		}
+
+		protected void Add_crm_start_aftale(ofplug.crm.StartAftale crm_start_aftale)
+		{
+			crm_start_aftale.CrmEntity = new Entity("StartAftale");//todo norriq navn
+
+			crm_start_aftale.Fill_fields();
+
+			_service.entitiesToReturn.Enqueue(new List<Entity> { crm_start_aftale.CrmEntity });
+		}
+
+
 		protected void Add_crm_abonnement()
 		{
 			Add_crm_abonnement(crm_abonnement => { });
@@ -231,28 +258,30 @@ namespace ofplug_test.Abstract
 		{
 			KeyValuePair<OrganizationServiceMock.Operation, object> log = _service.Log[log_index];
 
-			Assert.AreEqual(operation, log.Key);
-
-			if (operation == OrganizationServiceMock.Operation.RetrieveMultiple)
+			string actual_entity_name = string.Empty;
+			if (log.Key == OrganizationServiceMock.Operation.RetrieveMultiple)
 			{
-				Assert.AreEqual(entity_name, ((QueryExpression)log.Value).EntityName);
-
-				return;
+				actual_entity_name = ((QueryExpression)log.Value).EntityName;
+			}
+			else
+			{
+				actual_entity_name = ((Entity)log.Value).LogicalName;
 			}
 
-			Assert.AreEqual(entity_name, ((Entity)log.Value).LogicalName);
+			Assert.AreEqual(operation + " " + entity_name, log.Key + " " + actual_entity_name, " (" + log_index.ToString() + ") ");
 		}
 
 		protected void Assert_of_operation(int log_index, SenderMock.Operation operation, Type type, string url_part = null)
 		{
 			SenderLog log = _sender.Log[log_index];
 
-			Assert.AreEqual(operation, log.Operation);
-			Assert.AreEqual(type, log.Request?.GetType());
+			//Assert.AreEqual(operation, log.Operation, " (" + log_index.ToString() + ") " + log.Request?.GetType().Name + " - " + log.Url);
+			//Assert.AreEqual(type, log.Request?.GetType(), " (" + log_index.ToString() + ") " + log.Operation.ToString() + " - " + log.Url);
+			Assert.AreEqual(operation + " " + type?.Name, log.Operation + " " + log.Request?.GetType()?.Name, " (" + log_index.ToString() + ") " + log.Url);
 
 			if (url_part != null)
 			{
-				Assert.IsTrue(log.Url.Contains(url_part));
+				Assert.IsTrue(log.Url.Contains(url_part), " (" + log_index.ToString() + ") " + log.Request?.GetType().Name + " - " + log.Operation.ToString());
 			}
 		}
 

@@ -71,6 +71,9 @@
     <Compile Include="LogicTest\IndbetalingTest\Update_status_manual_in_ofTest.cs" />
     <Compile Include="LogicTest\IndbetalingTest\Update_status_automatic_in_ofTest.cs" />
     <Compile Include="LogicTest\IndbetalingTest\Create_or_update_one_in_crmTest.cs" />
+    <Compile Include="LogicTest\InitiateAgreementTest\Abstract_InitiateAgreement.cs" />
+    <Compile Include="LogicTest\InitiateAgreementTest\Process_InitiateAgreement_automaticTest.cs" />
+    <Compile Include="LogicTest\InitiateAgreementTest\Process_InitiateAgreement_manualTest.cs" />
     <Compile Include="Mock\IdMock.cs" />
     <Compile Include="Mock\PluginExecutionContextMock.cs" />
     <Compile Include="Mock\SenderLog.cs" />
@@ -95,6 +98,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
