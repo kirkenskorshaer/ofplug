@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace ofplug.of.data.Abstract
+namespace ofplug.of.data
 {
 	[DataContract]
 	public class InitiateAgreement
@@ -20,8 +20,8 @@ namespace ofplug.of.data.Abstract
 		[DataMember(Name = "address", EmitDefaultValue = false)]
 		public string Address { get; set; }
 
-		[DataMember(Name = "postcode", EmitDefaultValue = false)]
-		public string Postcode { get; set; }
+		[DataMember(Name = "post_code", EmitDefaultValue = false)]
+		public string Post_code { get; set; }
 
 		[DataMember(Name = "city", EmitDefaultValue = false)]
 		public string City { get; set; }
@@ -35,17 +35,17 @@ namespace ofplug.of.data.Abstract
 		[DataMember(Name = "email", EmitDefaultValue = false)]
 		public string Email { get; set; }
 
-		[DataMember(Name = "cpr", EmitDefaultValue = false)]
-		public string Cpr { get; set; }
+		[DataMember(Name = "national_id", EmitDefaultValue = false)]
+		public string National_id { get; set; }
 
-		[DataMember(Name = "cvr", EmitDefaultValue = false)]
-		public string Cvr { get; set; }
+		[DataMember(Name = "business_code", EmitDefaultValue = false)]
+		public string Business_code { get; set; }
 
 		[DataMember(Name = "bank_sort_code", EmitDefaultValue = false)]
-		public int Bank_sort_code { get; set; }
+		public int? Bank_sort_code { get; set; }
 
 		[DataMember(Name = "bank_account_no", EmitDefaultValue = false)]
-		public int Bank_account_no { get; set; }
+		public int? Bank_account_no { get; set; }
 
 		[DataMember(Name = "external_id", EmitDefaultValue = false)]
 		public string External_id { get; set; }
@@ -60,6 +60,6 @@ namespace ofplug.of.data.Abstract
 		public string Frequency { get; set; }
 
 		[DataMember(Name = "project_id", EmitDefaultValue = false)]
-		public string Project_id { get; set; }
+		public int Project_id { get; set; }
 	}
 }
