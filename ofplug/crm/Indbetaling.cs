@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ofplug.crm
@@ -71,17 +72,17 @@ namespace ofplug.crm
 			Read_from_entity();
 		}
 
-		public override void Fill_fields()
+		public override void Fill_fields(List<string> parameters = null)
 		{
 			//todo felter
 
-			Fill_if_not_empty("new_amount", new_amount);
-			Fill_if_not_empty("new_bankid", new_bankid);
-			Fill_if_not_empty("new_valdt", new_valdt);
-			Fill_if_not_empty("nrq_bilagsnr", nrq_bilagsnr);
-			Fill_if_not_empty("nrq_linktilindbetaling", nrq_linktilindbetaling);
-			Fill_if_not_empty("nrq_tekst", nrq_tekst);
-			Fill_if_not_empty("of_indbetaling_id", of_indbetaling_id);
+			Fill_if_not_empty("new_amount", new_amount, parameters);
+			Fill_if_not_empty("new_bankid", new_bankid, parameters);
+			Fill_if_not_empty("new_valdt", new_valdt, parameters);
+			Fill_if_not_empty("nrq_bilagsnr", nrq_bilagsnr, parameters);
+			Fill_if_not_empty("nrq_linktilindbetaling", nrq_linktilindbetaling, parameters);
+			Fill_if_not_empty("nrq_tekst", nrq_tekst, parameters);
+			Fill_if_not_empty("of_indbetaling_id", of_indbetaling_id, parameters);
 		}
 
 		public override void Read_fields()

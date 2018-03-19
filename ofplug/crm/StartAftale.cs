@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using System.Collections.Generic;
 
 namespace ofplug.crm
 {
@@ -44,29 +45,29 @@ namespace ofplug.crm
 			Read_from_entity();
 		}
 
-		public override void Fill_fields()
+		public override void Fill_fields(List<string> parameters = null)
 		{
 			//todo felter
-			Fill_if_not_empty("nrq_Name", Nrq_Name);
-			Fill_if_not_empty("nrq_First_name", Nrq_First_name);
-			Fill_if_not_empty("nrq_Middle_name", Nrq_Middle_name);
-			Fill_if_not_empty("nrq_Last_name", Nrq_Last_name);
-			Fill_if_not_empty("nrq_Address", Nrq_Address);
-			Fill_if_not_empty("nrq_Post_code", Nrq_Post_code);
-			Fill_if_not_empty("nrq_City", Nrq_City);
-			Fill_if_not_empty("nrq_Country", Nrq_Country);
-			Fill_if_not_empty("nrq_Msisdn", Nrq_Msisdn);
-			Fill_if_not_empty("nrq_Email", Nrq_Email);
-			Fill_if_not_empty("nrq_National_id", Nrq_National_id);
-			Fill_if_not_empty("nrq_Business_code", Nrq_Business_code);
-			Fill_if_not_empty("nrq_Bank_sort_code", Nrq_Bank_sort_code);
-			Fill_if_not_empty("nrq_Bank_account_no", Nrq_Bank_account_no);
-			Fill_if_not_empty("nrq_External_id", Nrq_External_id);
-			Fill_if_not_empty("nrq_Payment_media", Nrq_Payment_media);
-			Fill_if_not_empty("nrq_Amount", Nrq_Amount);
-			Fill_if_not_empty("nrq_Frequency", Nrq_Frequency);
-			Fill_if_not_empty("nrq_Project_id", Nrq_Project_id);
-			Fill_if_not_empty("nrq_import_status", Nrq_import_status);
+			Fill_if_not_empty("nrq_Name", Nrq_Name, parameters);
+			Fill_if_not_empty("nrq_First_name", Nrq_First_name, parameters);
+			Fill_if_not_empty("nrq_Middle_name", Nrq_Middle_name, parameters);
+			Fill_if_not_empty("nrq_Last_name", Nrq_Last_name, parameters);
+			Fill_if_not_empty("nrq_Address", Nrq_Address, parameters);
+			Fill_if_not_empty("nrq_Post_code", Nrq_Post_code, parameters);
+			Fill_if_not_empty("nrq_City", Nrq_City, parameters);
+			Fill_if_not_empty("nrq_Country", Nrq_Country, parameters);
+			Fill_if_not_empty("nrq_Msisdn", Nrq_Msisdn, parameters);
+			Fill_if_not_empty("nrq_Email", Nrq_Email, parameters);
+			Fill_if_not_empty("nrq_National_id", Nrq_National_id, parameters);
+			Fill_if_not_empty("nrq_Business_code", Nrq_Business_code, parameters);
+			Fill_if_not_empty("nrq_Bank_sort_code", Nrq_Bank_sort_code, parameters);
+			Fill_if_not_empty("nrq_Bank_account_no", Nrq_Bank_account_no, parameters);
+			Fill_if_not_empty("nrq_External_id", Nrq_External_id, parameters);
+			Fill_if_not_empty("nrq_Payment_media", Nrq_Payment_media, parameters);
+			Fill_if_not_empty("nrq_Amount", Nrq_Amount, parameters);
+			Fill_if_not_empty("nrq_Frequency", Nrq_Frequency, parameters);
+			Fill_if_not_empty("nrq_Project_id", Nrq_Project_id, parameters);
+			Fill_if_not_empty("nrq_import_status", Nrq_import_status, parameters);
 		}
 
 		public override void Read_fields()

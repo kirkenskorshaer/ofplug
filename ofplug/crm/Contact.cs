@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ofplug.crm
@@ -122,24 +123,24 @@ namespace ofplug.crm
 			Read_from_entity();
 		}
 
-		public override void Fill_fields()
+		public override void Fill_fields(List<string> parameters = null)
 		{
 			//todo felter
 
-			Fill_if_not_empty("firstname", firstname);
-			Fill_if_not_empty("new_ofcontactid", new_ofcontactid);
-			Fill_if_not_empty("emailaddress1", emailaddress1);
-			Fill_if_not_empty("new_cprnr", new_cprnr);
-			Fill_if_not_empty("address1_line1", address1_line1);
-			Fill_if_not_empty("address1_postalcode", address1_postalcode);
-			Fill_if_not_empty("address1_city", address1_city);
-			Fill_if_not_empty("address1_country", address1_country);
-			Fill_if_not_empty("gendercode", gendercode);
-			Fill_if_not_empty("birthdate", birthdate);
-			Fill_if_not_empty("address1_latitude", address1_latitude);
-			Fill_if_not_empty("address1_longitude", address1_longitude);
-			Fill_if_not_empty("lastname", lastname);
-			Fill_if_not_empty("new_kkadminmedlemsnr", new_kkadminmedlemsnr);
+			Fill_if_not_empty("firstname", firstname, parameters);
+			Fill_if_not_empty("new_ofcontactid", new_ofcontactid, parameters);
+			Fill_if_not_empty("emailaddress1", emailaddress1, parameters);
+			Fill_if_not_empty("new_cprnr", new_cprnr, parameters);
+			Fill_if_not_empty("address1_line1", address1_line1, parameters);
+			Fill_if_not_empty("address1_postalcode", address1_postalcode, parameters);
+			Fill_if_not_empty("address1_city", address1_city, parameters);
+			Fill_if_not_empty("address1_country", address1_country, parameters);
+			Fill_if_not_empty("gendercode", gendercode, parameters);
+			Fill_if_not_empty("birthdate", birthdate, parameters);
+			Fill_if_not_empty("address1_latitude", address1_latitude, parameters);
+			Fill_if_not_empty("address1_longitude", address1_longitude, parameters);
+			Fill_if_not_empty("lastname", lastname, parameters);
+			Fill_if_not_empty("new_kkadminmedlemsnr", new_kkadminmedlemsnr, parameters);
 		}
 
 		public override void Read_fields()

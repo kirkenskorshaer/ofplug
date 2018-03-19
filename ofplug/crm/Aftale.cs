@@ -65,17 +65,17 @@ namespace ofplug.crm
 			Read_from_entity();
 		}
 
-		public override void Fill_fields()
+		public override void Fill_fields(List<string> parameters = null)
 		{
 			//todo felter
 
-			Fill_if_not_empty("nrq_beloeb", nrq_beloeb);
-			Fill_if_not_empty("nrq_betalingsform", nrq_betalingsform);
-			Fill_if_not_empty("nrq_bidragyder", nrq_bidragyder);
-			Fill_if_not_empty("nrq_frekvens", nrq_frekvens);
-			Fill_if_not_empty("nrq_slutdato", nrq_slutdato);
-			Fill_if_not_empty("nrq_startdato", nrq_startdato);
-			Fill_if_not_empty("nrq_type", nrq_type);
+			Fill_if_not_empty("nrq_beloeb", nrq_beloeb, parameters);
+			Fill_if_not_empty("nrq_betalingsform", nrq_betalingsform, parameters);
+			Fill_if_not_empty("nrq_bidragyder", nrq_bidragyder, parameters);
+			Fill_if_not_empty("nrq_frekvens", nrq_frekvens, parameters);
+			Fill_if_not_empty("nrq_slutdato", nrq_slutdato, parameters);
+			Fill_if_not_empty("nrq_startdato", nrq_startdato, parameters);
+			Fill_if_not_empty("nrq_type", nrq_type, parameters);
 			//Fill_if_not_empty("of_id", of_id);
 		}
 

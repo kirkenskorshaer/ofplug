@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ofplug.crm
@@ -33,10 +34,10 @@ namespace ofplug.crm
 			}
 		}
 
-		public override void Fill_fields()
+		public override void Fill_fields(List<string> parameters = null)
 		{
-			Fill_if_not_empty("nrq_of_url", Nrq_of_url);
-			Fill_if_not_empty("nrq_of_token", Nrq_of_token);
+			Fill_if_not_empty("nrq_of_url", Nrq_of_url, parameters);
+			Fill_if_not_empty("nrq_of_token", Nrq_of_token, parameters);
 		}
 
 		public override void Read_fields()

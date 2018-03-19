@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
+using System.Collections.Generic;
 
 namespace ofplug.crm
 {
@@ -116,11 +117,11 @@ namespace ofplug.crm
 			Id = _service.Create(CrmEntity);
 		}
 
-		public void Update()
+		public void Update(List<string> parameters = null)
 		{
 			CrmEntity = new Entity(Logical_name);
 
-			Fill_fields();
+			Fill_fields(parameters);
 			CrmEntity.Id = Id;
 
 			_tracingService.Trace("ofplug " + Logical_name + " Update");
@@ -128,7 +129,7 @@ namespace ofplug.crm
 			_service.Update(CrmEntity);
 		}
 
-		public abstract void Fill_fields();
+		public abstract void Fill_fields(List<string> parameters = null);
 		public abstract void Read_fields();
 
 		public EntityReference Get_entity_reference()
@@ -148,8 +149,13 @@ namespace ofplug.crm
 			Read_fields();
 		}
 
-		protected void Fill_if_not_empty(string name, object value)
+		protected void Fill_if_not_empty(string name, object value, List<string> parameters)
 		{
+			if (parameters != null && parameters.Contains(name) == false)
+			{
+				return;
+			}
+
 			if (value == null)
 			{
 				return;

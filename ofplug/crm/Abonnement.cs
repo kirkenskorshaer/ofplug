@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ofplug.crm
 {
@@ -49,21 +50,21 @@ namespace ofplug.crm
 			Read_from_entity();
 		}
 
-		public override void Fill_fields()
+		public override void Fill_fields(List<string> parameters = null)
 		{
-			Fill_if_not_empty("nrq_status", Nrq_status);
-			Fill_if_not_empty("nrq_Subscription_customer_no", Nrq_Subscription_customer_no);
-			Fill_if_not_empty("nrq_Bse_guid", Nrq_Bse_guid);
-			Fill_if_not_empty("nrq_of_contact_id", Nrq_of_contact_id);
-			Fill_if_not_empty("nrq_order_id", Nrq_order_id);
-			Fill_if_not_empty("nrq_state", Nrq_state);
-			Fill_if_not_empty("nrq_contact", Nrq_contact);
-			Fill_if_not_empty("nrq_payment_gateway", Nrq_payment_gateway);
-			Fill_if_not_empty("nrq_payment_media", Nrq_payment_media);
-			Fill_if_not_empty("nrq_payment_media_type", Nrq_payment_media_type);
-			Fill_if_not_empty("nrq_msisdn", Nrq_msisdn);
-			Fill_if_not_empty("nrq_bank_account_no", Nrq_bank_account_no);
-			Fill_if_not_empty("nrq_bank_sort_code", Nrq_bank_sort_code);
+			Fill_if_not_empty("nrq_status", Nrq_status, parameters);
+			Fill_if_not_empty("nrq_Subscription_customer_no", Nrq_Subscription_customer_no, parameters);
+			Fill_if_not_empty("nrq_Bse_guid", Nrq_Bse_guid, parameters);
+			Fill_if_not_empty("nrq_of_contact_id", Nrq_of_contact_id, parameters);
+			Fill_if_not_empty("nrq_order_id", Nrq_order_id, parameters);
+			Fill_if_not_empty("nrq_state", Nrq_state, parameters);
+			Fill_if_not_empty("nrq_contact", Nrq_contact, parameters);
+			Fill_if_not_empty("nrq_payment_gateway", Nrq_payment_gateway, parameters);
+			Fill_if_not_empty("nrq_payment_media", Nrq_payment_media, parameters);
+			Fill_if_not_empty("nrq_payment_media_type", Nrq_payment_media_type, parameters);
+			Fill_if_not_empty("nrq_msisdn", Nrq_msisdn, parameters);
+			Fill_if_not_empty("nrq_bank_account_no", Nrq_bank_account_no, parameters);
+			Fill_if_not_empty("nrq_bank_sort_code", Nrq_bank_sort_code, parameters);
 		}
 
 		public override void Read_fields()
