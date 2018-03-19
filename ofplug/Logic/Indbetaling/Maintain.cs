@@ -2,6 +2,8 @@
 using Microsoft.Xrm.Sdk;
 using ofplug.crm;
 using ofplug.of;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug.Logic.Indbetaling
 {
@@ -61,7 +63,7 @@ namespace ofplug.Logic.Indbetaling
 			{
 				Create_in_crm(crm_indbetaling, of_indbetaling);
 			}
-			else if (Mapping.Indbetaling.Needs_update_in_crm(crm_indbetaling, of_indbetaling))
+			else
 			{
 				Update_in_crm(crm_indbetaling, of_indbetaling);
 			}
@@ -69,11 +71,18 @@ namespace ofplug.Logic.Indbetaling
 
 		private void Update_in_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_indbetaling)
 		{
+			List<string> parameters_to_update = Mapping.Indbetaling.Needs_update_in_crm(crm_indbetaling, of_indbetaling);
+
+			if (parameters_to_update.Any() == false)
+			{
+				return;
+			}
+
 			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling);
 
 			Create_or_update_associated_entities(of_indbetaling);
 
-			crm_indbetaling.Update();
+			crm_indbetaling.Update(parameters_to_update);
 		}
 
 		private void Create_in_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_indbetaling)

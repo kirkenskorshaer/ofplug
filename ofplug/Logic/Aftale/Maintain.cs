@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug.Logic.Aftale
 {
@@ -35,7 +37,7 @@ namespace ofplug.Logic.Aftale
 			{
 				Create_of_aftale(crm_aftale);
 			}
-			else if (Mapping.Aftale.Needs_update_in_of(crm_aftale, of_aftale))
+			else
 			{
 				Update_of_aftale(crm_aftale, of_aftale);
 			}
@@ -43,9 +45,16 @@ namespace ofplug.Logic.Aftale
 
 		private void Update_of_aftale(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
 		{
+			List<string> parameters_to_update = Mapping.Aftale.Needs_update_in_of(crm_aftale, of_aftale);
+
+			if (parameters_to_update.Any() == false)
+			{
+				return;
+			}
+
 			Mapping.Aftale.To_of(crm_aftale, of_aftale);
 
-			_of_connection.Agreement.Patch(of_aftale.Of_id.Value, of_aftale);
+			_of_connection.Agreement.Patch(of_aftale.Of_id.Value, of_aftale, parameters_to_update);
 		}
 
 		private void Create_of_aftale(crm.Aftale crm_aftale)

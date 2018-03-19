@@ -1,4 +1,6 @@
-﻿namespace ofplug.Mapping
+﻿using System.Collections.Generic;
+
+namespace ofplug.Mapping
 {
 	public static class Aftale
 	{
@@ -22,25 +24,29 @@
 			//crm_aftale.of_id = of_agreement.Id;
 		}
 
-		public static bool Needs_update_in_crm(crm.Aftale crm_aftale, of.data.Agreement of_agreement)
+		public static List<string> Needs_update_in_crm(crm.Aftale crm_aftale, of.data.Agreement of_agreement)
 		{
-			return
-				crm_aftale.nrq_beloeb == null ||
-				crm_aftale.nrq_beloeb.Value != of_agreement.Amount ||
-				crm_aftale.nrq_betalingsform != of_agreement.Payment_method ||
-				crm_aftale.nrq_frekvens != of_agreement.Frequency ||
-				//crm_aftale.nrq_type != of_agreement.Payment_media ||
-				crm_aftale.nrq_type != of_agreement.Of_id.GetValueOrDefault().ToString();
+			List<string> parameters = new List<string>();
+
+			Mapping_update_helper.Add_if_unequal(parameters, "nrq_beloeb", (int?)crm_aftale.nrq_beloeb?.Value, of_agreement.Amount);
+			Mapping_update_helper.Add_if_unequal(parameters, "nrq_betalingsform", crm_aftale.nrq_betalingsform, of_agreement.Payment_method);
+			Mapping_update_helper.Add_if_unequal(parameters, "nrq_frekvens", crm_aftale.nrq_frekvens, of_agreement.Frequency);
+			Mapping_update_helper.Add_if_unequal(parameters, "nrq_type", crm_aftale.nrq_type, of_agreement.Of_id.GetValueOrDefault().ToString());
+
+			//crm_aftale.nrq_type != of_agreement.Payment_media ||
+
+			return parameters;
 		}
 
-		public static bool Needs_update_in_of(crm.Aftale crm_aftale, of.data.Agreement of_agreement)
+		public static List<string> Needs_update_in_of(crm.Aftale crm_aftale, of.data.Agreement of_agreement)
 		{
-			return
-				crm_aftale.nrq_beloeb.Value != of_agreement.Amount ||
-				crm_aftale.nrq_betalingsform != of_agreement.Payment_method ||
-				crm_aftale.nrq_frekvens != of_agreement.Frequency ||
-				crm_aftale.nrq_type != of_agreement.Of_id.GetValueOrDefault().ToString();
-			//crm_aftale.of_id != of_agreement.Id;
+			List<string> parameters = new List<string>();
+
+			Mapping_update_helper.Add_if_unequal(parameters, "Amount", (int?)crm_aftale.nrq_beloeb?.Value, of_agreement.Amount);
+			Mapping_update_helper.Add_if_unequal(parameters, "Payment_method", crm_aftale.nrq_betalingsform, of_agreement.Payment_method);
+			Mapping_update_helper.Add_if_unequal(parameters, "Frequency", crm_aftale.nrq_frekvens, of_agreement.Frequency);
+
+			return parameters;
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace ofplug.Mapping
+﻿using System.Collections.Generic;
+
+namespace ofplug.Mapping
 {
 	public static class Contact
 	{
@@ -50,42 +52,43 @@
 			crm_contact.new_kkadminmedlemsnr = of_contact.External_id;
 		}
 
-		public static bool Needs_update_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
+		public static List<string> Needs_update_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
-			return
-				crm_contact.address1_city != of_contact.City ||
-				crm_contact.address1_country != of_contact.Country ||
-				crm_contact.Gendercode_value != crm_contact.Gendercode_string_to_enum(of_contact.Gender) ||
-				crm_contact.address1_latitude != of_contact.Lat ||
-				crm_contact.address1_line1 != of_contact.Address ||
-				crm_contact.address1_longitude != of_contact.Long ||
-				crm_contact.address1_postalcode != of_contact.Postcode ||
-				crm_contact.birthdate != of_contact.Birthday_stamp_value ||
-				crm_contact.emailaddress1 != of_contact.Email ||
-				crm_contact.firstname != of_contact.First_name ||
-				crm_contact.lastname != of_contact.Last_name ||
-				crm_contact.new_kkadminmedlemsnr != of_contact.External_id ||
-				//crm_contact.new_cprnr
-				crm_contact.new_ofcontactid != of_contact.Of_id;
+			List<string> parameters = new List<string>();
+
+			Mapping_update_helper.Add_if_unequal(parameters, "address1_city", crm_contact.address1_city, of_contact.City);
+			Mapping_update_helper.Add_if_unequal(parameters, "address1_country", crm_contact.address1_country, of_contact.Country);
+			Mapping_update_helper.Add_if_unequal(parameters, "Gendercode_value", crm_contact.Gendercode_value, crm_contact.Gendercode_string_to_enum(of_contact.Gender));
+			Mapping_update_helper.Add_if_unequal(parameters, "address1_latitude", crm_contact.address1_latitude, of_contact.Lat);
+			Mapping_update_helper.Add_if_unequal(parameters, "address1_line1", crm_contact.address1_line1, of_contact.Address);
+			Mapping_update_helper.Add_if_unequal(parameters, "address1_longitude", crm_contact.address1_longitude, of_contact.Long);
+			Mapping_update_helper.Add_if_unequal(parameters, "address1_postalcode", crm_contact.address1_postalcode, of_contact.Postcode);
+			Mapping_update_helper.Add_if_unequal(parameters, "birthdate", crm_contact.birthdate, of_contact.Birthday_stamp_value);
+			Mapping_update_helper.Add_if_unequal(parameters, "emailaddress1", crm_contact.emailaddress1, of_contact.Email);
+			Mapping_update_helper.Add_if_unequal(parameters, "firstname", crm_contact.firstname, of_contact.First_name);
+			Mapping_update_helper.Add_if_unequal(parameters, "lastname", crm_contact.lastname, of_contact.Last_name);
+			Mapping_update_helper.Add_if_unequal(parameters, "new_kkadminmedlemsnr", crm_contact.new_kkadminmedlemsnr, of_contact.External_id);
+
+			return parameters;
 		}
 
-		public static bool Needs_update_in_of(crm.Contact crm_contact, of.data.Contact of_contact)
+		public static List<string> Needs_update_in_of(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
-			return
-				of_contact.City != crm_contact.address1_city ||
-				of_contact.Country != crm_contact.address1_country ||
-				of_contact.Gender != crm_contact.Gendercode_enum_to_string(crm_contact.Gendercode_value) ||
-				of_contact.Lat != crm_contact.address1_latitude ||
-				of_contact.Address != crm_contact.address1_line1 ||
-				of_contact.Long != crm_contact.address1_longitude ||
-				of_contact.Postcode != crm_contact.address1_postalcode ||
-				of_contact.Birthday_stamp_value != crm_contact.birthdate ||
-				of_contact.Email != crm_contact.emailaddress1 ||
-				of_contact.First_name != crm_contact.firstname ||
-				of_contact.Last_name != crm_contact.lastname ||
-				of_contact.External_id != crm_contact.new_kkadminmedlemsnr ||
-				//crm_contact.new_cprnr
-				of_contact.Of_id != crm_contact.new_ofcontactid;
+			List<string> parameters = new List<string>();
+
+			Mapping_update_helper.Add_if_unequal(parameters, "City", crm_contact.address1_city, of_contact.City);
+			Mapping_update_helper.Add_if_unequal(parameters, "Country", crm_contact.address1_country, of_contact.Country);
+			Mapping_update_helper.Add_if_unequal(parameters, "Gender", crm_contact.Gendercode_value, crm_contact.Gendercode_string_to_enum(of_contact.Gender));
+			Mapping_update_helper.Add_if_unequal(parameters, "Lat", crm_contact.address1_latitude, of_contact.Lat);
+			Mapping_update_helper.Add_if_unequal(parameters, "Address", crm_contact.address1_line1, of_contact.Address);
+			Mapping_update_helper.Add_if_unequal(parameters, "Long", crm_contact.address1_longitude, of_contact.Long);
+			Mapping_update_helper.Add_if_unequal(parameters, "Postcode", crm_contact.address1_postalcode, of_contact.Postcode);
+			Mapping_update_helper.Add_if_unequal(parameters, "Email", crm_contact.emailaddress1, of_contact.Email);
+			Mapping_update_helper.Add_if_unequal(parameters, "First_name", crm_contact.firstname, of_contact.First_name);
+			Mapping_update_helper.Add_if_unequal(parameters, "Last_name", crm_contact.lastname, of_contact.Last_name);
+			Mapping_update_helper.Add_if_unequal(parameters, "External_id", crm_contact.new_kkadminmedlemsnr, of_contact.External_id);
+
+			return parameters;
 		}
 	}
 }

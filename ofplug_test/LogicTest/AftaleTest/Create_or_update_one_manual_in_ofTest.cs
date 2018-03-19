@@ -55,7 +55,11 @@ namespace ofplug_test.LogicTest.AftaleTest
 			Dictionary<string, object> input = Arrange_input();
 			Add_crm_config();
 			Add_of_aftale();
-			Add_crm_aftale(aftale => aftale.nrq_type = _id.Get_id("of_contact_id").ToString());
+			Add_crm_aftale(aftale =>
+			{
+				aftale.nrq_type = _id.Get_id("of_contact_id").ToString();
+				aftale.nrq_beloeb = new Money(_id.Get_id("random amount"));
+			});
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("of_contact_id") });
 
 			WorkflowInvoker.Invoke(creator, input);

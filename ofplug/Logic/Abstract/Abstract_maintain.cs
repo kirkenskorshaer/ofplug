@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug.Logic.Abstract
 {
@@ -21,14 +23,17 @@ namespace ofplug.Logic.Abstract
 		{
 			of.data.Contact of_contact = Get_or_create_of_contact(crm_contact);
 
-			if (Mapping.Contact.Needs_update_in_of(crm_contact, of_contact))
-			{
-				Update_of_contact(crm_contact, of_contact);
-			}
+			Update_of_contact(crm_contact, of_contact);
 		}
 
 		private void Update_of_contact(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
+			List<string> parameters_to_update = Mapping.Contact.Needs_update_in_of(crm_contact, of_contact);
+			if (parameters_to_update.Any() == false)
+			{
+				return;
+			}
+
 			Mapping.Contact.To_of(crm_contact, of_contact);
 
 			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
@@ -43,7 +48,7 @@ namespace ofplug.Logic.Abstract
 			{
 				crm_abonnement = Create_abonnement_in_crm(of_abonnement);
 			}
-			else if (Mapping.Subscription.Needs_update_in_crm(crm_abonnement, of_abonnement))
+			else
 			{
 				Update_abonnement_in_crm(crm_abonnement, of_abonnement);
 			}
@@ -57,7 +62,7 @@ namespace ofplug.Logic.Abstract
 
 			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
 
-			crm_abonnement.Update();
+			crm_abonnement.Update(Mapping.Subscription.Needs_update_in_crm(crm_abonnement, of_abonnement));
 		}
 
 		private crm.Abonnement Create_abonnement_in_crm(of.data.Subscription of_abonnement)
@@ -122,7 +127,7 @@ namespace ofplug.Logic.Abstract
 			{
 				crm_aftale = Create_crm_aftale(of_aftale);
 			}
-			else if (Mapping.Aftale.Needs_update_in_crm(crm_aftale, of_aftale))
+			else
 			{
 				Update_aftale_in_crm(crm_aftale, of_aftale);
 			}
@@ -145,18 +150,35 @@ namespace ofplug.Logic.Abstract
 
 		private void Update_aftale_in_crm(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
 		{
+			List<string> parameters_to_update = Mapping.Aftale.Needs_update_in_crm(crm_aftale, of_aftale);
+			if (parameters_to_update.Any() == false)
+			{
+				return;
+			}
+
 			Mapping.Aftale.To_crm(crm_aftale, of_aftale);
 
-			Add_contact_to_aftale(crm_aftale, of_aftale);
-
-			crm_aftale.Update();
+			bool update_nrq_bidragyder = Add_contact_to_aftale(crm_aftale, of_aftale);
+			if (parameters_to_update.Contains("nrq_bidragyder") == false && update_nrq_bidragyder)
+			{
+				parameters_to_update.Add("nrq_bidragyder");
+			}
+			crm_aftale.Update(parameters_to_update);
 		}
 
-		private void Add_contact_to_aftale(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
+		private bool Add_contact_to_aftale(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
 		{
 			crm.Contact crm_contact = Get_or_create_crm_contact(of_aftale.Contact_id.Value);
 
+			bool update_nrq_bidragyder = false;
+			if (crm_aftale.nrq_bidragyder == null || crm_aftale.nrq_bidragyder.Id != crm_contact.Id)
+			{
+				update_nrq_bidragyder = true;
+			}
+
 			crm_aftale.nrq_bidragyder = crm_contact.Get_entity_reference();
+
+			return update_nrq_bidragyder;
 		}
 
 		public crm.Contact Create_or_update_one_contact_in_crm(int? of_contact_id, of.data.Contact of_contact)
@@ -168,7 +190,7 @@ namespace ofplug.Logic.Abstract
 			{
 				Create_contact_in_crm(crm_contact, of_contact);
 			}
-			else if (Mapping.Contact.Needs_update_in_crm(crm_contact, of_contact))
+			else
 			{
 				Update_contact_in_crm(crm_contact, of_contact);
 			}
@@ -178,9 +200,15 @@ namespace ofplug.Logic.Abstract
 
 		private void Update_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
+			List<string> parameters_to_update = Mapping.Contact.Needs_update_in_crm(crm_contact, of_contact);
+			if (parameters_to_update.Any() == false)
+			{
+				return;
+			}
+
 			Mapping.Contact.To_crm(crm_contact, of_contact);
 
-			crm_contact.Update();
+			crm_contact.Update(parameters_to_update);
 		}
 
 		private void Create_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)

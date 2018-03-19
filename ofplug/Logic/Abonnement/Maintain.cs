@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug.Logic.Abonnement
 {
@@ -35,7 +37,7 @@ namespace ofplug.Logic.Abonnement
 			{
 				Create_of_abonnement(crm_abonnement);
 			}
-			else if (Mapping.Subscription.Needs_update_in_of(crm_abonnement, of_abonnement))
+			else
 			{
 				Update_of_abonnement(crm_abonnement, of_abonnement);
 			}
@@ -43,11 +45,17 @@ namespace ofplug.Logic.Abonnement
 
 		private void Update_of_abonnement(crm.Abonnement crm_abonnement, of.data.Subscription of_abonnement)
 		{
+			List<string> parameters = Mapping.Subscription.Needs_update_in_of(crm_abonnement, of_abonnement);
+			if (parameters.Any() == false)
+			{
+				return;
+			}
+
 			Mapping.Subscription.To_of(crm_abonnement, of_abonnement);
 
 			Attach_of_contact_if_missing(crm_abonnement);
 
-			_of_connection.Subscription.Patch(of_abonnement.Of_id.Value, of_abonnement);
+			_of_connection.Subscription.Patch(of_abonnement.Of_id.Value, of_abonnement, parameters);
 		}
 
 		private void Create_of_abonnement(crm.Abonnement crm_abonnement)
