@@ -1,4 +1,9 @@
-﻿namespace ofplug.of.connector
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+namespace ofplug.of.connector
 {
 	public abstract class Abstract_data_exchange
 	{
@@ -34,10 +39,32 @@
 			return response;
 		}
 
-		public data.IdResponse Patch<Input>(int id, Input input)
+		public data.IdResponse Patch<Input>(int id, Input input, List<string> parameters = null)
+		where Input : new()
 		{
-			data.IdResponse response = _sender.Patch<Input, data.IdResponse>(_url + _path + id.ToString() + "/", _token, input);
-			return response;
+			if (parameters != null && parameters.Any())
+			{
+				Input input_to_patch = new Input();
+				Add_wanted_parameters(input, input_to_patch, parameters);
+				data.IdResponse response = _sender.Patch<Input, data.IdResponse>(_url + _path + id.ToString() + "/", _token, input_to_patch);
+				return response;
+			}
+			else
+			{
+				data.IdResponse response = _sender.Patch<Input, data.IdResponse>(_url + _path + id.ToString() + "/", _token, input);
+				return response;
+			}
+		}
+
+		private void Add_wanted_parameters<Input>(Input input_original, Input input_copy, List<string> parameters)
+		{
+			PropertyInfo[] propertiesInfo = typeof(Input).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+			foreach (string parameter in parameters)
+			{
+				PropertyInfo propertyInfo = propertiesInfo.Single(property => property.Name == parameter);
+				object value = propertyInfo.GetValue(input_original);
+				propertyInfo.SetValue(input_copy, value);
+			}
 		}
 
 		public data.IdResponse Put<Input>(int id, Input input)

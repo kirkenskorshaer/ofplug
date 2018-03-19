@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ofplug.of.connector
 {
@@ -18,9 +19,9 @@ namespace ofplug.of.connector
 			return Get<data.Subscription>(1, id.ToString().ToLower());
 		}
 
-		public data.IdResponse Patch(int id, data.Subscription of_subscription)
+		public data.IdResponse Patch(int id, data.Subscription of_subscription, List<string> parameters = null)
 		{
-			return base.Patch(id, of_subscription);
+			return base.Patch(id, of_subscription, parameters);
 		}
 
 		public data.IdResponse Put(int id, data.Subscription of_subscription)
