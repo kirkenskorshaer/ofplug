@@ -70,7 +70,7 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "Bse_guid", crm_abonnement.Nrq_Bse_guid, of_subscription.Bse_guid);
 			Mapping_update_helper.Add_if_unequal(parameters, "Contact_id", crm_abonnement.Nrq_of_contact_id, of_subscription.Contact_id);
 			Mapping_update_helper.Add_if_unequal(parameters, "Msisdn", crm_abonnement.Nrq_msisdn, of_subscription.Msisdn);
-			Mapping_update_helper.Add_if_unequal(parameters, "Of_id", crm_abonnement.Nrq_of_subscription_id, of_subscription.Of_id);
+			Mapping_update_helper.Add_if_unequal(parameters, "Crm_id", crm_abonnement.Id.ToString().ToLower(), of_subscription.Crm_id);
 			Mapping_update_helper.Add_if_unequal(parameters, "Order_id", crm_abonnement.Nrq_order_id, of_subscription.Order_id);
 			Mapping_update_helper.Add_if_unequal(parameters, "Payment_gateway", crm_abonnement.Nrq_payment_gateway, of_subscription.Payment_gateway);
 			Mapping_update_helper.Add_if_unequal(parameters, "Payment_media", crm_abonnement.Nrq_payment_media, of_subscription.Payment_media);
