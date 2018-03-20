@@ -5,6 +5,7 @@ using ofplug_test.Mock;
 using System;
 using System.Activities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug_test.Abstract
 {
@@ -237,11 +238,18 @@ namespace ofplug_test.Abstract
 
 		protected void Add_of_abonnement()
 		{
+			Add_of_abonnement(of_abonnement => { });
+		}
+
+		protected void Add_of_abonnement(Action<ofplug.of.data.Subscription> adjust_of_abonnement)
+		{
 			ofplug.of.data.Subscription of_abonnement = new ofplug.of.data.Subscription()
 			{
 				Of_id = _id.Get_id("of_abonnement_id"),
 				Contact_id = _id.Get_id("of_contact_id"),
 			};
+
+			adjust_of_abonnement(of_abonnement);
 
 			_sender.data_to_return.Enqueue(of_abonnement);
 		}
@@ -285,10 +293,57 @@ namespace ofplug_test.Abstract
 			}
 		}
 
+		protected void Assert_no_writes()
+		{
+			Assert_no_crm_writes();
+			Assert_no_of_writes();
+		}
+
+		protected void Assert_no_crm_writes()
+		{
+			List<OrganizationServiceMock.Operation> forbidden_crm_operations = new List<OrganizationServiceMock.Operation>()
+			{
+				OrganizationServiceMock.Operation.Associate,
+				OrganizationServiceMock.Operation.Create,
+				OrganizationServiceMock.Operation.Delete,
+				OrganizationServiceMock.Operation.Disassociate,
+				OrganizationServiceMock.Operation.Execute,
+				OrganizationServiceMock.Operation.Update,
+			};
+
+			bool crm_manipulation = _service.Log.Any(log => forbidden_crm_operations.Contains(log.Key));
+
+			Assert.IsFalse(crm_manipulation);
+		}
+
+		protected void Assert_no_of_writes()
+		{
+			List<SenderMock.Operation> forbidden_of_operations = new List<SenderMock.Operation>()
+			{
+				SenderMock.Operation.Delete,
+				SenderMock.Operation.Patch,
+				SenderMock.Operation.Post,
+				SenderMock.Operation.Put,
+			};
+
+			bool of_manipulation = _sender.Log.Any(log => forbidden_of_operations.Contains(log.Operation));
+
+			Assert.IsFalse(of_manipulation);
+		}
+
 		protected void Assert_number_of_operations(int of_operations, int crm_operations)
 		{
 			Assert.AreEqual(of_operations, _sender.Log.Count);
 			Assert.AreEqual(crm_operations, _service.Log.Count);
+		}
+
+		protected ofplug.of.Connection Arrange_of_connection()
+		{
+			ofplug.of.Connection of_connection = new ofplug.of.Connection(string.Empty, string.Empty);
+
+			of_connection.Replace_sender(_sender);
+
+			return of_connection;
 		}
 	}
 }

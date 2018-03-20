@@ -59,6 +59,7 @@
     <Compile Include="LogicTest\AbonnementTest\Create_or_update_one_automatic_in_ofTest.cs" />
     <Compile Include="LogicTest\AbonnementTest\Create_or_update_one_in_crmTest.cs" />
     <Compile Include="LogicTest\AbonnementTest\Create_or_update_one_manuel_in_ofTest.cs" />
+    <Compile Include="LogicTest\AbonnementTest\MaintaintTest.cs" />
     <Compile Include="LogicTest\AftaleTest\Create_or_update_all_in_crmTest.cs" />
     <Compile Include="LogicTest\AftaleTest\Create_or_update_one_automatic_in_ofTest.cs" />
     <Compile Include="LogicTest\AftaleTest\Create_or_update_one_in_crmTest.cs" />
