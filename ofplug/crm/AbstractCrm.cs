@@ -179,7 +179,33 @@ namespace ofplug.crm
 				return;
 			}
 
+			if (value.GetType() == typeof(SelectedDictionary))
+			{
+				SelectedDictionary dictionary = (SelectedDictionary)value;
+				if (dictionary.SelectedKey.HasValue == false)
+				{
+					return;
+				}
+
+				CrmEntity[name] = new OptionSetValue(dictionary.SelectedKey.Value);
+				return;
+			}
+
 			CrmEntity[name] = value;
+		}
+
+		protected void Read_if_not_empty(SelectedDictionary selectedDictionary, string name)
+		{
+			if (CrmEntity.Contains(name))
+			{
+				OptionSetValue value = (OptionSetValue)CrmEntity[name];
+				selectedDictionary.Select(value.Value);
+				return;
+			}
+			else
+			{
+				_tracingService.Trace($"Read_if_not_empty didn't find :{name}");
+			}
 		}
 
 		protected output Read_if_not_empty<output>(string name)
