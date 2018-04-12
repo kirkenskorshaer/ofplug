@@ -13,7 +13,7 @@ namespace ofplug.Logic.InitiateAgreement
 				return;
 			}
 
-			crm.StartAftale crm_start_aftale = new crm.StartAftale(_service, _tracingService)
+			crm.AgreementRequest crm_start_aftale = new crm.AgreementRequest(_service, _tracingService)
 			{
 				CrmEntity = _context_entity
 			};

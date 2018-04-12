@@ -8,9 +8,9 @@ namespace ofplug.Logic.InitiateAgreement
 		{
 		}
 
-		public void Process_InitiateAgreement(crm.StartAftale crm_start_aftale)
+		public void Process_InitiateAgreement(crm.AgreementRequest crm_start_aftale)
 		{
-			if (crm_start_aftale.Nrq_import_status == true)
+			if (crm_start_aftale.Nrq_processstatus.SelectedValue != "Ready")
 			{
 				return;
 			}
@@ -36,11 +36,12 @@ namespace ofplug.Logic.InitiateAgreement
 			_of_connection.Contact.Patch(of_contact_patch.Of_id.Value, of_contact_patch);
 			_of_connection.Subscription.Patch(of_abonnement_patch.Of_id.Value, of_abonnement_patch);
 
-			crm.StartAftale crm_start_aftale_update = new crm.StartAftale(_service, _tracingService)
+			crm.AgreementRequest crm_start_aftale_update = new crm.AgreementRequest(_service, _tracingService)
 			{
 				Id = crm_start_aftale.Id,
-				Nrq_import_status = true,
 			};
+
+			crm_start_aftale_update.Nrq_processstatus.Select("Processed");
 
 			crm_start_aftale_update.Update();
 		}

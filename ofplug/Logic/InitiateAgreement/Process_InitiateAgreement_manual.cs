@@ -6,9 +6,9 @@ namespace ofplug.Logic.InitiateAgreement
 {
 	public class Process_InitiateAgreement_manual : Abstract.AbstractCodeActivity
 	{
-		[ReferenceTarget("StartAftale")]//todo norriq navn
+		[ReferenceTarget("nrq_agreement_request")]
 		[RequiredArgument]
-		[Input("StartAftale")]
+		[Input("Betalingsaftaleanmodning")]
 		public InArgument<EntityReference> StartAftaleEntityReference { get; set; }
 
 		protected override void Execute(CodeActivityContext codeActivityContext)

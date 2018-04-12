@@ -86,11 +86,11 @@ namespace ofplug_test.Abstract
 			Add_crm_start_aftale(crm_start_aftale => { });
 		}
 
-		protected void Add_crm_start_aftale(Action<ofplug.crm.StartAftale> adjust_start_aftale)
+		protected void Add_crm_start_aftale(Action<ofplug.crm.AgreementRequest> adjust_start_aftale)
 		{
-			ofplug.crm.StartAftale crm_start_aftale = new ofplug.crm.StartAftale(_service, _tracingService)
+			ofplug.crm.AgreementRequest crm_start_aftale = new ofplug.crm.AgreementRequest(_service, _tracingService)
 			{
-				Nrq_Amount = new Money(100)
+				Nrq_amount = new Money(100)
 			};
 
 			adjust_start_aftale(crm_start_aftale);
@@ -98,7 +98,7 @@ namespace ofplug_test.Abstract
 			Add_crm_start_aftale(crm_start_aftale);
 		}
 
-		protected void Add_crm_start_aftale(ofplug.crm.StartAftale crm_start_aftale)
+		protected void Add_crm_start_aftale(ofplug.crm.AgreementRequest crm_start_aftale)
 		{
 			crm_start_aftale.CrmEntity = new Entity("StartAftale");//todo norriq navn
 

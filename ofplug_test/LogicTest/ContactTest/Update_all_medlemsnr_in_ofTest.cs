@@ -17,8 +17,8 @@ namespace ofplug_test.LogicTest.ContactTest
 			Add_of_empty();
 			Add_crm_contact(contact =>
 			{
-				contact.new_ofcontactid = _id.Get_id("contact_id_1");
-				contact.new_kkadminmedlemsnr = _id.Get_id("medlemsnr").ToString();
+				contact.nrq_of_id = _id.Get_id("contact_id_1");
+				contact.new_kkadminmedlemsnr = _id.Get_id("medlemsnr");
 			});
 
 			WorkflowInvoker.Invoke(creator);
@@ -41,8 +41,8 @@ namespace ofplug_test.LogicTest.ContactTest
 			Add_of_empty();
 			Add_crm_contact(contact =>
 			{
-				contact.new_ofcontactid = _id.Get_id("contact_id_1");
-				contact.new_kkadminmedlemsnr = _id.Get_id("medlemsnr").ToString();
+				contact.nrq_of_id = _id.Get_id("contact_id_1");
+				contact.new_kkadminmedlemsnr = _id.Get_id("medlemsnr");
 			});
 
 			WorkflowInvoker.Invoke(creator);
