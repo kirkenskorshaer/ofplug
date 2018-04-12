@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="crm\Account.cs" />
     <Compile Include="crm\Indbetaling.cs" />
     <Compile Include="crm\Abonnement.cs" />
     <Compile Include="crm\SelectedDictionary.cs" />
