@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -10,15 +11,23 @@ namespace ofplug.of
 		public Response Get<Response>(string url, string token)
 			where Response : class
 		{
-			WebClient webClient = new WebClient();
-			Set_headers(webClient, token);
-			string data = webClient.DownloadString(url);
-			Response response = StringToDataContract<Response>(data);
-			webClient.Dispose();
+			try
+			{
+				WebClient webClient = new WebClient();
+				Set_headers(webClient, token);
+				string data = webClient.DownloadString(url);
+				Response response = StringToDataContract<Response>(data);
+				webClient.Dispose();
 
-			Move_id(response);
+				Move_id(response);
 
-			return response;
+				return response;
+			}
+			catch (Exception exception)
+			{
+				Exception url_exception = new Exception($"GET error {url}", exception);
+				throw url_exception;
+			}
 		}
 
 		public Response Post<Request, Response>(string url, string token, Request request)
