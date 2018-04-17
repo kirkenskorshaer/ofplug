@@ -111,6 +111,11 @@ namespace ofplug.crm
 
 		public void Get_contact_from_basis_information(IOrganizationService service, string email)
 		{
+			if (string.IsNullOrWhiteSpace(email))
+			{
+				return;
+			}
+
 			ConditionExpression emailCondition = new ConditionExpression()
 			{
 				AttributeName = "emailaddress1",
