@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug.crm
 {
@@ -64,6 +65,9 @@ namespace ofplug.crm
 			CrmEntity.Id = Id;
 
 			_tracingService.Trace("ofplug " + Logical_name + " Update");
+
+			//string trace = CrmEntity.Attributes.Aggregate("Update ", (collect, attribute) => collect + " " + attribute.Key + " = " + attribute.Value.ToString());
+			//_tracingService.Trace(trace);
 
 			_service.Update(CrmEntity);
 		}
