@@ -72,7 +72,8 @@ namespace ofplug.of
 			{
 				string error = new StreamReader(web_exception.Response.GetResponseStream()).ReadToEnd();
 
-				throw new System.Exception(error);
+				Exception url_exception = new Exception($"{method} error: {error} url: {url} request: {request} data: {preview}", web_exception);
+				throw url_exception;
 			}
 
 			string responseString = Encoding.UTF8.GetString(responseBytes);
