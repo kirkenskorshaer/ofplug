@@ -14,7 +14,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		{
 			ofplug.Logic.Indbetaling.Update_status_manual_in_of creator = Arrange_creator();
 			Add_crm_config();
-			Add_crm_indbetaling(crm_indbetaling => crm_indbetaling.of_indbetaling_id = _id.Get_id("indbetaling id"));
+			Add_crm_indbetaling(crm_indbetaling => crm_indbetaling.Nrq_of_id = _id.Get_id("indbetaling id"));
 			Dictionary<string, object> input = Arrange_input();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.State = "not updated");
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("indbetaling id") });

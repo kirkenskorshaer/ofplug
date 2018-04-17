@@ -28,7 +28,7 @@ namespace ofplug.Logic.Contact
 				if (Needs_medlemsnr_update_in_of(crm_contact, of_contact))
 				{
 					//todo sæt medlemsnr
-					of_contact.External_id = crm_contact.new_kkadminmedlemsnr;
+					of_contact.External_id = crm_contact.new_kkadminmedlemsnr?.ToString();
 					_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
 				}
 				//todo remove
@@ -39,7 +39,7 @@ namespace ofplug.Logic.Contact
 		private bool Needs_medlemsnr_update_in_of(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
 			//todo skal se om medlemsnr er udfyldt
-			if (crm_contact.new_kkadminmedlemsnr != of_contact.External_id)
+			if (crm_contact.new_kkadminmedlemsnr?.ToString() != of_contact.External_id)
 			{
 				return true;
 			}

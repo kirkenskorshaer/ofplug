@@ -126,7 +126,7 @@ namespace ofplug_test.Abstract
 
 		protected void Add_crm_abonnement(ofplug.crm.Abonnement crm_abonnement)
 		{
-			crm_abonnement.CrmEntity = new Entity("Abonnement");//todo norriq name
+			crm_abonnement.CrmEntity = new Entity("nrq_subscription");
 
 			crm_abonnement.Fill_fields();
 

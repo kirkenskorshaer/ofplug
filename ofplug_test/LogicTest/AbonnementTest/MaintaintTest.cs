@@ -15,7 +15,7 @@ namespace ofplug_test.LogicTest.AbonnementTest
 			ofplug.Logic.Abonnement.Maintain maintain = Arrange_maintain();
 			ofplug.crm.Abonnement crm_abonnoment = new ofplug.crm.Abonnement(_service, _tracingService)
 			{
-				Nrq_of_subscription_id = _id.Get_id("of_subscription_id"),
+				Nrq_of_id = _id.Get_id("of_subscription_id"),
 				Id = Guid.Empty,
 				Nrq_of_contact_id = _id.Get_id("of_contact_id"),
 			};
@@ -33,7 +33,7 @@ namespace ofplug_test.LogicTest.AbonnementTest
 			_sender.data_to_return.Enqueue(new List<int> { _id.Get_id("abonnement_id") });
 			ofplug.crm.Abonnement crm_abonnoment = new ofplug.crm.Abonnement(_service, _tracingService)
 			{
-				Nrq_of_subscription_id = _id.Get_id("of_subscription_id"),
+				Nrq_of_id = _id.Get_id("of_subscription_id"),
 				Id = Guid.Empty,
 			};
 

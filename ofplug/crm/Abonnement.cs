@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System.Linq;
 using System.Collections.Generic;
@@ -8,27 +7,30 @@ namespace ofplug.crm
 {
 	public class Abonnement : AbstractCrm
 	{
-		public string Nrq_status;
-		public int? Nrq_Subscription_customer_no;
-		public Guid? Nrq_Bse_guid;
 		public int? Nrq_of_contact_id;
 		public EntityReference Nrq_contact;
 		public string Nrq_order_id;
 		public SelectedDictionary Nrq_state = new SelectedDictionary { { 170590000, "subscribe" }, { 170590001, "subscribing" }, { 170590002, "subscribed" }, { 170590003, "cancelled" } };
 		public SelectedDictionary Nrq_PaymentGateway = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "epay" }, { 170590002, "linkm" }, { 170590003, "mobilepay_sub" }, { 170590004, "noop" } };
 		public SelectedDictionary Nrq_PaymentMedia = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "fi" }, { 170590002, "card" }, { 170590003, "sms_keyword" }, { 170590004, "phonebill" }, { 170590005, "mobilepay" } };
-		public string Nrq_payment_media_type;
-		public string Nrq_msisdn;
 		public string Nrq_bank_account_no;
 		public string Nrq_bank_sort_code;
-		public int? Nrq_of_subscription_id;
+		public int? Nrq_of_id;
 
 		private static ColumnSet _columnSet = new ColumnSet
-		(//todo felter
-			"nrq_of_subscription_id"
+		(
+			"nrq_of_contact_id",
+			"nrq_contact",
+			"nrq_order_id",
+			"nrq_state",
+			"nrq_PaymentGateway",
+			"nrq_PaymentMedia",
+			"nrq_bank_account_no",
+			"nrq_bank_sort_code",
+			"nrq_of_id"
 		);
 
-		public Abonnement(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "Abonnement")//todo nrq entity name
+		public Abonnement(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "nrq_subscription")//todo nrq entity name
 		{
 		}
 
@@ -52,35 +54,28 @@ namespace ofplug.crm
 
 		public override void Fill_fields(List<string> parameters = null)
 		{
-			Fill_if_not_empty("nrq_status", Nrq_status, parameters);
-			Fill_if_not_empty("nrq_Subscription_customer_no", Nrq_Subscription_customer_no, parameters);
-			Fill_if_not_empty("nrq_Bse_guid", Nrq_Bse_guid, parameters);
 			Fill_if_not_empty("nrq_of_contact_id", Nrq_of_contact_id, parameters);
+			Fill_if_not_empty("nrq_contact", Nrq_contact, parameters);
 			Fill_if_not_empty("nrq_order_id", Nrq_order_id, parameters);
 			Fill_if_not_empty("nrq_state", Nrq_state, parameters);
 			Fill_if_not_empty("nrq_PaymentGateway", Nrq_PaymentGateway, parameters);
 			Fill_if_not_empty("nrq_PaymentMedia", Nrq_PaymentMedia, parameters);
-			Fill_if_not_empty("nrq_contact", Nrq_contact, parameters);
-			Fill_if_not_empty("nrq_msisdn", Nrq_msisdn, parameters);
 			Fill_if_not_empty("nrq_bank_account_no", Nrq_bank_account_no, parameters);
 			Fill_if_not_empty("nrq_bank_sort_code", Nrq_bank_sort_code, parameters);
+			Fill_if_not_empty("nrq_of_id", Nrq_of_id, parameters);
 		}
 
 		public override void Read_fields()
 		{
-			Nrq_status = Read_if_not_empty<string>("nrq_status");
-			Nrq_Subscription_customer_no = Read_if_not_empty<int?>("nrq_Subscription_customer_no");
-			Nrq_Bse_guid = Read_if_not_empty<Guid?>("nrq_Bse_guid");
 			Nrq_of_contact_id = Read_if_not_empty<int?>("nrq_of_contact_id");
-			Nrq_order_id = Read_if_not_empty<string>("nrq_order_id");
-			Nrq_state = Read_if_not_empty<string>("nrq_state");
 			Nrq_contact = Read_if_not_empty<EntityReference>("nrq_contact");
-			Nrq_payment_gateway = Read_if_not_empty<string>("nrq_payment_gateway");
-			Nrq_payment_media = Read_if_not_empty<string>("nrq_payment_media");
-			Nrq_payment_media_type = Read_if_not_empty<string>("nrq_payment_media_type");
-			Nrq_msisdn = Read_if_not_empty<string>("nrq_msisdn");
+			Nrq_order_id = Read_if_not_empty<string>("nrq_order_id");
+			Read_if_not_empty(Nrq_state, "nrq_state");
+			Read_if_not_empty(Nrq_PaymentGateway, "nrq_PaymentGateway");
+			Read_if_not_empty(Nrq_PaymentMedia, "nrq_PaymentMedia");
 			Nrq_bank_account_no = Read_if_not_empty<string>("nrq_bank_account_no");
 			Nrq_bank_sort_code = Read_if_not_empty<string>("nrq_bank_sort_code");
+			Nrq_of_id = Read_if_not_empty<int?>("nrq_of_id");
 		}
 	}
 }

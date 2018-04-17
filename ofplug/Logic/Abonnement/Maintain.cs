@@ -28,9 +28,9 @@ namespace ofplug.Logic.Abonnement
 		{
 			of.data.Subscription of_abonnement = null;
 
-			if (crm_abonnement.Nrq_of_subscription_id.HasValue)
+			if (crm_abonnement.Nrq_of_id.HasValue)
 			{
-				of_abonnement = _of_connection.Subscription.Get(crm_abonnement.Nrq_of_subscription_id.Value);
+				of_abonnement = _of_connection.Subscription.Get(crm_abonnement.Nrq_of_id.Value);
 			}
 
 			if (of_abonnement == null)
@@ -71,7 +71,7 @@ namespace ofplug.Logic.Abonnement
 			crm.Abonnement crm_abonnement_update = new crm.Abonnement(_service, _tracingService)
 			{
 				Id = crm_abonnement.Id,
-				Nrq_of_subscription_id = id_response.Id
+				Nrq_of_id = id_response.Id
 			};
 			crm_abonnement_update.Update();
 		}

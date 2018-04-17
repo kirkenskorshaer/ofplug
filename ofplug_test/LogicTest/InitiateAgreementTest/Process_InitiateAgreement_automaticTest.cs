@@ -9,7 +9,7 @@ namespace ofplug_test.LogicTest.InitiateAgreementTest
 		public void Creates_data_in_of_and_updates_crm()
 		{
 			ofplug.Logic.InitiateAgreement.Process_InitiateAgreement_automatic creator = Arrange_creator();
-			Arrange_input_parameter(new ofplug.crm.StartAftale(_service, _tracingService) { Nrq_Amount = new Microsoft.Xrm.Sdk.Money(100) });
+			Arrange_input_parameter(new ofplug.crm.AgreementRequest(_service, _tracingService) { Nrq_amount = new Microsoft.Xrm.Sdk.Money(100) });
 			Add_crm_config();
 			Arrange_crm_data();
 			Arrange_of_data();
@@ -37,11 +37,14 @@ namespace ofplug_test.LogicTest.InitiateAgreementTest
 		public void Nothing_happens_if_entity_is_already_imported()
 		{
 			ofplug.Logic.InitiateAgreement.Process_InitiateAgreement_automatic creator = Arrange_creator();
-			Arrange_input_parameter(new ofplug.crm.StartAftale(_service, _tracingService)
+
+			ofplug.crm.AgreementRequest request = new ofplug.crm.AgreementRequest(_service, _tracingService)
 			{
-				Nrq_Amount = new Microsoft.Xrm.Sdk.Money(100),
-				Nrq_import_status = true,
-			});
+				Nrq_amount = new Microsoft.Xrm.Sdk.Money(100),
+			};
+			request.Nrq_processstatus.Select("Processed");
+
+			Arrange_input_parameter(request);
 			Add_crm_config();
 
 			creator.Execute(_serviceProvider);

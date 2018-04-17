@@ -34,7 +34,7 @@ namespace ofplug_test.LogicTest.ContactTest
 			Dictionary<string, object> input = Arrange_input();
 			Add_crm_config();
 			Add_of_contact();
-			Add_crm_contact(contact => contact.new_ofcontactid = _id.Get_id("of_contact_id"));
+			Add_crm_contact(contact => contact.nrq_of_id = _id.Get_id("of_contact_id"));
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("of_contact_id") });
 
 			WorkflowInvoker.Invoke(creator, input);

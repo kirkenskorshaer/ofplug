@@ -23,10 +23,10 @@ namespace ofplug_test.LogicTest.AbonnementTest
 			WorkflowInvoker.Invoke(creator, input);
 
 			Assert_crm_operation(0, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_configuration");
-			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Retrieve, "Abonnement");//todo norriq navn på Abonnement
+			Assert_crm_operation(1, Mock.OrganizationServiceMock.Operation.Retrieve, "nrq_subscription");
 			Assert_crm_operation(2, Mock.OrganizationServiceMock.Operation.Retrieve, "contact");
 			Assert_crm_operation(3, Mock.OrganizationServiceMock.Operation.Update, "contact");
-			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Update, "Abonnement");//todo norriq navn på Abonnement
+			Assert_crm_operation(4, Mock.OrganizationServiceMock.Operation.Update, "nrq_subscription");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Post, typeof(ofplug.of.data.Contact));
 			Assert_of_operation(1, Mock.SenderMock.Operation.Post, typeof(ofplug.of.data.Subscription));
 			Assert_number_of_operations(2, 5);

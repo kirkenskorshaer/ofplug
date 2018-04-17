@@ -29,7 +29,7 @@ namespace ofplug.Logic.Indbetaling
 		public void Update_status_in_of(crm.Indbetaling crm_indbetaling)
 		{
 			//todo byt ud med of_indbetaling_id
-			int? of_indbetaling_id = crm_indbetaling.of_indbetaling_id;
+			int? of_indbetaling_id = crm_indbetaling.Nrq_of_id;
 
 			if (of_indbetaling_id.HasValue == false)
 			{
@@ -39,7 +39,8 @@ namespace ofplug.Logic.Indbetaling
 			of.data.Payment of_indbetaling = _of_connection.Payment.Get(of_indbetaling_id.Value);
 
 			//todo sæt status
-			string crm_status = crm_indbetaling.nrq_tekst;
+			//string crm_status = crm_indbetaling.nrq_tekst;
+			string crm_status = string.Empty;
 			if (crm_status == of_indbetaling.State)
 			{
 				return;
@@ -80,7 +81,7 @@ namespace ofplug.Logic.Indbetaling
 
 			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling);
 
-			Create_or_update_associated_entities(of_indbetaling);
+			Create_or_update_associated_entities(crm_indbetaling, of_indbetaling);
 
 			crm_indbetaling.Update(parameters_to_update);
 		}
@@ -89,25 +90,29 @@ namespace ofplug.Logic.Indbetaling
 		{
 			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling);
 
-			Create_or_update_associated_entities(of_indbetaling);
+			Create_or_update_associated_entities(crm_indbetaling, of_indbetaling);
 
 			crm_indbetaling.Create();
 		}
 
-		private void Create_or_update_associated_entities(of.data.Payment of_indbetaling)
+		private void Create_or_update_associated_entities(crm.Indbetaling crm_indbetaling, of.data.Payment of_indbetaling)
 		{
 			if (of_indbetaling.Agreement_id.HasValue)
 			{
 				of.data.Agreement of_aftale = _of_connection.Agreement.Get(of_indbetaling.Agreement_id.Value);
 
-				Create_or_update_one_aftale_in_crm(of_aftale);
+				crm.Aftale crm_aftale = Create_or_update_one_aftale_in_crm(of_aftale);
+
+				//todo sæt indbetaling aftale
 			}
 
 			if (of_indbetaling.Contact_id.HasValue)
 			{
 				of.data.Contact of_contact = _of_connection.Contact.Get(of_indbetaling.Contact_id.Value);
 
-				Create_or_update_one_contact_in_crm(of_indbetaling.Contact_id, of_contact);
+				crm.Contact crm_contact = Create_or_update_one_contact_in_crm(of_indbetaling.Contact_id, of_contact);
+
+				crm_indbetaling.Nrq_indbetaler = new EntityReference("contact", crm_contact.Id);
 			}
 		}
 	}

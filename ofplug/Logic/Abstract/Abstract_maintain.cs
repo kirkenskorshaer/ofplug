@@ -222,9 +222,9 @@ namespace ofplug.Logic.Abstract
 		{
 			of.data.Contact of_contact = null;
 
-			if (crm_contact.new_ofcontactid.HasValue)
+			if (crm_contact.nrq_of_id.HasValue)
 			{
-				of_contact = _of_connection.Contact.Get(crm_contact.new_ofcontactid.Value);
+				of_contact = _of_connection.Contact.Get(crm_contact.nrq_of_id.Value);
 			}
 			else
 			{
@@ -235,7 +235,7 @@ namespace ofplug.Logic.Abstract
 
 				crm.Contact update_crm_contact = new crm.Contact(_service, _tracingService)
 				{
-					new_ofcontactid = response.Id,
+					nrq_of_id = response.Id,
 					Id = crm_contact.Id
 				};
 				update_crm_contact.Update();

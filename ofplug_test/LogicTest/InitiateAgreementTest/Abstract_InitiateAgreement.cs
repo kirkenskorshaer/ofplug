@@ -13,9 +13,9 @@ namespace ofplug_test.LogicTest.InitiateAgreementTest
 			Assert_crm_operation(4 + offset, Mock.OrganizationServiceMock.Operation.Create, "contact");
 			Assert_crm_operation(5 + offset, Mock.OrganizationServiceMock.Operation.Create, "nrq_bidragsaftale");//todo norriq navne
 			Assert_crm_operation(6 + offset, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(7 + offset, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "Abonnement");
+			Assert_crm_operation(7 + offset, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "nrq_subscription");
 			Assert_crm_operation(8 + offset, Mock.OrganizationServiceMock.Operation.RetrieveMultiple, "contact");
-			Assert_crm_operation(9 + offset, Mock.OrganizationServiceMock.Operation.Create, "Abonnement");
+			Assert_crm_operation(9 + offset, Mock.OrganizationServiceMock.Operation.Create, "nrq_subscription");
 			Assert_crm_operation(10 + offset, Mock.OrganizationServiceMock.Operation.Update, "StartAftale");
 			Assert_of_operation(0, Mock.SenderMock.Operation.Post, typeof(ofplug.of.data.InitiateAgreement));
 			Assert_of_operation(1, Mock.SenderMock.Operation.Get, null, typeof(ofplug.of.data.Agreement).Name.ToLower());
@@ -53,9 +53,9 @@ namespace ofplug_test.LogicTest.InitiateAgreementTest
 		protected void Arrange_crm_data()
 		{
 			Add_crm_empty(4);
-			Add_crm_contact(contact => { contact.firstname = "unittest"; contact.new_ofcontactid = _id.Get_id("of_contact_id"); });
+			Add_crm_contact(contact => { contact.firstname = "unittest"; contact.nrq_of_id = _id.Get_id("of_contact_id"); });
 			Add_crm_empty(1);
-			Add_crm_contact(contact => { contact.firstname = "unittest"; contact.new_ofcontactid = _id.Get_id("of_contact_id"); });
+			Add_crm_contact(contact => { contact.firstname = "unittest"; contact.nrq_of_id = _id.Get_id("of_contact_id"); });
 		}
 	}
 }

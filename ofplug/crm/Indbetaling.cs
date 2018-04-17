@@ -8,46 +8,40 @@ namespace ofplug.crm
 {
 	public class Indbetaling : AbstractCrm
 	{
-		public double? new_amount;
-		public string new_bankid;
-		//public string new_bankkildekode
-		//public lookup new_byarbejdeid
-		//public lookup new_campaignid
-		//public lookup new_indbetalingid
-		//public lookup new_indsamlingskoordinatorid
-		//public OptionSet new_kilde
-		//public lookup new_kontoid
-		//public string new_name
-		public DateTime? new_valdt;
-		//public string nrq_bankensarkivreference;
-		//public Currency nrq_beloebkredit;
-		public string nrq_bilagsnr;
-		//public Formålskode Lookup nrq_formaalskode;
-		//public Customer nrq_indbetaler;
-		//public int? nrq_indbetalingnr;
-		//public Option Set nrq_indbetalingstatus;
-		//public Lookup nrq_indbetalingstype;
-		//public Lookup nrq_indsamlingssted;
-		//public string nrq_kommentartilbogfring;
-		public string nrq_linktilindbetaling;
-		//public Lookup nrq_modkonto;
-		//public string nrq_notat;
-		//public DateTime? nrq_rentedato;
-		//public Lookup nrq_sted;
-		//public string nrq_stedkode;
-		//public Option Set nrq_takkebrev;
-		//public Two Options nrq_takkebrevsendt;
-		public string nrq_tekst;
-		//public Status statecode;
-
-		public int? of_aftale_id;
-		public int? of_indbetaling_id;
+		public int? Nrq_of_id;
+		public Money New_amount;
+		public SelectedDictionary Nrq_amountType = new SelectedDictionary { { 170590000, "donation" }, { 170590001, "purchase" } };
+		public string Nrq_FeeAmount;
+		public DateTime? Nrq_PaymentDueDate;
+		public DateTime? Nrq_paymentDate;
+		public DateTime? nrq_BookkeepingDate;
+		public DateTime? Nrq_ChargebackDate;
+		public SelectedDictionary Nrq_PaymentGateway = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "epay" }, { 170590002, "linkm" }, { 170590003, "mobilepay_sub" }, { 170590004, "noop" } };
+		public SelectedDictionary Nrq_PaymentMedia = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "fi" }, { 170590002, "card" }, { 170590003, "sms_keyword" }, { 170590004, "phonebill" }, { 170590005, "mobilepay" } };
+		public SelectedDictionary Nrq_PaymentType = new SelectedDictionary { { 170590000, "single" }, { 170590001, "recurring" } };
+		public int? Nrq_of_contact_id;
+		public int? Nrq_of_agreement_id;
+		public int? Nrq_of_fundraising_project_id;
+		public string Nrq_tekst;
+		public EntityReference Nrq_indbetaler;
 
 		private static ColumnSet _columnSet = new ColumnSet
-		(//todo felter
+		(
+			"nrq_of_id",
 			"new_amount",
-			"new_bankid",
-			"new_valdt"
+			"nrq_amounttype",
+			"nrq_feeamount",
+			"nrq_paymentduedate",
+			"nrq_paymentdate",
+			"nrq_bookkeepingdate",
+			"nrq_chargebackdate",
+			"nrq_paymentgateway",
+			"nrq_paymentmedia",
+			"nrq_paymenttype",
+			"nrq_of_contact_id",
+			"nrq_of_agreement_id",
+			"nrq_of_fundraising_project_id",
+			"nrq_indbetaler"
 		);
 
 		public Indbetaling(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "new_indbetaling")
@@ -56,7 +50,7 @@ namespace ofplug.crm
 
 		public void Get_by_of_id(int id)
 		{
-			QueryExpression queryExpression = Create_query_expression("new_of_payment_id", id.ToString(), new ColumnSet("new_indbetalingid"));
+			QueryExpression queryExpression = Create_query_expression("nrq_of_id", id.ToString(), _columnSet);
 
 			EntityCollection entities = _service.RetrieveMultiple(queryExpression);
 
@@ -67,35 +61,47 @@ namespace ofplug.crm
 
 		public void Get_by_reference(EntityReference entityReference)
 		{
-			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, new ColumnSet("new_amount"));
+			CrmEntity = _service.Retrieve(entityReference.LogicalName, entityReference.Id, _columnSet);
 
 			Read_from_entity();
 		}
 
 		public override void Fill_fields(List<string> parameters = null)
 		{
-			//todo felter
-
-			Fill_if_not_empty("new_amount", new_amount, parameters);
-			Fill_if_not_empty("new_bankid", new_bankid, parameters);
-			Fill_if_not_empty("new_valdt", new_valdt, parameters);
-			Fill_if_not_empty("nrq_bilagsnr", nrq_bilagsnr, parameters);
-			Fill_if_not_empty("nrq_linktilindbetaling", nrq_linktilindbetaling, parameters);
-			Fill_if_not_empty("nrq_tekst", nrq_tekst, parameters);
-			Fill_if_not_empty("of_indbetaling_id", of_indbetaling_id, parameters);
+			Fill_if_not_empty("nrq_of_id", Nrq_of_id, parameters);
+			Fill_if_not_empty("new_amount", New_amount, parameters);
+			Fill_if_not_empty("nrq_amounttype", Nrq_amountType, parameters);
+			Fill_if_not_empty("nrq_feeamount", Nrq_FeeAmount, parameters);
+			Fill_if_not_empty("nrq_paymentduedate", Nrq_PaymentDueDate, parameters);
+			Fill_if_not_empty("nrq_paymentdate", Nrq_paymentDate, parameters);
+			Fill_if_not_empty("nrq_bookkeepingdate", nrq_BookkeepingDate, parameters);
+			Fill_if_not_empty("nrq_chargebackdate", Nrq_ChargebackDate, parameters);
+			Fill_if_not_empty("nrq_paymentgateway", Nrq_PaymentGateway, parameters);
+			Fill_if_not_empty("nrq_paymentmedia", Nrq_PaymentMedia, parameters);
+			Fill_if_not_empty("nrq_paymenttype", Nrq_PaymentType, parameters);
+			Fill_if_not_empty("nrq_of_contact_id", Nrq_of_contact_id, parameters);
+			Fill_if_not_empty("nrq_of_agreement_id", Nrq_of_agreement_id, parameters);
+			Fill_if_not_empty("nrq_of_fundraising_project_id", Nrq_of_fundraising_project_id, parameters);
+			Fill_if_not_empty("nrq_indbetaler", Nrq_indbetaler, parameters);
 		}
 
 		public override void Read_fields()
 		{
-			//todo felter
-
-			new_amount = Read_if_not_empty<double?>("new_amount");
-			new_bankid = Read_if_not_empty<string>("new_bankid");
-			new_valdt = Read_if_not_empty<DateTime?>("new_valdt");
-			nrq_bilagsnr = Read_if_not_empty<string>("nrq_bilagsnr");
-			nrq_linktilindbetaling = Read_if_not_empty<string>("nrq_linktilindbetaling");
-			nrq_tekst = Read_if_not_empty<string>("nrq_tekst");
-			of_indbetaling_id = Read_if_not_empty<int?>("of_indbetaling_id");
+			Nrq_of_id = Read_if_not_empty<int?>("nrq_of_id");
+			New_amount = Read_if_not_empty<Money>("new_amount");
+			Read_if_not_empty(Nrq_amountType, "nrq_amounttype");
+			Nrq_FeeAmount = Read_if_not_empty<string>("nrq_feeamount");
+			Nrq_PaymentDueDate = Read_if_not_empty<DateTime?>("nrq_paymentduedate");
+			Nrq_paymentDate = Read_if_not_empty<DateTime?>("nrq_paymentdate");
+			nrq_BookkeepingDate = Read_if_not_empty<DateTime?>("nrq_bookkeepingdate");
+			Nrq_ChargebackDate = Read_if_not_empty<DateTime?>("nrq_chargebackdate");
+			Read_if_not_empty(Nrq_PaymentGateway, "nrq_paymentgateway");
+			Read_if_not_empty(Nrq_PaymentMedia, "nrq_paymentmedia");
+			Read_if_not_empty(Nrq_PaymentType, "nrq_paymenttype");
+			Nrq_of_contact_id = Read_if_not_empty<int?>("nrq_of_contact_id");
+			Nrq_of_agreement_id = Read_if_not_empty<int?>("nrq_of_agreement_id");
+			Nrq_of_fundraising_project_id = Read_if_not_empty<int?>("nrq_of_fundraising_project_id");
+			Nrq_indbetaler = Read_if_not_empty<EntityReference>("nrq_indbetaler");
 		}
 	}
 }

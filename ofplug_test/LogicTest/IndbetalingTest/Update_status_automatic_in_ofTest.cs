@@ -11,7 +11,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		public void Updates_status()
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
-			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { of_indbetaling_id = _id.Get_id("indbetaling id") });
+			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { Nrq_of_id = _id.Get_id("indbetaling id") });
 			Add_crm_config();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.State = "not updated");
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("indbetaling id") });
@@ -53,7 +53,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		public void Nothing_happens_if_indbetaling_has_no_of_id()
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
-			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { of_indbetaling_id = null });
+			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { Nrq_of_id = null });
 			Add_crm_config();
 
 			creator.Execute(_serviceProvider);
@@ -66,7 +66,7 @@ namespace ofplug_test.LogicTest.ContactTest
 		public void If_status_is_already_updated_no_new_status_will_be_set()
 		{
 			ofplug.Logic.Indbetaling.Update_status_automatic_in_of creator = Arrange_creator();
-			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { of_indbetaling_id = _id.Get_id("indbetaling id"), nrq_tekst = "updated" });//todo forkert felt
+			Arrange_input_parameter(new ofplug.crm.Indbetaling(_service, _tracingService) { Nrq_of_id = _id.Get_id("indbetaling id"), Nrq_tekst = "updated" });//todo forkert felt
 			Add_crm_config();
 			Add_of_indbetaling(of_indbetaling => of_indbetaling.State = "updated");
 

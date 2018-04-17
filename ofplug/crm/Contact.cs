@@ -9,14 +9,16 @@ namespace ofplug.crm
 	public class Contact : AbstractCrm
 	{
 		public string firstname;
-		public int? new_ofcontactid;
+		public int? nrq_of_id;
+		public string middlename;
 		public string emailaddress1;
 		public string new_cprnr;
 		public string address1_line1;
 		public string address1_postalcode;
 		public string address1_city;
 		public string address1_country;
-		public string new_kkadminmedlemsnr;
+		public int? new_kkadminmedlemsnr;
+		public string mobilephone;
 
 		public SelectedDictionary gendercode = new SelectedDictionary { { 1, "male" }, { 2, "female" } };
 		public DateTime? birthdate;
@@ -28,10 +30,22 @@ namespace ofplug.crm
 		//msisdn
 
 		private static ColumnSet _columnSet = new ColumnSet
-		(//todo felter
+		(
 			"firstname",
-			"new_ofcontactid",
-			"emailaddress1"
+			"nrq_of_id",
+			"middlename",
+			"emailaddress1",
+			"new_cprnr",
+			"address1_line1",
+			"address1_postalcode",
+			"address1_city",
+			"address1_country",
+			"new_kkadminmedlemsnr",
+			"mobilephone",
+			"gendercode",
+			"address1_latitude",
+			"address1_longitude",
+			"lastname"
 		);
 
 		public Contact(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "contact")
@@ -51,7 +65,7 @@ namespace ofplug.crm
 
 		public void Get_contact_from_of_contact_id(IOrganizationService service, int of_contact_id)
 		{
-			QueryExpression queryExpression = Create_query_expression("new_ofcontactid", of_contact_id.ToString(), _columnSet);
+			QueryExpression queryExpression = Create_query_expression("nrq_of_id", of_contact_id.ToString(), _columnSet);
 
 			EntityCollection entities = service.RetrieveMultiple(queryExpression);
 
@@ -124,41 +138,40 @@ namespace ofplug.crm
 
 		public override void Fill_fields(List<string> parameters = null)
 		{
-			//todo felter
-
 			Fill_if_not_empty("firstname", firstname, parameters);
-			Fill_if_not_empty("new_ofcontactid", new_ofcontactid, parameters);
+			Fill_if_not_empty("nrq_of_id", nrq_of_id, parameters);
+			Fill_if_not_empty("middlename", middlename, parameters);
 			Fill_if_not_empty("emailaddress1", emailaddress1, parameters);
 			Fill_if_not_empty("new_cprnr", new_cprnr, parameters);
 			Fill_if_not_empty("address1_line1", address1_line1, parameters);
 			Fill_if_not_empty("address1_postalcode", address1_postalcode, parameters);
 			Fill_if_not_empty("address1_city", address1_city, parameters);
 			Fill_if_not_empty("address1_country", address1_country, parameters);
+			Fill_if_not_empty("new_kkadminmedlemsnr", new_kkadminmedlemsnr, parameters);
+			Fill_if_not_empty("mobilephone", mobilephone, parameters);
 			Fill_if_not_empty("gendercode", gendercode, parameters);
-			Fill_if_not_empty("birthdate", birthdate, parameters);
 			Fill_if_not_empty("address1_latitude", address1_latitude, parameters);
 			Fill_if_not_empty("address1_longitude", address1_longitude, parameters);
 			Fill_if_not_empty("lastname", lastname, parameters);
-			Fill_if_not_empty("new_kkadminmedlemsnr", new_kkadminmedlemsnr, parameters);
 		}
 
 		public override void Read_fields()
 		{
-			//todo felter
 			firstname = Read_if_not_empty<string>("firstname");
-			new_ofcontactid = Read_if_not_empty<int?>("new_ofcontactid");
+			nrq_of_id = Read_if_not_empty<int?>("nrq_of_id");
+			middlename = Read_if_not_empty<string>("middlename");
 			emailaddress1 = Read_if_not_empty<string>("emailaddress1");
 			new_cprnr = Read_if_not_empty<string>("new_cprnr");
 			address1_line1 = Read_if_not_empty<string>("address1_line1");
 			address1_postalcode = Read_if_not_empty<string>("address1_postalcode");
 			address1_city = Read_if_not_empty<string>("address1_city");
 			address1_country = Read_if_not_empty<string>("address1_country");
-			Gendercode_value = Gendercode_string_to_enum(Read_if_not_empty<string>("gendercode"));
-			birthdate = Read_if_not_empty<DateTime?>("birthdate");
+			new_kkadminmedlemsnr = Read_if_not_empty<int?>("new_kkadminmedlemsnr");
+			mobilephone = Read_if_not_empty<string>("mobilephone");
+			Read_if_not_empty(gendercode, "gendercode");
 			address1_latitude = Read_if_not_empty<double?>("address1_latitude");
 			address1_longitude = Read_if_not_empty<double?>("address1_longitude");
 			lastname = Read_if_not_empty<string>("lastname");
-			new_kkadminmedlemsnr = Read_if_not_empty<string>("new_kkadminmedlemsnr");
 		}
 	}
 }
