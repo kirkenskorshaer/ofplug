@@ -72,6 +72,8 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "nrq_paymentmedia", crm_indbetaling.Nrq_PaymentMedia.SelectedValue, of_payment.Payment_media);
 			Mapping_update_helper.Add_if_unequal(parameters, "nrq_paymenttype", crm_indbetaling.Nrq_PaymentType.SelectedValue, of_payment.Payment_media_type);
 
+			Mapping_update_helper.Add_if_other_exists(parameters, "nrq_of_contact_id", "nrq_indbetaler");
+
 			return parameters;
 		}
 

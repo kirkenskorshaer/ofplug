@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ofplug.Mapping
 {
@@ -20,6 +22,14 @@ namespace ofplug.Mapping
 			if (a.Equals(b) == false)
 			{
 				parameters_to_update.Add(name);
+			}
+		}
+
+		internal static void Add_if_other_exists(List<string> parameters, string other, string may_add)
+		{
+			if (parameters.Any(parameter => parameter == other))
+			{
+				parameters.Add(may_add);
 			}
 		}
 	}
