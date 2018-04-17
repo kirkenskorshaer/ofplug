@@ -57,7 +57,7 @@ namespace ofplug.of
 			{
 				if (_payment == null)
 				{
-					_payment = new Payment(_sender, _url, _token, "agreement");
+					_payment = new Payment(_sender, _url, _token, "payment");
 				}
 
 				return _payment;
