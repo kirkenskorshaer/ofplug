@@ -1,6 +1,7 @@
 ﻿using ofplug.Logic.Abstract;
 using System.Activities;
 using Microsoft.Xrm.Sdk.Workflow;
+using System;
 
 namespace ofplug.Logic.Indbetaling
 {
@@ -13,13 +14,20 @@ namespace ofplug.Logic.Indbetaling
 
 		protected override void Execute(CodeActivityContext codeActivityContext)
 		{
-			Initialize(codeActivityContext);
+			try
+			{
+				Initialize(codeActivityContext);
 
-			int of_indbetaling_id = Of_indbetaling_id_InArgument.Get<int>(codeActivityContext);
-			of.data.Payment of_indbetaling = _of_connection.Payment.Get(of_indbetaling_id);
+				int of_indbetaling_id = Of_indbetaling_id_InArgument.Get<int>(codeActivityContext);
+				of.data.Payment of_indbetaling = _of_connection.Payment.Get(of_indbetaling_id);
 
-			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
-			maintain.Create_or_update_one_indbetaling_in_crm(of_indbetaling_id, of_indbetaling);
+				Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
+				maintain.Create_or_update_one_indbetaling_in_crm(of_indbetaling_id, of_indbetaling);
+			}
+			catch (Exception exception)
+			{
+				Write_exception(exception);
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
+using System;
 using System.Activities;
 
 namespace ofplug.Logic.Abstract
@@ -40,6 +41,28 @@ namespace ofplug.Logic.Abstract
 			_tracingService = tracingService;
 			_service = service;
 			_sender_test = sender;
+		}
+
+		protected void Write_exception(Exception exception)
+		{
+			if (_tracingService != null)
+			{
+				_tracingService.Trace(_get_exception_string(exception));
+			}
+			throw exception;
+		}
+
+		private string _get_exception_string(Exception exception)
+		{
+			if (exception == null)
+			{
+				return string.Empty;
+			}
+
+			return
+				exception.Message + Environment.NewLine +
+				exception.StackTrace + Environment.NewLine +
+				_get_exception_string(exception.InnerException);
 		}
 	}
 }
