@@ -22,67 +22,6 @@ namespace ofplug.crm
 			Logical_name = logical_name;
 		}
 
-		public enum GendercodeEnum
-		{
-			Male = 1,
-			Female = 2,
-		}
-
-		public GendercodeEnum? Gendercode_string_to_enum(string value)
-		{
-			if (string.IsNullOrWhiteSpace(value))
-			{
-				return null;
-			}
-
-			if (value.ToLower() == "male")
-			{
-				return GendercodeEnum.Male;
-			}
-
-			if (value.ToLower() == "female")
-			{
-				return GendercodeEnum.Female;
-			}
-
-			return null;
-		}
-
-		public string Gendercode_enum_to_string(GendercodeEnum? value)
-		{
-			switch (value)
-			{
-				case GendercodeEnum.Male:
-					return "male";
-				case GendercodeEnum.Female:
-					return "female";
-				case null:
-					return null;
-				default:
-					throw new Exception("unknown enum " + value);
-			}
-		}
-
-		public GendercodeEnum? Gendercode_optionSet_to_enum(OptionSetValue value)
-		{
-			if (value == null)
-			{
-				return null;
-			}
-
-			return (GendercodeEnum)value.Value;
-		}
-
-		public OptionSetValue Gendercode_enum_to_optionSet(GendercodeEnum? value)
-		{
-			if (value == null)
-			{
-				return null;
-			}
-
-			return new OptionSetValue((int)value.Value);
-		}
-
 		protected QueryExpression Create_query_expression(string attribute_name, object value, ColumnSet coulmnSet)
 		{
 			ConditionExpression conditionExpression = new ConditionExpression()

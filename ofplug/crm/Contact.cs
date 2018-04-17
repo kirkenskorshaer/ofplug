@@ -18,8 +18,7 @@ namespace ofplug.crm
 		public string address1_country;
 		public string new_kkadminmedlemsnr;
 
-		private OptionSetValue gendercode;
-		public GendercodeEnum? Gendercode_value { get { return Gendercode_optionSet_to_enum(gendercode); } set { gendercode = Gendercode_enum_to_optionSet(value); } }
+		public SelectedDictionary gendercode = new SelectedDictionary { { 1, "male" }, { 2, "female" } };
 		public DateTime? birthdate;
 		//dawa_id
 		public double? address1_latitude;

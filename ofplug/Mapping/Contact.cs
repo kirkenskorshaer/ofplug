@@ -38,7 +38,7 @@ namespace ofplug.Mapping
 		{
 			crm_contact.address1_city = of_contact.City;
 			crm_contact.address1_country = of_contact.Country;
-			crm_contact.Gendercode_value = crm_contact.Gendercode_string_to_enum(of_contact.Gender);
+			crm_contact.gendercode.Select(of_contact.Gender);
 			crm_contact.address1_latitude = of_contact.Lat;
 			crm_contact.address1_line1 = of_contact.Address;
 			crm_contact.address1_longitude = of_contact.Long;
@@ -58,7 +58,7 @@ namespace ofplug.Mapping
 
 			Mapping_update_helper.Add_if_unequal(parameters, "address1_city", crm_contact.address1_city, of_contact.City);
 			Mapping_update_helper.Add_if_unequal(parameters, "address1_country", crm_contact.address1_country, of_contact.Country);
-			Mapping_update_helper.Add_if_unequal(parameters, "Gendercode_value", crm_contact.Gendercode_value, crm_contact.Gendercode_string_to_enum(of_contact.Gender));
+			Mapping_update_helper.Add_if_unequal(parameters, "Gendercode", crm_contact.gendercode.SelectedValue, of_contact.Gender);
 			Mapping_update_helper.Add_if_unequal(parameters, "address1_latitude", crm_contact.address1_latitude, of_contact.Lat);
 			Mapping_update_helper.Add_if_unequal(parameters, "address1_line1", crm_contact.address1_line1, of_contact.Address);
 			Mapping_update_helper.Add_if_unequal(parameters, "address1_longitude", crm_contact.address1_longitude, of_contact.Long);
@@ -78,7 +78,7 @@ namespace ofplug.Mapping
 
 			Mapping_update_helper.Add_if_unequal(parameters, "City", crm_contact.address1_city, of_contact.City);
 			Mapping_update_helper.Add_if_unequal(parameters, "Country", crm_contact.address1_country, of_contact.Country);
-			Mapping_update_helper.Add_if_unequal(parameters, "Gender", crm_contact.Gendercode_value, crm_contact.Gendercode_string_to_enum(of_contact.Gender));
+			Mapping_update_helper.Add_if_unequal(parameters, "Gender", crm_contact.gendercode.SelectedValue, of_contact.Gender);
 			Mapping_update_helper.Add_if_unequal(parameters, "Lat", crm_contact.address1_latitude, of_contact.Lat);
 			Mapping_update_helper.Add_if_unequal(parameters, "Address", crm_contact.address1_line1, of_contact.Address);
 			Mapping_update_helper.Add_if_unequal(parameters, "Long", crm_contact.address1_longitude, of_contact.Long);

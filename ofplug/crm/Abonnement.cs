@@ -14,9 +14,9 @@ namespace ofplug.crm
 		public int? Nrq_of_contact_id;
 		public EntityReference Nrq_contact;
 		public string Nrq_order_id;
-		public string Nrq_state;
-		public string Nrq_payment_gateway;
-		public string Nrq_payment_media;
+		public SelectedDictionary Nrq_state = new SelectedDictionary { { 170590000, "subscribe" }, { 170590001, "subscribing" }, { 170590002, "subscribed" }, { 170590003, "cancelled" } };
+		public SelectedDictionary Nrq_PaymentGateway = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "epay" }, { 170590002, "linkm" }, { 170590003, "mobilepay_sub" }, { 170590004, "noop" } };
+		public SelectedDictionary Nrq_PaymentMedia = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "fi" }, { 170590002, "card" }, { 170590003, "sms_keyword" }, { 170590004, "phonebill" }, { 170590005, "mobilepay" } };
 		public string Nrq_payment_media_type;
 		public string Nrq_msisdn;
 		public string Nrq_bank_account_no;
@@ -58,10 +58,9 @@ namespace ofplug.crm
 			Fill_if_not_empty("nrq_of_contact_id", Nrq_of_contact_id, parameters);
 			Fill_if_not_empty("nrq_order_id", Nrq_order_id, parameters);
 			Fill_if_not_empty("nrq_state", Nrq_state, parameters);
+			Fill_if_not_empty("nrq_PaymentGateway", Nrq_PaymentGateway, parameters);
+			Fill_if_not_empty("nrq_PaymentMedia", Nrq_PaymentMedia, parameters);
 			Fill_if_not_empty("nrq_contact", Nrq_contact, parameters);
-			Fill_if_not_empty("nrq_payment_gateway", Nrq_payment_gateway, parameters);
-			Fill_if_not_empty("nrq_payment_media", Nrq_payment_media, parameters);
-			Fill_if_not_empty("nrq_payment_media_type", Nrq_payment_media_type, parameters);
 			Fill_if_not_empty("nrq_msisdn", Nrq_msisdn, parameters);
 			Fill_if_not_empty("nrq_bank_account_no", Nrq_bank_account_no, parameters);
 			Fill_if_not_empty("nrq_bank_sort_code", Nrq_bank_sort_code, parameters);
