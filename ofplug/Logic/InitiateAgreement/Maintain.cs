@@ -19,7 +19,7 @@ namespace ofplug.Logic.InitiateAgreement
 			Mapping.InitiateAgreement.To_of(crm_start_aftale, of_start_aftale);
 
 			of.data.InitiateAgreementResponse of_initiateAgreementResponse = _of_connection.Initiate_agreement.Post(of_start_aftale);
-
+			/*
 			of.data.Agreement of_aftale = _of_connection.Agreement.Get(of_initiateAgreementResponse.Agreement_id);
 			of.data.Contact of_contact = _of_connection.Contact.Get(of_initiateAgreementResponse.Contact_id);
 			of.data.Subscription of_abonnement = _of_connection.Subscription.Get(of_initiateAgreementResponse.Subscription_id);
@@ -35,6 +35,7 @@ namespace ofplug.Logic.InitiateAgreement
 			_of_connection.Agreement.Patch(of_aftale_patch.Of_id.Value, of_aftale_patch);
 			_of_connection.Contact.Patch(of_contact_patch.Of_id.Value, of_contact_patch);
 			_of_connection.Subscription.Patch(of_abonnement_patch.Of_id.Value, of_abonnement_patch);
+			*/
 
 			crm.AgreementRequest crm_start_aftale_update = new crm.AgreementRequest(_service, _tracingService)
 			{
