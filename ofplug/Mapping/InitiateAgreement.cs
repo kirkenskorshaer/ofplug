@@ -11,7 +11,7 @@
 			of_initiate_agreement.Address = crm_initiate_agreement.Nrq_address_line;
 			of_initiate_agreement.Post_code = crm_initiate_agreement.Nrq_address_postalcode;
 			of_initiate_agreement.City = crm_initiate_agreement.Nrq_address_city;
-			of_initiate_agreement.Country = crm_initiate_agreement.Nrq_address_country;
+			of_initiate_agreement.Country = crm_initiate_agreement.Nrq_address_country ?? "DK";
 			of_initiate_agreement.Msisdn = crm_initiate_agreement.Nrq_msisdn;
 			of_initiate_agreement.Email = crm_initiate_agreement.Nrq_emailaddress;
 			of_initiate_agreement.National_id = crm_initiate_agreement.Nrq_cprnr;
