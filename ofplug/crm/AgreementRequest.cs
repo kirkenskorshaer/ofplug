@@ -16,7 +16,6 @@ namespace ofplug.crm
 		public string Nrq_projectid;
 		public SelectedDictionary Nrq_processstatus = new SelectedDictionary { { 170590000, "Draft" }, { 170590001, "Ready" }, { 170590002, "Processed" } };
 
-		public string External_id = null;
 		public Contact customer_contact = null;
 		public Account customer_account = null;
 
@@ -31,7 +30,21 @@ namespace ofplug.crm
 		public string Nrq_emailaddress { get { return customer_contact?.emailaddress1 ?? customer_account?.Emailaddress1; } }
 		public string Nrq_cprnr { get { return customer_contact?.new_cprnr; } }
 		public string Nrq_cvrnr { get { return customer_account?.Nrq_cvrnr; } }
-		public string Nrq_msisdn { get { return customer_contact?.mobilephone ?? customer_account?.Nrq_msisdn; } }
+		public string Nrq_msisdn
+		{
+			get
+			{
+				string msisdn = customer_contact?.mobilephone ?? customer_account?.Nrq_msisdn;
+
+				if (msisdn.Length == 8)
+				{
+					msisdn = "45" + msisdn;
+				}
+
+				return msisdn;
+			}
+		}
+		public string External_id { get { return customer_account?.New_kkadminmedlemsnr ?? customer_contact?.new_kkadminmedlemsnr?.ToString(); } }
 
 		private static ColumnSet _columnSet = new ColumnSet
 		(
