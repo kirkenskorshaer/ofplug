@@ -6,7 +6,7 @@ namespace ofplug.Logic.Abonnement
 {
 	public class Create_or_update_one_manuel_in_of : Abstract.AbstractCodeActivity
 	{
-		[ReferenceTarget("nrq_abonnement")]
+		[ReferenceTarget("nrq_subscription")]
 		[RequiredArgument]
 		[Input("Abonnement")]
 		public InArgument<EntityReference> AbonnementEntityReference { get; set; }
