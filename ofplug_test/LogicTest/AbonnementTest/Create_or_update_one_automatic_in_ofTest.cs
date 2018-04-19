@@ -7,6 +7,7 @@ namespace ofplug_test.LogicTest.AbonnementTest
 	[TestClass]
 	public class Create_or_update_one_automatic_in_ofTest : Abstract.AbstractTest
 	{
+		/*
 		[TestMethod]
 		public void Creates_an_Abonnement()
 		{
@@ -63,5 +64,6 @@ namespace ofplug_test.LogicTest.AbonnementTest
 
 			return creator;
 		}
+		*/
 	}
 }

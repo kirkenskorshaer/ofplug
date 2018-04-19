@@ -7,6 +7,7 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 	[TestClass]
 	public class Create_or_update_all_in_crmTest : Abstract.AbstractTest
 	{
+		/*
 		[TestMethod]
 		public void Creates_an_indbetaling()
 		{
@@ -37,5 +38,6 @@ namespace ofplug_test.LogicTest.IndbetalingTest
 
 			return creator;
 		}
+		*/
 	}
 }

@@ -3,6 +3,7 @@ using ofplug.Logic.Abstract;
 
 namespace ofplug.Logic.Aftale
 {
+	/*
 	public class Create_or_update_all_in_crm : AbstractCodeActivity
 	{
 		protected override void Execute(CodeActivityContext codeActivityContext)
@@ -13,4 +14,5 @@ namespace ofplug.Logic.Aftale
 			maintain.Update_agreements_in_crm_from_of_data();
 		}
 	}
+	*/
 }

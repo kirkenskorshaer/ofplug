@@ -2,6 +2,7 @@
 
 namespace ofplug.Logic.Abonnement
 {
+	/*
 	public class Create_or_update_all_in_crm : Abstract.AbstractCodeActivity
 	{
 		protected override void Execute(CodeActivityContext codeActivityContext)
@@ -12,4 +13,5 @@ namespace ofplug.Logic.Abonnement
 			maintain.Update_subscriptions_in_crm();
 		}
 	}
+	*/
 }

@@ -2,6 +2,7 @@
 
 namespace ofplug.Logic.Abonnement
 {
+	/*
 	public class Create_or_update_one_automatic_in_of : Abstract.AbstractPlugin
 	{
 		public override void Execute(IServiceProvider serviceProvider)
@@ -29,4 +30,5 @@ namespace ofplug.Logic.Abonnement
 			maintain.Create_or_update_one_abonnement_in_of(crm_abonnement);
 		}
 	}
+	*/
 }

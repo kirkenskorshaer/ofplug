@@ -2,6 +2,7 @@
 
 namespace ofplug.Logic.InitiateAgreement
 {
+	/*
 	public class Process_InitiateAgreement_automatic : Abstract.AbstractPlugin
 	{
 		public override void Execute(IServiceProvider serviceProvider)
@@ -29,4 +30,5 @@ namespace ofplug.Logic.InitiateAgreement
 			maintain.Process_InitiateAgreement(crm_start_aftale);
 		}
 	}
+	*/
 }

@@ -7,6 +7,7 @@ namespace ofplug_test.LogicTest.AftaleTest
 	[TestClass]
 	public class Create_or_update_one_automatic_in_ofTest : Abstract.AbstractTest
 	{
+		/*
 		[TestMethod]
 		public void Creates_an_aftale()
 		{
@@ -62,5 +63,6 @@ namespace ofplug_test.LogicTest.AftaleTest
 
 			return creator;
 		}
+		*/
 	}
 }

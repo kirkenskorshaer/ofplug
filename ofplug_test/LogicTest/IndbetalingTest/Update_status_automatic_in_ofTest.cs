@@ -7,6 +7,7 @@ namespace ofplug_test.LogicTest.ContactTest
 	[TestClass]
 	public class Update_status_automatically_in_ofTest : Abstract.AbstractTest
 	{
+		/*
 		[TestMethod]
 		public void Updates_status()
 		{
@@ -87,5 +88,6 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			return creator;
 		}
+		*/
 	}
 }

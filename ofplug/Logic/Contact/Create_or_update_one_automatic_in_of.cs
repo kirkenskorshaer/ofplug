@@ -3,6 +3,7 @@ using System;
 
 namespace ofplug.Logic.Contact
 {
+	/*
 	public class Create_or_update_one_automatic_in_of : AbstractPlugin
 	{
 		public override void Execute(IServiceProvider serviceProvider)
@@ -30,4 +31,5 @@ namespace ofplug.Logic.Contact
 			maintain.Create_or_update_one_contact_in_of(crm_contact);
 		}
 	}
+	*/
 }

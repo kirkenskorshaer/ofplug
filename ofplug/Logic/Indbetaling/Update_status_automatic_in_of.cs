@@ -2,6 +2,7 @@
 
 namespace ofplug.Logic.Indbetaling
 {
+	/*
 	public class Update_status_automatic_in_of : Abstract.AbstractPlugin
 	{
 		public override void Execute(IServiceProvider serviceProvider)
@@ -29,4 +30,5 @@ namespace ofplug.Logic.Indbetaling
 			maintain.Update_status_in_of(crm_indbetaling);
 		}
 	}
+	*/
 }

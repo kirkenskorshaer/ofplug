@@ -3,6 +3,7 @@ using System.Activities;
 
 namespace ofplug.Logic.Contact
 {
+	/*
 	public class Update_all_medlemsnr_in_of : AbstractCodeActivity
 	{
 		protected override void Execute(CodeActivityContext codeActivityContext)
@@ -13,4 +14,5 @@ namespace ofplug.Logic.Contact
 			maintain.Update_all_medlemsnr_in_of();
 		}
 	}
+	*/
 }

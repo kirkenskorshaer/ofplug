@@ -5,6 +5,7 @@ namespace ofplug_test.LogicTest.InitiateAgreementTest
 	[TestClass]
 	public class Process_InitiateAgreement_automaticTest : Abstract_InitiateAgreement
 	{
+		/*
 		[TestMethod]
 		public void Creates_data_in_of_and_updates_crm()
 		{
@@ -76,5 +77,6 @@ namespace ofplug_test.LogicTest.InitiateAgreementTest
 
 			return creator;
 		}
+		*/
 	}
 }

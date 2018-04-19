@@ -7,6 +7,7 @@ namespace ofplug_test.LogicTest.ContactTest
 	[TestClass]
 	public class Update_all_medlemsnr_in_ofTest : Abstract.AbstractTest
 	{
+		/*
 		[TestMethod]
 		public void Medlemsnr_will_be_updated()
 		{
@@ -85,5 +86,6 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			return creator;
 		}
+		*/
 	}
 }

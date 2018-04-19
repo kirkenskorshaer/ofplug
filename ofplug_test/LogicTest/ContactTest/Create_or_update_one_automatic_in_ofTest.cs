@@ -7,6 +7,7 @@ namespace ofplug_test.LogicTest.ContactTest
 	[TestClass]
 	public class Create_or_update_one_automatic_in_ofTest : Abstract.AbstractTest
 	{
+		/*
 		[TestMethod]
 		public void Creates_a_contact()
 		{
@@ -58,5 +59,6 @@ namespace ofplug_test.LogicTest.ContactTest
 
 			return creator;
 		}
+		*/
 	}
 }
