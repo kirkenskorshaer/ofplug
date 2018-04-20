@@ -82,7 +82,7 @@ namespace ofplug.Logic.Abstract
 		{
 			crm.Contact crm_contact = Get_or_create_crm_contact(of_abonnement.Contact_id.Value);
 
-			crm_abonnement.Nrq_contact = crm_contact.Get_entity_reference();
+			crm_abonnement.Nrq_subscriber = crm_contact.Get_entity_reference();
 		}
 
 		protected crm.Contact Get_or_create_crm_contact(int of_contact_id)

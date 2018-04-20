@@ -8,7 +8,6 @@ namespace ofplug.crm
 	public class Abonnement : AbstractCrm
 	{
 		public int? Nrq_of_contact_id;
-		public EntityReference Nrq_contact;
 		public string Nrq_order_id;
 		public SelectedDictionary Nrq_state = new SelectedDictionary { { 170590000, "subscribe" }, { 170590001, "subscribing" }, { 170590002, "subscribed" }, { 170590003, "cancelled" } };
 		public SelectedDictionary Nrq_PaymentGateway = new SelectedDictionary { { 170590000, "pbs" }, { 170590001, "epay" }, { 170590002, "linkm" }, { 170590003, "mobilepay_sub" }, { 170590004, "noop" } };
@@ -16,6 +15,7 @@ namespace ofplug.crm
 		public string Nrq_bank_account_no;
 		public string Nrq_bank_sort_code;
 		public int? Nrq_of_id;
+		public EntityReference Nrq_subscriber;
 
 		private static ColumnSet _columnSet = new ColumnSet
 		(
@@ -55,7 +55,7 @@ namespace ofplug.crm
 		public override void Fill_fields(List<string> parameters = null)
 		{
 			Fill_if_not_empty("nrq_of_contact_id", Nrq_of_contact_id, parameters);
-			Fill_if_not_empty("nrq_contact", Nrq_contact, parameters);
+			Fill_if_not_empty("nrq_subscriber", Nrq_subscriber, parameters);
 			Fill_if_not_empty("nrq_order_id", Nrq_order_id, parameters);
 			Fill_if_not_empty("nrq_state", Nrq_state, parameters);
 			Fill_if_not_empty("nrq_PaymentGateway", Nrq_PaymentGateway, parameters);
@@ -68,7 +68,7 @@ namespace ofplug.crm
 		public override void Read_fields()
 		{
 			Nrq_of_contact_id = Read_if_not_empty<int?>("nrq_of_contact_id");
-			Nrq_contact = Read_if_not_empty<EntityReference>("nrq_contact");
+			Nrq_subscriber = Read_if_not_empty<EntityReference>("nrq_subscriber");
 			Nrq_order_id = Read_if_not_empty<string>("nrq_order_id");
 			Read_if_not_empty(Nrq_state, "nrq_state");
 			Read_if_not_empty(Nrq_PaymentGateway, "nrq_PaymentGateway");

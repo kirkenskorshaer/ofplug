@@ -15,7 +15,7 @@ namespace ofplug_test.LogicTest.AbonnementTest
 			ofplug.Logic.Abonnement.Create_or_update_one_manuel_in_of creator = Arrange_creator();
 			Dictionary<string, object> input = Arrange_input();
 			Add_crm_config();
-			Add_crm_abonnement(abonnement => abonnement.Nrq_contact = new EntityReference("contact", Guid.Empty));
+			Add_crm_abonnement(abonnement => abonnement.Nrq_subscriber = new EntityReference("contact", Guid.Empty));
 			Add_crm_contact();
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("of_contact_id") });
 			_sender.data_to_return.Enqueue(new ofplug.of.data.IdResponse() { Id = _id.Get_id("abonnement id") });

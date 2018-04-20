@@ -78,10 +78,10 @@ namespace ofplug.Logic.Abonnement
 
 		private void Attach_of_contact_if_missing(crm.Abonnement crm_abonnement)
 		{
-			if (crm_abonnement.Nrq_contact != null)
+			if (crm_abonnement.Nrq_subscriber != null)
 			{
 				crm.Contact crm_contact = new crm.Contact(_service, _tracingService);
-				crm_contact.Get_by_reference(crm_abonnement.Nrq_contact);
+				crm_contact.Get_by_reference(crm_abonnement.Nrq_subscriber);
 				Create_or_update_one_contact_in_of(crm_contact);
 			}
 		}
