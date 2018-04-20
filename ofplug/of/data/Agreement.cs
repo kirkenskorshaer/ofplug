@@ -28,10 +28,11 @@ namespace ofplug.of.data
 		[DataMember(Name = "payment_media", EmitDefaultValue = false)]
 		public string Payment_media { get; set; }
 
-		[DataMember(Name = "payment_method", EmitDefaultValue = false)]
-		public string Payment_method { get; set; }
+		[DataMember(Name = "payment_type", EmitDefaultValue = false)]
+		public string Payment_type { get; set; }
 
-		[DataMember(Name = "payment_media_type", EmitDefaultValue = false)]
+		//[DataMember(Name = "payment_media_type", EmitDefaultValue = false)]
+		[DataMember(Name = "paymenttype", EmitDefaultValue = false)]
 		public string Payment_media_type { get; set; }
 
 		[DataMember(Name = "charge_ts", EmitDefaultValue = false)]
