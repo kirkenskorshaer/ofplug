@@ -25,6 +25,10 @@ namespace ofplug.of.data
 		public string Agreement_start_ts { get; set; }
 		public DateTime? Agreement_start_ts_value { get { return GetDateTime(Agreement_start_ts); } set { Agreement_start_ts = SetDateTime(value); } }
 
+		[DataMember(Name = "last_payment_ts", EmitDefaultValue = false)]
+		public string Last_payment_ts { get; set; }
+		public DateTime? Last_payment_ts_value { get { return GetDateTime(Last_payment_ts); } set { Last_payment_ts = SetDateTime(value); } }
+
 		[DataMember(Name = "payment_media", EmitDefaultValue = false)]
 		public string Payment_media { get; set; }
 

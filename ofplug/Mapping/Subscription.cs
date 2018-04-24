@@ -11,7 +11,7 @@ namespace ofplug.Mapping
 			of_subscription.Bank_sort_code = crm_abonnement.Nrq_bank_sort_code;
 			of_subscription.Contact_id = crm_abonnement.Nrq_of_contact_id;
 			of_subscription.Of_id = crm_abonnement.Nrq_of_id;
-			of_subscription.Order_id = crm_abonnement.Nrq_order_id;
+			//of_subscription.Order_id = crm_abonnement.Nrq_order_id;
 			of_subscription.Payment_gateway = crm_abonnement.Nrq_PaymentGateway.SelectedValue;
 			of_subscription.Payment_media = crm_abonnement.Nrq_PaymentMedia.SelectedValue;
 			//of_subscription.Payment_media_type = crm_abonnement.;
@@ -29,7 +29,7 @@ namespace ofplug.Mapping
 			crm_abonnement.Nrq_of_contact_id = of_subscription.Contact_id;
 			//crm_abonnement.Nrq_msisdn = of_subscription.Msisdn;
 			crm_abonnement.Nrq_of_id = of_subscription.Of_id;
-			crm_abonnement.Nrq_order_id = of_subscription.Order_id;
+			//crm_abonnement.Nrq_order_id = of_subscription.Order_id;
 			crm_abonnement.Nrq_PaymentGateway.Select(of_subscription.Payment_gateway);
 			crm_abonnement.Nrq_PaymentMedia.Select(of_subscription.Payment_media);
 			//crm_abonnement.Nrq_payment_media_type = of_subscription.Payment_media_type;
@@ -48,7 +48,7 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "nrq_of_contact_id", crm_abonnement.Nrq_of_contact_id, of_subscription.Contact_id);
 			//Mapping_update_helper.Add_if_unequal(parameters, "nrq_msisdn", crm_abonnement.Nrq_msisdn, of_subscription.Msisdn);
 			Mapping_update_helper.Add_if_unequal(parameters, "nrq_of_subscription_id", crm_abonnement.Nrq_of_id, of_subscription.Of_id);
-			Mapping_update_helper.Add_if_unequal(parameters, "nrq_order_id", crm_abonnement.Nrq_order_id, of_subscription.Order_id);
+			//Mapping_update_helper.Add_if_unequal(parameters, "nrq_order_id", crm_abonnement.Nrq_order_id, of_subscription.Order_id);
 			Mapping_update_helper.Add_if_unequal(parameters, "nrq_payment_gateway", crm_abonnement.Nrq_PaymentGateway.SelectedValue, of_subscription.Payment_gateway);
 			Mapping_update_helper.Add_if_unequal(parameters, "nrq_payment_media", crm_abonnement.Nrq_PaymentMedia.SelectedValue, of_subscription.Payment_media);
 			//Mapping_update_helper.Add_if_unequal(parameters, "nrq_payment_media_type", crm_abonnement.Nrq_payment_media_type, of_subscription.Payment_media_type);
@@ -69,7 +69,7 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "Contact_id", crm_abonnement.Nrq_of_contact_id, of_subscription.Contact_id);
 			//Mapping_update_helper.Add_if_unequal(parameters, "Msisdn", crm_abonnement.Nrq_msisdn, of_subscription.Msisdn);
 			Mapping_update_helper.Add_if_unequal(parameters, "Crm_id", crm_abonnement.Id.ToString().ToLower(), of_subscription.Crm_id);
-			Mapping_update_helper.Add_if_unequal(parameters, "Order_id", crm_abonnement.Nrq_order_id, of_subscription.Order_id);
+			//Mapping_update_helper.Add_if_unequal(parameters, "Order_id", crm_abonnement.Nrq_order_id, of_subscription.Order_id);
 			Mapping_update_helper.Add_if_unequal(parameters, "Payment_gateway", crm_abonnement.Nrq_PaymentGateway.SelectedValue, of_subscription.Payment_gateway);
 			Mapping_update_helper.Add_if_unequal(parameters, "Payment_media", crm_abonnement.Nrq_PaymentMedia.SelectedValue, of_subscription.Payment_media);
 			//Mapping_update_helper.Add_if_unequal(parameters, "Payment_media_type", crm_abonnement.Nrq_payment_media_type, of_subscription.Payment_media_type);

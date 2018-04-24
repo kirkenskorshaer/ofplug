@@ -20,7 +20,7 @@
 			of_initiate_agreement.Bank_account_no = crm_initiate_agreement.Nrq_bankaccountno;
 			of_initiate_agreement.External_id = crm_initiate_agreement.External_id;
 			of_initiate_agreement.Payment_media = crm_initiate_agreement.Nrq_paymentmedia.SelectedValue;
-			of_initiate_agreement.Amount = (int)crm_initiate_agreement.Nrq_amount.Value;
+			of_initiate_agreement.Amount = (int?)crm_initiate_agreement.Nrq_amount?.Value ?? 0;
 			of_initiate_agreement.Frequency = crm_initiate_agreement.Nrq_frequency.SelectedValue;
 			//of_initiate_agreement.Project_id = crm_initiate_agreement.Nrq_projectid.GetValueOrDefault();
 			of_initiate_agreement.Project_id = int.Parse(crm_initiate_agreement.Nrq_projectid);

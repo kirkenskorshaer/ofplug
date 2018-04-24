@@ -24,6 +24,7 @@ namespace ofplug.crm
 		public int? Nrq_of_fundraising_project_id;
 		public string Nrq_tekst;
 		public EntityReference Nrq_indbetaler;
+		public EntityReference Nrq_betalingsaftale;
 
 		private static ColumnSet _columnSet = new ColumnSet
 		(
@@ -41,7 +42,8 @@ namespace ofplug.crm
 			"nrq_of_contact_id",
 			"nrq_of_agreement_id",
 			"nrq_of_fundraising_project_id",
-			"nrq_indbetaler"
+			"nrq_indbetaler",
+			"nrq_betalingsaftale"
 		);
 
 		public Indbetaling(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "new_indbetaling")
@@ -83,6 +85,7 @@ namespace ofplug.crm
 			Fill_if_not_empty("nrq_of_agreement_id", Nrq_of_agreement_id, parameters);
 			Fill_if_not_empty("nrq_of_fundraising_project_id", Nrq_of_fundraising_project_id, parameters);
 			Fill_if_not_empty("nrq_indbetaler", Nrq_indbetaler, parameters);
+			Fill_if_not_empty("nrq_betalingsaftale", Nrq_betalingsaftale, parameters);
 		}
 
 		public override void Read_fields()
@@ -102,6 +105,7 @@ namespace ofplug.crm
 			Nrq_of_agreement_id = Read_if_not_empty<int?>("nrq_of_agreement_id");
 			Nrq_of_fundraising_project_id = Read_if_not_empty<int?>("nrq_of_fundraising_project_id");
 			Nrq_indbetaler = Read_if_not_empty<EntityReference>("nrq_indbetaler");
+			Nrq_betalingsaftale = Read_if_not_empty<EntityReference>("nrq_betalingsaftale");
 		}
 	}
 }

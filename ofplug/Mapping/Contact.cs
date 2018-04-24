@@ -22,7 +22,7 @@ namespace ofplug.Mapping
 			of_contact.Email = crm_contact.emailaddress1;
 			of_contact.First_name = crm_contact.firstname;
 			of_contact.Last_name = crm_contact.lastname;
-			//crm_contact.new_cprnr
+			of_contact.Cpr = crm_contact.new_cprnr;
 			//of_contact.Id = crm_contact.new_ofcontactid;
 			of_contact.Id = null;
 			of_contact.Of_id = crm_contact.nrq_of_id;
@@ -47,9 +47,12 @@ namespace ofplug.Mapping
 			crm_contact.emailaddress1 = of_contact.Email;
 			crm_contact.firstname = of_contact.First_name;
 			crm_contact.lastname = of_contact.Last_name;
-			//crm_contact.new_cprnr
+			crm_contact.new_cprnr = of_contact.Cpr;
 			crm_contact.nrq_of_id = of_contact.Of_id;
-			crm_contact.new_kkadminmedlemsnr = int.Parse(of_contact.External_id);
+			if (string.IsNullOrWhiteSpace(of_contact.External_id) == false)
+			{
+				crm_contact.new_kkadminmedlemsnr = int.Parse(of_contact.External_id);
+			}
 		}
 
 		public static List<string> Needs_update_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
@@ -67,7 +70,7 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "emailaddress1", crm_contact.emailaddress1, of_contact.Email);
 			Mapping_update_helper.Add_if_unequal(parameters, "firstname", crm_contact.firstname, of_contact.First_name);
 			Mapping_update_helper.Add_if_unequal(parameters, "lastname", crm_contact.lastname, of_contact.Last_name);
-			Mapping_update_helper.Add_if_unequal(parameters, "new_kkadminmedlemsnr", crm_contact.new_kkadminmedlemsnr?.ToString(), of_contact.External_id);
+			Mapping_update_helper.Add_if_unequal(parameters, "new_cprnr", crm_contact.new_cprnr, of_contact.Cpr);
 
 			return parameters;
 		}
@@ -87,6 +90,7 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "First_name", crm_contact.firstname, of_contact.First_name);
 			Mapping_update_helper.Add_if_unequal(parameters, "Last_name", crm_contact.lastname, of_contact.Last_name);
 			Mapping_update_helper.Add_if_unequal(parameters, "External_id", crm_contact.new_kkadminmedlemsnr?.ToString(), of_contact.External_id);
+			Mapping_update_helper.Add_if_unequal(parameters, "Cpr", crm_contact.new_cprnr, of_contact.Cpr);
 
 			return parameters;
 		}
