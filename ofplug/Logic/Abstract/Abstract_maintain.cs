@@ -29,6 +29,7 @@ namespace ofplug.Logic.Abstract
 		private void Update_of_contact(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
 			List<string> parameters_to_update = Mapping.Contact.Needs_update_in_of(crm_contact, of_contact);
+
 			if (parameters_to_update.Any() == false)
 			{
 				return;
@@ -36,7 +37,7 @@ namespace ofplug.Logic.Abstract
 
 			Mapping.Contact.To_of(crm_contact, of_contact);
 
-			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact);
+			_of_connection.Contact.Patch(of_contact.Of_id.Value, of_contact, parameters_to_update);
 		}
 
 		public crm.Abonnement Create_or_update_one_abonnement_in_crm(of.data.Subscription of_abonnement)
