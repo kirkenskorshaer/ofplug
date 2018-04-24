@@ -36,6 +36,11 @@ namespace ofplug.crm
 			{
 				string msisdn = customer_contact?.mobilephone ?? customer_account?.Nrq_msisdn;
 
+				if (string.IsNullOrWhiteSpace(msisdn))
+				{
+					return null;
+				}
+
 				if (msisdn.Length == 8)
 				{
 					msisdn = "45" + msisdn;
