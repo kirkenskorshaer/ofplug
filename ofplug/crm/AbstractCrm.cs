@@ -86,6 +86,12 @@ namespace ofplug.crm
 			{
 				return ((OptionSetValue)value).Value.ToString();
 			}
+
+			if (value.GetType() == typeof(Money))
+			{
+				return ((Money)value).Value.ToString();
+			}
+
 			return value.ToString();
 		}
 
