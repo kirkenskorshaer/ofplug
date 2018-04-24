@@ -143,9 +143,24 @@ namespace ofplug.Logic.Abstract
 
 			Add_contact_to_aftale(crm_aftale, of_agreement);
 
+			Add_subscription_to_aftale(crm_aftale, of_agreement);
+
 			crm_aftale.Create();
 
 			return crm_aftale;
+		}
+
+		private void Add_subscription_to_aftale(crm.Aftale crm_aftale, of.data.Agreement of_agreement)
+		{
+			if (of_agreement.Subscription_id.HasValue == false)
+			{
+				return;
+			}
+
+			of.data.Subscription of_subscription = _of_connection.Subscription.Get(of_agreement.Subscription_id.Value);
+			crm.Abonnement crm_subscription = Create_or_update_one_abonnement_in_crm(of_subscription);
+
+			crm_aftale.nrq_subscription = new EntityReference("nrq_subscription", crm_subscription.Id);
 		}
 
 		private void Update_aftale_in_crm(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
@@ -163,6 +178,9 @@ namespace ofplug.Logic.Abstract
 			{
 				parameters_to_update.Add("nrq_bidragyder");
 			}
+
+			Add_subscription_to_aftale(crm_aftale, of_aftale);
+
 			crm_aftale.Update(parameters_to_update);
 		}
 
@@ -201,6 +219,7 @@ namespace ofplug.Logic.Abstract
 		private void Update_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
 			List<string> parameters_to_update = Mapping.Contact.Needs_update_in_crm(crm_contact, of_contact);
+
 			if (parameters_to_update.Any() == false)
 			{
 				return;
