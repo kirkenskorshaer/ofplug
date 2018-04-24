@@ -243,5 +243,10 @@ namespace ofplug.Logic.Abstract
 
 			return of_contact;
 		}
+
+		protected void Trace_of(string method, List<string> parameters)
+		{
+			_tracingService.Trace($"{method}: {parameters.Aggregate("", (a, b) => a + ", " + b)}");
+		}
 	}
 }

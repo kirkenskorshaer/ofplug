@@ -17,8 +17,9 @@ namespace ofplug.Logic.Abonnement
 				Initialize(codeActivityContext);
 
 				int of_aftale_id = Of_abonnement_id_InArgument.Get<int>(codeActivityContext);
-
 				of.data.Subscription of_abonnement = _of_connection.Subscription.Get(of_aftale_id);
+
+				_tracingService.Trace($"of_id: {of_aftale_id}");
 
 				if (of_abonnement == null)
 				{

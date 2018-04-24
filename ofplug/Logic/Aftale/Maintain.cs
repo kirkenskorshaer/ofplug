@@ -54,6 +54,8 @@ namespace ofplug.Logic.Aftale
 
 			Mapping.Aftale.To_of(crm_aftale, of_aftale);
 
+			Trace_of("Patch", parameters_to_update);
+
 			_of_connection.Agreement.Patch(of_aftale.Of_id.Value, of_aftale, parameters_to_update);
 		}
 

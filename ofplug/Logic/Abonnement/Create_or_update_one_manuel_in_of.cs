@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
+using System;
 using System.Activities;
 
 namespace ofplug.Logic.Abonnement
@@ -13,15 +14,22 @@ namespace ofplug.Logic.Abonnement
 
 		protected override void Execute(CodeActivityContext codeActivityContext)
 		{
-			Initialize(codeActivityContext);
+			try
+			{
+				Initialize(codeActivityContext);
 
-			EntityReference abonnementEntityReference = AbonnementEntityReference.Get<EntityReference>(codeActivityContext);
+				EntityReference abonnementEntityReference = AbonnementEntityReference.Get<EntityReference>(codeActivityContext);
 
-			crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
-			crm_abonnement.Get_by_reference(abonnementEntityReference);
+				crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
+				crm_abonnement.Get_by_reference(abonnementEntityReference);
 
-			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
-			maintain.Create_or_update_one_abonnement_in_of(crm_abonnement);
+				Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
+				maintain.Create_or_update_one_abonnement_in_of(crm_abonnement);
+			}
+			catch (Exception exception)
+			{
+				Write_exception(exception);
+			}
 		}
 	}
 }

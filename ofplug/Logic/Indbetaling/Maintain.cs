@@ -103,7 +103,13 @@ namespace ofplug.Logic.Indbetaling
 
 				crm.Aftale crm_aftale = Create_or_update_one_aftale_in_crm(of_aftale);
 
-				//todo sæt indbetaling aftale
+				crm_indbetaling.Nrq_betalingsaftale = new EntityReference("new_indbetaling", crm_aftale.Id);
+
+				//_tracingService.Trace($"connecting aftale {crm_aftale.Id} to indbetaling {crm_indbetaling.Id}");
+			}
+			else
+			{
+				//_tracingService.Trace($"no aftale on indbetaling {crm_indbetaling.Id}");
 			}
 
 			if (of_indbetaling.Contact_id.HasValue)
@@ -113,6 +119,12 @@ namespace ofplug.Logic.Indbetaling
 				crm.Contact crm_contact = Create_or_update_one_contact_in_crm(of_indbetaling.Contact_id, of_contact);
 
 				crm_indbetaling.Nrq_indbetaler = new EntityReference("contact", crm_contact.Id);
+
+				//_tracingService.Trace($"connecting contact {crm_contact.Id} to indbetaling {crm_indbetaling.Id}");
+			}
+			else
+			{
+				//_tracingService.Trace($"no contact on indbetaling {crm_indbetaling.Id}");
 			}
 		}
 	}

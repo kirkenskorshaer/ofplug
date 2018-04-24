@@ -54,6 +54,9 @@ namespace ofplug.crm
 
 			_tracingService.Trace("ofplug " + Logical_name + " Create");
 
+			string trace = "Create " + GetFieldsString();
+			_tracingService.Trace(trace);
+
 			Id = _service.Create(CrmEntity);
 		}
 
@@ -66,10 +69,24 @@ namespace ofplug.crm
 
 			_tracingService.Trace("ofplug " + Logical_name + " Update");
 
-			//string trace = CrmEntity.Attributes.Aggregate("Update ", (collect, attribute) => collect + " " + attribute.Key + " = " + attribute.Value.ToString());
-			//_tracingService.Trace(trace);
+			string trace = "Update " + GetFieldsString();
+			_tracingService.Trace(trace);
 
 			_service.Update(CrmEntity);
+		}
+
+		private string GetFieldsString()
+		{
+			return CrmEntity.Attributes.Aggregate(" ", (collect, attribute) => collect + " " + attribute.Key + " = " + Get_attribute_string_value(attribute.Value));
+		}
+
+		private string Get_attribute_string_value(object value)
+		{
+			if (value.GetType() == typeof(OptionSetValue))
+			{
+				return ((OptionSetValue)value).Value.ToString();
+			}
+			return value.ToString();
 		}
 
 		public abstract void Fill_fields(List<string> parameters = null);

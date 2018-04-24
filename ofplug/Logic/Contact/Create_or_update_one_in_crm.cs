@@ -1,6 +1,7 @@
 ﻿using ofplug.Logic.Abstract;
 using System.Activities;
 using Microsoft.Xrm.Sdk.Workflow;
+using System;
 
 namespace ofplug.Logic.Contact
 {
@@ -12,19 +13,27 @@ namespace ofplug.Logic.Contact
 
 		protected override void Execute(CodeActivityContext codeActivityContext)
 		{
-			Initialize(codeActivityContext);
-
-			int of_contact_id = Of_contact_id_InArgument.Get<int>(codeActivityContext);
-
-			of.data.Contact of_contact = _of_connection.Contact.Get(of_contact_id);
-
-			if (of_contact == null)
+			try
 			{
-				return;
-			}
+				Initialize(codeActivityContext);
 
-			Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
-			maintain.Create_or_update_one_contact_in_crm(of_contact_id, of_contact);
+				int of_contact_id = Of_contact_id_InArgument.Get<int>(codeActivityContext);
+				of.data.Contact of_contact = _of_connection.Contact.Get(of_contact_id);
+
+				_tracingService.Trace($"of_id: {of_contact_id}");
+
+				if (of_contact == null)
+				{
+					return;
+				}
+
+				Maintain maintain = new Maintain(_service, _tracingService, _config, _of_connection);
+				maintain.Create_or_update_one_contact_in_crm(of_contact_id, of_contact);
+			}
+			catch (Exception exception)
+			{
+				Write_exception(exception);
+			}
 		}
 	}
 }
