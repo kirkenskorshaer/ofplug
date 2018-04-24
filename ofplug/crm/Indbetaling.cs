@@ -25,6 +25,7 @@ namespace ofplug.crm
 		public string Nrq_tekst;
 		public EntityReference Nrq_indbetaler;
 		public EntityReference Nrq_betalingsaftale;
+		public EntityReference Nrq_indbetalingstype;
 
 		private static ColumnSet _columnSet = new ColumnSet
 		(
@@ -43,7 +44,8 @@ namespace ofplug.crm
 			"nrq_of_agreement_id",
 			"nrq_of_fundraising_project_id",
 			"nrq_indbetaler",
-			"nrq_betalingsaftale"
+			"nrq_betalingsaftale",
+			"nrq_indbetalingstype"
 		);
 
 		public Indbetaling(IOrganizationService service, ITracingService tracingService) : base(service, tracingService, "new_indbetaling")
@@ -86,6 +88,7 @@ namespace ofplug.crm
 			Fill_if_not_empty("nrq_of_fundraising_project_id", Nrq_of_fundraising_project_id, parameters);
 			Fill_if_not_empty("nrq_indbetaler", Nrq_indbetaler, parameters);
 			Fill_if_not_empty("nrq_betalingsaftale", Nrq_betalingsaftale, parameters);
+			Fill_if_not_empty("nrq_indbetalingstype", Nrq_indbetalingstype, parameters);
 		}
 
 		public override void Read_fields()
@@ -106,6 +109,44 @@ namespace ofplug.crm
 			Nrq_of_fundraising_project_id = Read_if_not_empty<int?>("nrq_of_fundraising_project_id");
 			Nrq_indbetaler = Read_if_not_empty<EntityReference>("nrq_indbetaler");
 			Nrq_betalingsaftale = Read_if_not_empty<EntityReference>("nrq_betalingsaftale");
+			Nrq_indbetalingstype = Read_if_not_empty<EntityReference>("nrq_indbetalingstype");
+		}
+
+		public void Set_indbetaling_type_from_of_project_id(int? project_id)
+		{
+			if (project_id.HasValue == false)
+			{
+				return;
+			}
+
+			int kode = project_id.Value + 2000;
+
+			ConditionExpression conditionExpression = new ConditionExpression()
+			{
+				AttributeName = "nrq_kode",
+				Operator = ConditionOperator.Equal
+			};
+
+			conditionExpression.Values.Add(kode.ToString());
+
+			FilterExpression filterExpression = new FilterExpression();
+			filterExpression.AddCondition(conditionExpression);
+
+			QueryExpression queryExpression = new QueryExpression("nrq_indbetalingstype")
+			{
+				ColumnSet = new ColumnSet("nrq_indbetalingstypeid")
+			};
+
+			queryExpression.Criteria.AddFilter(filterExpression);
+
+			EntityCollection entities = _service.RetrieveMultiple(queryExpression);
+
+			Entity indbetaling_type_entity = entities.Entities.FirstOrDefault();
+
+			if (indbetaling_type_entity != null)
+			{
+				Nrq_indbetalingstype = new EntityReference("nrq_indbetalingstype", indbetaling_type_entity.Id);
+			}
 		}
 	}
 }

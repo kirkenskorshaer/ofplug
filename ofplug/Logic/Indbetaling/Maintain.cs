@@ -126,6 +126,8 @@ namespace ofplug.Logic.Indbetaling
 			{
 				//_tracingService.Trace($"no contact on indbetaling {crm_indbetaling.Id}");
 			}
+
+			crm_indbetaling.Set_indbetaling_type_from_of_project_id(of_indbetaling.Project_id);
 		}
 	}
 }
