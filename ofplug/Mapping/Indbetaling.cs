@@ -32,7 +32,10 @@ namespace ofplug.Mapping
 		public static void To_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_payment)
 		{
 			crm_indbetaling.Nrq_of_agreement_id = of_payment.Agreement_id;
-			crm_indbetaling.New_amount = new Money((decimal)of_payment.Amount);
+			if (of_payment.Amount != null)
+			{
+				crm_indbetaling.New_amount = new Money((decimal)of_payment.Amount);
+			}
 			if (string.IsNullOrWhiteSpace(of_payment.Crm_id) == false)
 			{
 				crm_indbetaling.Id = Guid.Parse(of_payment.Crm_id);
