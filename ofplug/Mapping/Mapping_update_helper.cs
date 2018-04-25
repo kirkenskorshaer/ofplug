@@ -27,7 +27,8 @@ namespace ofplug.Mapping
 
 		internal static void Add_if_other_exists(List<string> parameters, string other, string may_add)
 		{
-			if (parameters.Any(parameter => parameter == other))
+			if (parameters.Any(parameter => parameter == other) == true &&
+				parameters.Any(parameter => parameter == may_add) == false)
 			{
 				parameters.Add(may_add);
 			}

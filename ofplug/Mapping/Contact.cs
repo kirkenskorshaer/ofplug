@@ -92,6 +92,8 @@ namespace ofplug.Mapping
 			Mapping_update_helper.Add_if_unequal(parameters, "External_id", crm_contact.new_kkadminmedlemsnr?.ToString(), of_contact.External_id);
 			Mapping_update_helper.Add_if_unequal(parameters, "Cpr", crm_contact.new_cprnr, of_contact.Cpr);
 
+			Mapping_update_helper.Add_if_other_exists(parameters, "Address", "Postcode");
+
 			return parameters;
 		}
 	}
