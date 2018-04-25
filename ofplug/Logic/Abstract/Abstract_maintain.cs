@@ -59,7 +59,7 @@ namespace ofplug.Logic.Abstract
 
 		private void Update_abonnement_in_crm(crm.Abonnement crm_abonnement, of.data.Subscription of_abonnement)
 		{
-			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement);
+			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement, _tracingService);
 
 			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
 
@@ -70,7 +70,7 @@ namespace ofplug.Logic.Abstract
 		{
 			crm.Abonnement crm_abonnement = new crm.Abonnement(_service, _tracingService);
 
-			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement);
+			Mapping.Subscription.To_crm(crm_abonnement, of_abonnement, _tracingService);
 
 			Add_crm_contact_to_abonnement(crm_abonnement, of_abonnement);
 
@@ -95,7 +95,7 @@ namespace ofplug.Logic.Abstract
 
 			if (contact.CrmEntity == null)
 			{
-				Mapping.Contact.To_crm(contact, of_contact);
+				Mapping.Contact.To_crm(contact, of_contact, _tracingService);
 
 				contact.Create();
 			}
@@ -140,7 +140,7 @@ namespace ofplug.Logic.Abstract
 		{
 			crm.Aftale crm_aftale = new crm.Aftale(_service, _tracingService);
 
-			Mapping.Aftale.To_crm(crm_aftale, of_agreement);
+			Mapping.Aftale.To_crm(crm_aftale, of_agreement, _tracingService);
 
 			Add_contact_to_aftale(crm_aftale, of_agreement);
 
@@ -172,7 +172,7 @@ namespace ofplug.Logic.Abstract
 				return;
 			}
 
-			Mapping.Aftale.To_crm(crm_aftale, of_aftale);
+			Mapping.Aftale.To_crm(crm_aftale, of_aftale, _tracingService);
 
 			bool update_nrq_bidragyder = Add_contact_to_aftale(crm_aftale, of_aftale);
 			if (parameters_to_update.Contains("nrq_bidragyder") == false && update_nrq_bidragyder)
@@ -187,6 +187,11 @@ namespace ofplug.Logic.Abstract
 
 		private bool Add_contact_to_aftale(crm.Aftale crm_aftale, of.data.Agreement of_aftale)
 		{
+			if (of_aftale.Contact_id.HasValue == false)
+			{
+				return false;
+			}
+
 			crm.Contact crm_contact = Get_or_create_crm_contact(of_aftale.Contact_id.Value);
 
 			bool update_nrq_bidragyder = false;
@@ -226,14 +231,14 @@ namespace ofplug.Logic.Abstract
 				return;
 			}
 
-			Mapping.Contact.To_crm(crm_contact, of_contact);
+			Mapping.Contact.To_crm(crm_contact, of_contact, _tracingService);
 
 			crm_contact.Update(parameters_to_update);
 		}
 
 		private void Create_contact_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
-			Mapping.Contact.To_crm(crm_contact, of_contact);
+			Mapping.Contact.To_crm(crm_contact, of_contact, _tracingService);
 
 			crm_contact.Create();
 		}

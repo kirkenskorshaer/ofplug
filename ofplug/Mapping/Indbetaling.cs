@@ -29,7 +29,7 @@ namespace ofplug.Mapping
 			//of_payment.Subscription_id = crm_indbetaling.
 		}
 
-		public static void To_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_payment)
+		public static void To_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_payment, ITracingService tracingService)
 		{
 			crm_indbetaling.Nrq_of_agreement_id = of_payment.Agreement_id;
 			if (of_payment.Amount != null)
@@ -42,7 +42,7 @@ namespace ofplug.Mapping
 			}
 			if (string.IsNullOrWhiteSpace(of_payment.Amount_type) == false)
 			{
-				crm_indbetaling.Nrq_amountType.Select(of_payment.Amount_type);
+				crm_indbetaling.Nrq_amountType.Select(of_payment.Amount_type, tracingService);
 			}
 			//crm_indbetaling.Nrq_FeeAmount = of_payment.fee_amount;
 			crm_indbetaling.Nrq_of_contact_id = of_payment.Contact_id;
@@ -50,9 +50,9 @@ namespace ofplug.Mapping
 			crm_indbetaling.Nrq_of_id = of_payment.Of_id;
 			//crm_indbetaling.Nrq_paymentDate = of_payment.Payment_ts_value;
 			crm_indbetaling.Nrq_PaymentDueDate = of_payment.Payment_due_ts_value;
-			crm_indbetaling.Nrq_PaymentGateway.Select(of_payment.Payment_gateway);
-			crm_indbetaling.Nrq_PaymentMedia.Select(of_payment.Payment_media);
-			crm_indbetaling.Nrq_PaymentType.Select(of_payment.Payment_media_type);
+			crm_indbetaling.Nrq_PaymentGateway.Select(of_payment.Payment_gateway, tracingService);
+			crm_indbetaling.Nrq_PaymentMedia.Select(of_payment.Payment_media, tracingService);
+			crm_indbetaling.Nrq_PaymentType.Select(of_payment.Payment_media_type, tracingService);
 			//crm_indbetaling.Nrq_BookkeeptinDate
 			//crm_indbetaling.Nrq_ChargebackDate
 		}

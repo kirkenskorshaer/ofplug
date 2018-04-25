@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xrm.Sdk;
+using System.Collections.Generic;
 
 namespace ofplug.Mapping
 {
@@ -34,11 +35,11 @@ namespace ofplug.Mapping
 			//"birthday": "2011-11-13",
 		}
 
-		public static void To_crm(crm.Contact crm_contact, of.data.Contact of_contact)
+		public static void To_crm(crm.Contact crm_contact, of.data.Contact of_contact, ITracingService tracingService)
 		{
 			crm_contact.address1_city = of_contact.City;
 			crm_contact.address1_country = of_contact.Country;
-			crm_contact.gendercode.Select(of_contact.Gender);
+			crm_contact.gendercode.Select(of_contact.Gender, tracingService);
 			crm_contact.address1_latitude = of_contact.Lat;
 			crm_contact.address1_line1 = of_contact.Address;
 			crm_contact.address1_longitude = of_contact.Long;

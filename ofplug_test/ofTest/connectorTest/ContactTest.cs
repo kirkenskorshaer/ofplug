@@ -33,7 +33,7 @@ namespace ofplug_test.ofTest.connectorTest
 		private ofplug.of.data.Contact To_crm_and_back(ofplug.of.data.Contact of_contact, Action<ofplug.crm.Contact> modify_while_crm)
 		{
 			ofplug.crm.Contact crm_contact = new ofplug.crm.Contact(_service, _tracingService);
-			ofplug.Mapping.Contact.To_crm(crm_contact, of_contact);
+			ofplug.Mapping.Contact.To_crm(crm_contact, of_contact, _tracingService);
 
 			modify_while_crm(crm_contact);
 

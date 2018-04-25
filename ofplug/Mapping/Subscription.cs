@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xrm.Sdk;
+using System.Collections.Generic;
 
 namespace ofplug.Mapping
 {
@@ -21,7 +22,7 @@ namespace ofplug.Mapping
 			of_subscription.Crm_id = crm_abonnement.Id.ToString().ToLower();
 		}
 
-		public static void To_crm(crm.Abonnement crm_abonnement, of.data.Subscription of_subscription)
+		public static void To_crm(crm.Abonnement crm_abonnement, of.data.Subscription of_subscription, ITracingService tracingService)
 		{
 			crm_abonnement.Nrq_bank_account_no = of_subscription.Bank_account_no;
 			crm_abonnement.Nrq_bank_sort_code = of_subscription.Bank_sort_code;
@@ -30,10 +31,10 @@ namespace ofplug.Mapping
 			//crm_abonnement.Nrq_msisdn = of_subscription.Msisdn;
 			crm_abonnement.Nrq_of_id = of_subscription.Of_id;
 			//crm_abonnement.Nrq_order_id = of_subscription.Order_id;
-			crm_abonnement.Nrq_PaymentGateway.Select(of_subscription.Payment_gateway);
-			crm_abonnement.Nrq_PaymentMedia.Select(of_subscription.Payment_media);
+			crm_abonnement.Nrq_PaymentGateway.Select(of_subscription.Payment_gateway, tracingService);
+			crm_abonnement.Nrq_PaymentMedia.Select(of_subscription.Payment_media, tracingService);
 			//crm_abonnement.Nrq_payment_media_type = of_subscription.Payment_media_type;
-			crm_abonnement.Nrq_state.Select(of_subscription.State);
+			crm_abonnement.Nrq_state.Select(of_subscription.State, tracingService);
 			//crm_abonnement.Nrq_status = of_subscription.Status;
 			//crm_abonnement.Nrq_Subscription_customer_no = of_subscription.Subscription_customer_no;
 		}

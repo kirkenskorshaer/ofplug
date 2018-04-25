@@ -79,7 +79,7 @@ namespace ofplug.Logic.Indbetaling
 				return;
 			}
 
-			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling);
+			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling, _tracingService);
 
 			Create_or_update_associated_entities(crm_indbetaling, of_indbetaling);
 
@@ -88,7 +88,7 @@ namespace ofplug.Logic.Indbetaling
 
 		private void Create_in_crm(crm.Indbetaling crm_indbetaling, of.data.Payment of_indbetaling)
 		{
-			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling);
+			Mapping.Indbetaling.To_crm(crm_indbetaling, of_indbetaling, _tracingService);
 
 			Create_or_update_associated_entities(crm_indbetaling, of_indbetaling);
 

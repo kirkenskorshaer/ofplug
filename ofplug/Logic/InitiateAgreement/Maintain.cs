@@ -42,7 +42,7 @@ namespace ofplug.Logic.InitiateAgreement
 				Id = crm_start_aftale.Id,
 			};
 
-			crm_start_aftale_update.Nrq_processstatus.Select("Processed");
+			crm_start_aftale_update.Nrq_processstatus.Select("Processed", _tracingService);
 
 			crm_start_aftale_update.Update();
 			_tracingService.Trace($"AgreementRequest:{crm_start_aftale.Id.ToString()} marked as Processed");

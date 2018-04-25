@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +32,7 @@ namespace ofplug.crm
 			}
 		}
 
-		public void Select(string value)
+		public void Select(string value, ITracingService _tracingService)
 		{
 			if (string.IsNullOrWhiteSpace(value))
 			{
@@ -45,7 +46,8 @@ namespace ofplug.crm
 			}
 			else
 			{
-				throw new Exception("no element with value: " + value.ToString());
+				SelectedKey = null;
+				_tracingService.Trace($"no element with value: {value.ToString()}");
 			}
 		}
 	}

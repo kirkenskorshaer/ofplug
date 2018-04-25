@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xrm.Sdk;
+using System.Collections.Generic;
 
 namespace ofplug.Mapping
 {
@@ -22,17 +23,17 @@ namespace ofplug.Mapping
 			of_agreement.Charge_ts_value = crm_aftale.nrq_chargedate;
 		}
 
-		public static void To_crm(crm.Aftale crm_aftale, of.data.Agreement of_agreement)
+		public static void To_crm(crm.Aftale crm_aftale, of.data.Agreement of_agreement, ITracingService tracingService)
 		{
 			crm_aftale.nrq_beloeb = new Microsoft.Xrm.Sdk.Money((decimal)of_agreement.Amount);
 			crm_aftale.nrq_betalingsform = of_agreement.Payment_type;
-			crm_aftale.nrq_amounttype.Select(of_agreement.Amount_type);
-			crm_aftale.nrq_frequency.Select(of_agreement.Frequency);
+			crm_aftale.nrq_amounttype.Select(of_agreement.Amount_type, tracingService);
+			crm_aftale.nrq_frequency.Select(of_agreement.Frequency, tracingService);
 			crm_aftale.nrq_of_contact_id = of_agreement.Contact_id;
 			crm_aftale.nrq_of_id = of_agreement.Of_id;
 			crm_aftale.nrq_of_project_id = of_agreement.Project_id;
 			crm_aftale.nrq_of_subscription_id = of_agreement.Subscription_id;
-			crm_aftale.nrq_paymentmedia.Select(of_agreement.Payment_media);
+			crm_aftale.nrq_paymentmedia.Select(of_agreement.Payment_media, tracingService);
 			crm_aftale.nrq_type = of_agreement.Payment_media_type?.ToString();
 			crm_aftale.nrq_state = of_agreement.State;
 			crm_aftale.nrq_agreementstarttype = of_agreement.Agreement_start_type;
