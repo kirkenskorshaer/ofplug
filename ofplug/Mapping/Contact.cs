@@ -5,11 +5,10 @@ namespace ofplug.Mapping
 {
 	public static class Contact
 	{
-		//todo felter
 		public static void To_of(crm.Contact crm_contact, of.data.Contact of_contact)
 		{
 			of_contact.City = crm_contact.address1_city;
-			of_contact.Country = crm_contact.address1_country;
+			of_contact.Country = crm_contact.address1_country ?? "DK";
 			//of_contact.Gender = crm_contact.Gendercode_enum_to_string(crm_contact.Gendercode_value);
 			of_contact.Gender = null;
 			//of_contact.Lat = crm_contact.address1_latitude;
