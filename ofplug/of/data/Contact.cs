@@ -25,7 +25,7 @@ namespace ofplug.of.data
 		[DataMember(Name = "city", EmitDefaultValue = false)]
 		public string City { get; set; } // "København NV",
 
-		[DataMember(Name = "country", EmitDefaultValue = false)]
+		[DataMember(Name = "country_code", EmitDefaultValue = false)]
 		public string Country { get; set; } // "DK",
 
 		[DataMember(Name = "gender", EmitDefaultValue = false)]
