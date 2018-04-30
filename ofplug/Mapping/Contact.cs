@@ -49,10 +49,6 @@ namespace ofplug.Mapping
 			crm_contact.lastname = of_contact.Last_name;
 			crm_contact.new_cprnr = of_contact.Cpr;
 			crm_contact.nrq_of_id = of_contact.Of_id;
-			if (string.IsNullOrWhiteSpace(of_contact.External_id) == false)
-			{
-				crm_contact.new_kkadminmedlemsnr = int.Parse(of_contact.External_id);
-			}
 		}
 
 		public static List<string> Needs_update_in_crm(crm.Contact crm_contact, of.data.Contact of_contact)
