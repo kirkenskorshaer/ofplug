@@ -13,7 +13,7 @@ namespace ofplug.of.data
 		[DataMember(Name = "email", EmitDefaultValue = false)]
 		public string Email { get; set; } // "c.laugesen@gmail.com",
 
-		[DataMember(Name = "cpr", EmitDefaultValue = false)]
+		[DataMember(Name = "national_id", EmitDefaultValue = false)]
 		public string Cpr { get; set; } // "1111111118",
 
 		[DataMember(Name = "address", EmitDefaultValue = false)]
